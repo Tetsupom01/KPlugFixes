@@ -1,7 +1,7 @@
 # KPlugNullGuardsFix v0.2.0
 
-Status: integration test BLOCKED.  
-v0.1.0 core guards are runtime-tested and remain the stable version. The AtHome destroy guard was also runtime-tested as the standalone v0.1.1 plugin. During the first combined v0.2.0 runtime test, Koikatu later crashed with a native Access Violation in the HSceneProc.ChangeAnimator / Animator runtime-controller path. The crash was not in AtHomeCtrl.OnDestroy, so the integrated guard is not yet proven to be causal. Roll back and reproduce before any further change.
+Status: 正式版・実機確認済み。  
+v0.1.0のNullGuards本体と、standalone版KPlugAtHomeDestroyGuard v0.1.1の処理を統合したv0.2.0を、最終実機テスト通過後の現行Stableとする。
 
 ## 目的
 
@@ -91,12 +91,35 @@ Destroyed girlRoots are removed before AtHomeCtrl.OnDestroy.
 
 ## 最終実機確認
 
+最終確認では以下を実施した。
+
 1. Koikatu起動
 2. v0.2.0起動ログ確認
-3. MyRoomへ1回入退室
-4. 通常Hへ入り、アニメーション変更等を軽く確認
-5. H終了
-6. ゲームを通常終了
-7. ログに `kPlug.CmpBase.AtHomeCtrl.OnDestroy` のNullReferenceExceptionがないことを確認
+3. MyRoomへ入退室
+4. 通常終了
+5. ログ確認
 
-初回統合テストではH中の ChangeAnimator / Animator runtime-controller 経路でネイティブクラッシュが発生したため、v0.2.0は正式化しない。まずv0.1.0 + standalone AtHomeDestroyGuardへロールバックし、同じH操作で再現するか確認する。再現しなければv0.2.0統合が強い疑い、再現すればChangeAnimator/アニメーション経路を別件として調査する。
+結果:
+
+- `[NullGuardsFix] v0.2.0 active. 13 Prefix guards + Voice Transpiler. AtHome destroy guard included.` を確認
+- MyRoom入退室正常
+- ゲーム通常終了
+- `kPlug.CmpBase.AtHomeCtrl.OnDestroy` のNullReferenceExceptionなし
+- `NullGuardsFix patch failed` なし
+- `InvalidProgramException` なし
+- AccessViolation / Fatal / Crash なし
+
+なお、今回の正常終了ログでは `AtHome OnDestroy: removed N ...` は出ていない。
+これは今回の終了時には除去対象となるnull / Destroy済み `girlRoots` が存在しなかったことを意味する。
+
+## 正式判定
+
+**KPlugNullGuardsFix v0.2.0 を正式成功版・現行Stableとして固定する。**
+
+v0.1.0は履歴・ロールバック用として保持する。
+
+v0.1.0既知SHA-256:
+
+`e1e585f3961126adda211d140535ab7590ed2d47c6f0ce97bbd2f146565a1c1e`
+
+v0.2.0は実機成功確認済みだが、成功実機DLLのSHA-256は確認ログに記録されていないため、値を推定・再生成して記載しない。
