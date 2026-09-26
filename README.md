@@ -21,7 +21,7 @@ The vanilla method completes normally. The plugin preserves the current swapped 
 
 ### NullGuardsFix
 
-**KPlugNullGuardsFix v0.1.0 stable / v0.2.0 integration test blocked**
+**KPlugNullGuardsFix v0.2.0**
 
 Reproduces the null-guard changes previously embedded in a modified kPlug build without modifying `kPlug.dll` itself.
 
@@ -37,7 +37,7 @@ Startup result:
 
 `13 Prefix guards + Voice Transpiler`
 
-v0.2.0 integrates the previously standalone AtHomeDestroyGuard v0.1.1. During the first integrated runtime test, Koikatu later suffered a native Access Violation inside the HSceneProc.ChangeAnimator / Animator runtime-controller path. The crash did not occur in AtHomeCtrl.OnDestroy, so causality is not established. v0.2.0 is blocked pending rollback/reproduction testing; v0.1.0 remains the recorded stable binary.
+v0.2.0 integrates the previously standalone AtHomeDestroyGuard v0.1.1. Final integrated runtime verification completed successfully: the plugin loaded with all 13 Prefix guards plus the Voice Transpiler, MyRoom entry/exit completed normally, the game exited normally, and no AtHomeCtrl.OnDestroy NullReferenceException was observed.
 
 ### PistonTransitionFix
 
@@ -126,7 +126,7 @@ Historical PistonTransitionFix release documentation is preserved under `docs/Pi
 ## Known successful DLL hashes
 
 ```text
-KPlugNullGuardsFix.dll
+KPlugNullGuardsFix v0.1.0 historical known-good DLL
 e1e585f3961126adda211d140535ab7590ed2d47c6f0ce97bbd2f146565a1c1e
 
 KPlugPistonWaitFix.dll
@@ -137,6 +137,8 @@ KPlugPistonAutoResume.dll
 ```
 
 The successful runtime-tested KPlugGaugeSwapFix v0.2.0 binary hash was not recorded at the time of testing, so no replacement value is invented here.
+
+The integrated KPlugNullGuardsFix v0.2.0 DLL is runtime-tested and is the current stable version. Its runtime-tested binary SHA-256 was not captured in the verification log, so no hash is invented for v0.2.0.
 
 ## Migration note
 
