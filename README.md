@@ -21,7 +21,7 @@ The vanilla method completes normally. The plugin preserves the current swapped 
 
 ### NullGuardsFix
 
-**KPlugNullGuardsFix v0.1.0**
+**KPlugNullGuardsFix v0.2.0 RC**
 
 Reproduces the null-guard changes previously embedded in a modified kPlug build without modifying `kPlug.dll` itself.
 
@@ -30,11 +30,14 @@ Runtime patch set:
 - 9 H-process guards
 - 2 KokanBehavior guards
 - 1 MenuCorner guard
+- 1 AtHome OnDestroy destroyed-object guard
 - 1 Voice coroutine transpiler
 
 Startup result:
 
-`12 Prefix guards + Voice Transpiler`
+`13 Prefix guards + Voice Transpiler`
+
+v0.2.0 integrates the previously standalone AtHomeDestroyGuard v0.1.1. The integrated DLL is staged for one final runtime verification; v0.1.0 remains the recorded stable binary until that check passes.
 
 ### PistonTransitionFix
 
@@ -62,6 +65,7 @@ KPlugFixes/
 │  ├─ GaugeSwapFix/
 │  │  └─ KPlugGaugeSwapFix_v0.2.0.cs
 │  ├─ NullGuardsFix/
+│  │  ├─ KPlugNullGuardsFix_v0.2.0.cs
 │  │  └─ KPlugNullGuardsFix_v0.1.0.cs
 │  └─ PistonTransitionFix/
 │     ├─ WaitFix/
