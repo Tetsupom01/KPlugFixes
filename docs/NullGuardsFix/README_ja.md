@@ -1,61 +1,102 @@
-# KPlugNullGuardsFix v0.1.0
+# KPlugNullGuardsFix v0.2.0
+
+Status: integrated release candidate.  
+v0.1.0 core guards are runtime-tested. The AtHome destroy guard was also runtime-tested as the standalone v0.1.1 plugin. The combined v0.2.0 DLL requires one final integrated runtime verification before being marked as the fixed stable binary.
 
 ## 目的
 
-kPlug 3.6.0 のバージン版から旧修正版へ直接組み込まれていた null guard 系修正を、kPlug.dll本体を改変せず独立したBepInEx / Harmonyプラグインとして再現する。
+kPlug 3.6.0で確認されているnull / destroyed object由来の限定的な例外を、kPlug.dll本体を直接改変せずBepInEx / Harmonyで防御する。
 
-## 実装
+v0.2.0では、成功済みv0.1.0のNullGuardsに、旧 `KPlugAtHomeDestroyGuard v0.1.1` の処理を統合する。
 
-実機成功版は以下で構成される。
+## v0.1.0から継続する処理
 
 - H処理系 Prefix guard: 9メソッド
 - KokanBehavior Prefix guard: 2メソッド
 - MenuCorner Prefix guard: 1メソッド
 - Voice coroutine Transpiler: 1メソッド
 
-起動ログ:
-
-```text
-[NullGuardsFix] Voice guard injected at AudioSource.clip -> AudioClip.length path.
-[NullGuardsFix] v0.1.0 active. 12 Prefix guards + Voice Transpiler.
-```
-
-## Voice guard
-
-対象:
-
-`kPlug.CmpChara.FaceCtrl+<IE_PlayVoice>d__88::MoveNext()`
-
-`AudioSource.clip -> AudioClip.length` の命令列を意味的アンカーとして使用し、音源またはclipが無効な場合にCoroutineを安全に終了させる。
-
-固定ILオフセットには依存しない。アンカーが1箇所でない場合は曖昧なパッチを行わず失敗させる。
-
-## 実機確認
-
-確認済み:
-
-1. Hシーン進入
-2. 7キーでアニメーション変更
-3. 途中でスワップ
-4. スワップ後も7キー操作
-5. 終了ボタンでH終了
-
-結果:
-
-- Hシーン進入 正常
-- 7キー操作 正常
-- スワップ後7キー操作 正常
-- H終了 正常
-- 対象guard由来の新規実害なし
-
-## 成功版
-
-KPlugNullGuardsFix.dll v0.1.0
-
-SHA-256:
+v0.1.0実機確認済みDLL SHA-256:
 
 `e1e585f3961126adda211d140535ab7590ed2d47c6f0ce97bbd2f146565a1c1e`
 
-## 注意
+## v0.2.0追加: AtHome OnDestroy guard
 
-これはすべてのkPlug経路のnull問題を包括的に解決するものではない。対象を限定した成功済み修正として維持する。
+対象:
+
+`kPlug.CmpBase.AtHomeCtrl.OnDestroy()`
+
+### 元の症状
+
+ゲーム終了等の破棄処理時、`girlRoots` 内にUnity上ですでにDestroy済みのGameObjectが残っていると、
+元の `OnDestroy()` がその要素に対して `GetComponentInChildren<ChaControl>()` を呼び、NullReferenceExceptionになる場合があった。
+
+### 対応
+
+Harmony Prefixで `AtHomeCtrl.OnDestroy()` の直前に `girlRoots` を確認する。
+
+以下だけをリストから除去する。
+
+- CLR上のnull要素
+- UnityEngine.ObjectとしてDestroy済みのGameObject
+
+その後、元の `AtHomeCtrl.OnDestroy()` は通常どおり最後まで実行する。
+
+カメラ復帰、ChaControl処理、Destroy処理など元のOnDestroyロジックは置き換えない。
+
+### standalone版で確認済み
+
+旧 `KPlugAtHomeDestroyGuard v0.1.1` は、
+
+```text
+[AtHomeDestroyGuard] v0.1.1 active.
+Destroyed girlRoots are removed before AtHomeCtrl.OnDestroy.
+```
+
+としてロードされ、そのテストログでは従来の `AtHomeCtrl.OnDestroy` NREは再発しなかった。
+
+## v0.2.0構成
+
+- Prefix guards: 13
+- Voice Transpiler: 1
+
+期待起動ログ:
+
+```text
+[NullGuardsFix] Voice guard injected at AudioSource.clip -> AudioClip.length path.
+[NullGuardsFix] v0.2.0 active. 13 Prefix guards + Voice Transpiler. AtHome destroy guard included.
+```
+
+破棄対象が実際に見つかった場合:
+
+```text
+[NullGuardsFix] AtHome OnDestroy: removed N null/destroyed girlRoots entries.
+```
+
+## ビルド・導入
+
+`scripts/NullGuardsFix/Build-KPlugNullGuardsFix_v0.2.0.bat`
+
+を実行する。
+
+処理:
+
+1. TEMPへコンパイル
+2. コンパイル成功後のみゲーム側を変更
+3. 旧 `KPlugNullGuardsFix.dll` と standalone `KPlugAtHomeDestroyGuard.dll` を `.integrated_off` へ退避
+4. `BepInEx/plugins/KPlugFixes/KPlugNullGuardsFix.dll` に統合版を配置
+5. 配置失敗時は旧DLLをロールバック
+
+旧DLLは削除しない。
+
+## 最終実機確認
+
+1. Koikatu起動
+2. v0.2.0起動ログ確認
+3. MyRoomへ1回入退室
+4. 通常Hへ入り、アニメーション変更等を軽く確認
+5. H終了
+6. ゲームを通常終了
+7. ログに `kPlug.CmpBase.AtHomeCtrl.OnDestroy` のNullReferenceExceptionがないことを確認
+
+この1回が通ればv0.2.0を正式成功版として固定する。
