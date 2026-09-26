@@ -1,2 +1,4 @@
 e1e585f3961126adda211d140535ab7590ed2d47c6f0ce97bbd2f146565a1c1e  KPlugNullGuardsFix.dll
+c134bde2967194477c686e26ebca12010c3d81653e97a7b226e33a6b7294eabd  KPlugPistonWaitFix.dll
+0abaa27f88469dcb9e73a1f83878da522e61f3a73cd3a7df9aad4ad668290f4f  KPlugPistonAutoResume.dll
 # KPlugGaugeSwapFix.dll: runtime-tested successful binary hash was not recorded.
