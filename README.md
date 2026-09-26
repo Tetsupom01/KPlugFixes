@@ -21,7 +21,7 @@ The vanilla method completes normally. The plugin preserves the current swapped 
 
 ### NullGuardsFix
 
-**KPlugNullGuardsFix v0.2.0 RC**
+**KPlugNullGuardsFix v0.1.0 stable / v0.2.0 integration test blocked**
 
 Reproduces the null-guard changes previously embedded in a modified kPlug build without modifying `kPlug.dll` itself.
 
@@ -37,7 +37,7 @@ Startup result:
 
 `13 Prefix guards + Voice Transpiler`
 
-v0.2.0 integrates the previously standalone AtHomeDestroyGuard v0.1.1. The integrated DLL is staged for one final runtime verification; v0.1.0 remains the recorded stable binary until that check passes.
+v0.2.0 integrates the previously standalone AtHomeDestroyGuard v0.1.1. During the first integrated runtime test, Koikatu later suffered a native Access Violation inside the HSceneProc.ChangeAnimator / Animator runtime-controller path. The crash did not occur in AtHomeCtrl.OnDestroy, so causality is not established. v0.2.0 is blocked pending rollback/reproduction testing; v0.1.0 remains the recorded stable binary.
 
 ### PistonTransitionFix
 
