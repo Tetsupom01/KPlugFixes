@@ -6,3 +6,4 @@ release/
 *.log
 *.backup*
 *.v020_off
+*.integrated_off
