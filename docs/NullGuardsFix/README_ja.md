@@ -1,7 +1,7 @@
 # KPlugNullGuardsFix v0.2.0
 
-Status: integrated release candidate.  
-v0.1.0 core guards are runtime-tested. The AtHome destroy guard was also runtime-tested as the standalone v0.1.1 plugin. The combined v0.2.0 DLL requires one final integrated runtime verification before being marked as the fixed stable binary.
+Status: integration test BLOCKED.  
+v0.1.0 core guards are runtime-tested and remain the stable version. The AtHome destroy guard was also runtime-tested as the standalone v0.1.1 plugin. During the first combined v0.2.0 runtime test, Koikatu later crashed with a native Access Violation in the HSceneProc.ChangeAnimator / Animator runtime-controller path. The crash was not in AtHomeCtrl.OnDestroy, so the integrated guard is not yet proven to be causal. Roll back and reproduce before any further change.
 
 ## 目的
 
@@ -99,4 +99,4 @@ Destroyed girlRoots are removed before AtHomeCtrl.OnDestroy.
 6. ゲームを通常終了
 7. ログに `kPlug.CmpBase.AtHomeCtrl.OnDestroy` のNullReferenceExceptionがないことを確認
 
-この1回が通ればv0.2.0を正式成功版として固定する。
+初回統合テストではH中の ChangeAnimator / Animator runtime-controller 経路でネイティブクラッシュが発生したため、v0.2.0は正式化しない。まずv0.1.0 + standalone AtHomeDestroyGuardへロールバックし、同じH操作で再現するか確認する。再現しなければv0.2.0統合が強い疑い、再現すればChangeAnimator/アニメーション経路を別件として調査する。
