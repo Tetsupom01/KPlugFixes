@@ -39,6 +39,18 @@ Startup result:
 
 v0.2.0 integrates the previously standalone AtHomeDestroyGuard v0.1.1. Final integrated runtime verification completed successfully: the plugin loaded with all 13 Prefix guards plus the Voice Transpiler, MyRoom entry/exit completed normally, the game exited normally, and no AtHomeCtrl.OnDestroy NullReferenceException was observed.
 
+### CrossFaderCompatFix
+
+**KPlugCrossFaderCompatFix v1.0.0**
+
+Prevents a native H-scene crash seen with CrossFader 0.11 when animation-change requests overlap around `HSceneProc.ChangeAnimator`.
+
+The fix uses a first-request-wins gate: the first request is preserved until CrossFader and all relevant H Animators are stable, later conflicting non-null requests are rejected while the gate is active, and the original `ChangeAnimator` path is then allowed to run unchanged.
+
+CrossFader itself is not disabled or rewritten; its `SetPlayHook` / `CrossFadeInFixedTime` path remains intact.
+
+Runtime-success logic was verified as v0.8.0 and formalized as v1.0.0 with no functional source changes. Investigation history and verification limits are documented under `docs/CrossFaderCompatFix/`.
+
 ### PistonTransitionFix
 
 Contains two independent plugins:
@@ -67,7 +79,7 @@ KPlugFixes/
 │  ├─ NullGuardsFix/
 │  │  ├─ KPlugNullGuardsFix_v0.2.0.cs
 │  │  └─ KPlugNullGuardsFix_v0.1.0.cs
-│  └─ PistonTransitionFix/
+│  ├─ PistonTransitionFix/
 │     ├─ WaitFix/
 │     │  └─ KPlugPistonWaitFix_v1.0.0.cs
 │     └─ AutoResume/

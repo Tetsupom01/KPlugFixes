@@ -3,3 +3,5 @@ c134bde2967194477c686e26ebca12010c3d81653e97a7b226e33a6b7294eabd  KPlugPistonWai
 0abaa27f88469dcb9e73a1f83878da522e61f3a73cd3a7df9aad4ad668290f4f  KPlugPistonAutoResume.dll
 # KPlugGaugeSwapFix.dll: runtime-tested successful binary hash was not recorded.
 # KPlugNullGuardsFix_v0.2.0.dll: runtime-tested stable binary hash was not recorded.
+3077ac3b8ea547c6c8e7a0cf96e5e11ab3aa1495e506ca7ac998f5cd5470f5e4  release/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.0.0-source.zip
+# KPlugCrossFaderCompatFix.dll v1.0.0: exact rebuilt DLL SHA-256 not yet recorded; do not substitute the v0.8.0 binary hash.
