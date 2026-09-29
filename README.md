@@ -162,3 +162,21 @@ The integrated KPlugNullGuardsFix v0.2.0 DLL is runtime-tested and is the curren
 
 `KPlugPistonTransitionFix` was originally maintained as a separate repository.  
 Its source, build scripts, release script, and documentation are now also preserved under `PistonTransitionFix/` in this repository.
+
+
+## Distribution policy
+
+Stable fixes should provide both reproducible source and prebuilt Windows binaries.
+
+For each stable runtime fix, preserve:
+
+- source code
+- build/deploy scripts
+- documentation and investigation history
+- the runtime-tested Windows `.dll` when available
+- SHA-256 for each distributed DLL
+- a release package for users who do not compile from source
+
+Prebuilt binaries are limited to DLLs produced by this project. Third-party binaries such as kPlug, BepInEx, Harmony, Unity, or game assemblies are not redistributed here.
+
+A DLL is not labeled runtime-tested unless that exact binary, or an explicitly documented byte-identical build, was tested. Missing hashes are left missing rather than reconstructed or guessed.
