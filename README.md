@@ -108,7 +108,7 @@ KPlugFixes/
       ├─ KPlugNullGuardsFix_v0.2.0.zip
       ├─ KPlugPistonWaitFix_v1.0.0.zip
       ├─ KPlugPistonAutoResume_v0.2.0.zip
-      └─ KPlugCrossFaderCompatFix_v0.8.0-runtime-tested.zip
+      ├─ KPlugCrossFaderCompatFix_v1.0.0.zip\n      └─ archive/\n         └─ KPlugCrossFaderCompatFix_v0.8.0-runtime-tested.zip
 ```
 
 ## Prebuilt Windows binaries
@@ -121,11 +121,11 @@ For users who do not compile from source, exact runtime-tested DLLs are provided
 | `KPlugNullGuardsFix_v0.2.0.zip` | v0.2.0 | `da40fb1db618baccb229d36bbe4f557df499a0f7227b720bd3298090887cd087` | `650bf318eafb1b7cbe7c0f7094b7c73d49caf3e014ca3d5ab0af89194d803033` |
 | `KPlugPistonWaitFix_v1.0.0.zip` | v1.0.0 | `c134bde2967194477c686e26ebca12010c3d81653e97a7b226e33a6b7294eabd` | `955de4cc6c72d0e852cd4f3b75e7e13bf6efd9094d84cc5d4096427adb3be48a` |
 | `KPlugPistonAutoResume_v0.2.0.zip` | v0.2.0 | `0abaa27f88469dcb9e73a1f83878da522e61f3a73cd3a7df9aad4ad668290f4f` | `a7e8a19766570f441f6d059053eeb0333ae266b7b99824a0e75c72793b5c1c48` |
-| `KPlugCrossFaderCompatFix_v0.8.0-runtime-tested.zip` | v0.8.0 runtime-tested success build | `2a29634a67ae5a1da31db872dcb083115834564c167b0ccbe2dc3a8961edec7f` | `8aa11033cb70370cf3dbe2b9cd0efcf36759b91b05ca61f7a256be459c212365` |
+| `KPlugCrossFaderCompatFix_v1.0.0.zip` | v1.0.0 current installed build | `1bd4cbcd316b4ec4132f453c732ddcbc95d12911349099b3fe786dbed9036cc7` | `50ce10e547e64f7fa564b8263d2271418e9853fb3b74b38cd1e8add8abd9a0ec` |
 
 Each ZIP contains the corresponding project-produced DLL with its normal runtime filename.
 
-The CrossFader binary is deliberately kept as **v0.8.0** because that exact DLL was runtime-tested. The separately stored v1.0.0 source is the formalized source version; no v1.0.0 binary is relabeled or substituted.
+CrossFaderCompatFix now has a **v1.0.0 Windows binary** matching the formal v1.0.0 source metadata. The DLL was collected from the user's current Koikatu installation on 2026-09-30. Its internal plugin/version strings report v1.0.0. The exact v1.0.0 binary has not yet been independently runtime-verified after this rebuild, so the previous v0.8.0 runtime-tested DLL is preserved under `release/windows/archive/` as historical evidence rather than overwritten.
 
 The independent MyRoom mannequin Harmony fix is not included yet because it has not reached its formal runtime-verified release state.
 
@@ -178,7 +178,7 @@ KPlugPistonAutoResume.dll
 0abaa27f88469dcb9e73a1f83878da522e61f3a73cd3a7df9aad4ad668290f4f
 ```
 
-`KPlugGaugeSwapFix v0.2.0` and `KPlugNullGuardsFix v0.2.0` hashes were later recovered directly from the active runtime-tested game environment and are recorded in the prebuilt Windows package section above.
+`KPlugGaugeSwapFix v0.2.0` and `KPlugNullGuardsFix v0.2.0` hashes were later recovered directly from the active runtime-tested game environment and are recorded in the prebuilt Windows package section above. CrossFaderCompatFix v1.0.0 is the current installed binary; its exact DLL SHA-256 is `1bd4cbcd316b4ec4132f453c732ddcbc95d12911349099b3fe786dbed9036cc7`.
 
 ## Migration note
 

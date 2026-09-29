@@ -43,7 +43,7 @@ SHA-256:
 
 `3077ac3b8ea547c6c8e7a0cf96e5e11ab3aa1495e506ca7ac998f5cd5470f5e4`
 
-The exact v1.0.0 rebuilt DLL SHA-256 is intentionally not invented. It should be recorded from the first formal v1.0.0 build manifest.
+The v1.0.0 DLL has now been rebuilt and collected from the user's current Koikatu installation. Internal plugin/version strings report v1.0.0. DLL SHA-256: `1bd4cbcd316b4ec4132f453c732ddcbc95d12911349099b3fe786dbed9036cc7`. Exact post-rebuild runtime verification has not yet been separately recorded.
 
 ## Prebuilt Windows binaries
 
@@ -53,7 +53,7 @@ No-build Windows packages are provided individually under `release/windows/`:
 - `KPlugNullGuardsFix_v0.2.0.zip`
 - `KPlugPistonWaitFix_v1.0.0.zip`
 - `KPlugPistonAutoResume_v0.2.0.zip`
-- `KPlugCrossFaderCompatFix_v0.8.0-runtime-tested.zip`
+- `KPlugCrossFaderCompatFix_v1.0.0.zip`
 
 Each package contains the exact DLL recovered from the active runtime-tested Koikatu environment on 2026-09-29.
 
