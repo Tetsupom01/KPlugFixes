@@ -4,7 +4,7 @@ c134bde2967194477c686e26ebca12010c3d81653e97a7b226e33a6b7294eabd  KPlugPistonWai
 3077ac3b8ea547c6c8e7a0cf96e5e11ab3aa1495e506ca7ac998f5cd5470f5e4  release/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.0.0-source.zip
 7039f65e09ff3de19b56a1c152a3156b147bf17b70e817862fde5a1684ee8cc9  KPlugGaugeSwapFix.dll  # runtime-tested v0.2.0
 da40fb1db618baccb229d36bbe4f557df499a0f7227b720bd3298090887cd087  KPlugNullGuardsFix.dll  # runtime-tested v0.2.0
-1bd4cbcd316b4ec4132f453c732ddcbc95d12911349099b3fe786dbed9036cc7  KPlugCrossFaderCompatFix.dll  # v1.0.0 current installed build
+1bd4cbcd316b4ec4132f453c732ddcbc95d12911349099b3fe786dbed9036cc7  KPlugCrossFaderCompatFix.dll  # runtime-tested v1.0.0
 # Historical runtime-tested KPlugCrossFaderCompatFix v0.8.0 DLL SHA-256: 2a29634a67ae5a1da31db872dcb083115834564c167b0ccbe2dc3a8961edec7f
 7bae97d1a68ead58cba5a467fd44708ae0021a8102f9801c981e7bf0dd21c77b  release/windows/KPlugGaugeSwapFix_v0.2.0.zip
 650bf318eafb1b7cbe7c0f7094b7c73d49caf3e014ca3d5ab0af89194d803033  release/windows/KPlugNullGuardsFix_v0.2.0.zip

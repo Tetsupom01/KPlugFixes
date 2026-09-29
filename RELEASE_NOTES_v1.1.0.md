@@ -23,7 +23,7 @@ The fix does not modify the CrossFader body, `SetPlayHook`, `Animator.CrossFadeI
 
 ### Runtime verification
 
-The successful runtime implementation was v0.8.0. v1.0.0 is functionally identical source with only the plugin version metadata formalized.
+The successful v0.8.0 logic was formalized without functional change as v1.0.0, and the v1.0.0 DLL has now been runtime-verified.
 
 Observed in the final verification run:
 
@@ -43,7 +43,7 @@ SHA-256:
 
 `3077ac3b8ea547c6c8e7a0cf96e5e11ab3aa1495e506ca7ac998f5cd5470f5e4`
 
-The v1.0.0 DLL has now been rebuilt and collected from the user's current Koikatu installation. Internal plugin/version strings report v1.0.0. DLL SHA-256: `1bd4cbcd316b4ec4132f453c732ddcbc95d12911349099b3fe786dbed9036cc7`. This exact rebuilt binary is the current installed build; a separate post-rebuild runtime verification record has not yet been captured.
+The v1.0.0 DLL was rebuilt, installed, and runtime-verified. Internal plugin/version strings report v1.0.0. DLL SHA-256: `1bd4cbcd316b4ec4132f453c732ddcbc95d12911349099b3fe786dbed9036cc7`.
 
 ## Prebuilt Windows binaries
 
@@ -55,8 +55,8 @@ No-build Windows packages are provided individually under `release/windows/`:
 - `KPlugPistonAutoResume_v0.2.0.zip`
 - `KPlugCrossFaderCompatFix_v1.0.0.zip`
 
-Each package contains the exact DLL recovered from the active runtime-tested Koikatu environment on 2026-09-29.
+Each package contains the corresponding project-produced Windows DLL. CrossFaderCompatFix v1.0.0 is now included as the current runtime-tested binary. Its verification run completed five `GATE START -> ALLOW CHANGE -> GATE RELEASE` transactions, exercised CrossFader transition waits, showed no native crash / Access Violation, and reached normal game quit.
 
-CrossFaderCompatFix is deliberately distributed as the exact runtime-tested v0.8.0 DLL. The v1.0.0 package in `release/CrossFaderCompatFix/` remains source-only until a v1.0.0 DLL is built and verified.
+The previous v0.8.0 runtime-tested CrossFader package is preserved under `release/windows/archive/` for history only.
 
 The independent MyRoom mannequin Harmony fix is not included because it has not yet reached its formal runtime-verified release state.

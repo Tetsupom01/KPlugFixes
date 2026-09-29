@@ -73,7 +73,26 @@ first request wins。
 
 ## 正式化
 
-v0.8.0の機能ロジックを変更せず、版番号のみv1.0.0へ正式化。
+v0.8.0の機能ロジックを変更せず、版番号のみv1.0.0へ正式化。その後、v1.0.0 DLLを実機へ配置して再確認した。
+
+【実機・ログ確認済み】
+
+- `kPlug CrossFader Compat Fix 1.0.0` ロード成功
+- `HSceneProc.Update` Patch適用成功
+- 5回の `GATE START -> ALLOW CHANGE -> GATE RELEASE` が完走
+- #2〜#5で `CrossFader=True` を検出し、待機後に変更を許可
+- native crash / Access Violationなし
+- ゲームは通常終了まで到達
+
+これにより、現在の正式成功版を **KPlugCrossFaderCompatFix v1.0.0** とする。
+
+正式版DLL SHA-256:
+
+`1bd4cbcd316b4ec4132f453c732ddcbc95d12911349099b3fe786dbed9036cc7`
+
+Windows配布ZIP SHA-256:
+
+`50ce10e547e64f7fa564b8263d2271418e9853fb3b74b38cd1e8add8abd9a0ec`
 
 正式版ソースパッケージSHA-256:
 
@@ -81,6 +100,6 @@ v0.8.0の機能ロジックを変更せず、版番号のみv1.0.0へ正式化�
 
 ## 未確定事項
 
-最終成功ログでは `BLOCK WRITE` が0回だったため、後続setter書き込みを実際に拒否したケース自体は未観測。
+v1.0.0最終成功ログでも `BLOCK WRITE` が0回だったため、後続setter書き込みを実際に拒否したケース自体は未観測。
 
 また、CrossFader本体・`SetPlayHook`・`CrossFadeInFixedTime` は変更しておらず、ログ上CrossFaderの遷移状態も動作している。ただし最終テストは連打を含んでいたため、視覚的なクロスフェード品質だけを独立評価したテストは行っていない。

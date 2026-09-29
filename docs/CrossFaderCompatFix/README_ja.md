@@ -31,15 +31,16 @@ Koikatu + kPlug 3.6.0 + CrossFader 0.11 環境で、H中にアニメーション
 
 ## 実機確認
 
-実機成功版は v0.8.0。v1.0.0はそのソースと機能ロジック同一で、プラグイン版番号のみ正式化している。
+**v1.0.0 DLLを実機確認済み。現在の正式成功版は v1.0.0。** v0.8.0で確立した機能ロジックを変更せず正式化した版を、そのまま実機へ入れて確認した。
 
-最終確認では:
+v1.0.0最終確認では:
 
-- 複数回のHアニメーション変更が `GATE START -> ALLOW CHANGE -> GATE RELEASE` まで完走
-- 旧クラッシュ再現操作でも native crash / Access Violation なし
-- Hシーン終了およびゲーム終了まで正常
-- CrossFader 0.11 はロード済み
-- 実動作中に `CrossFader=True` / Animator transition を検出して待機
+- BepInExが `kPlug CrossFader Compat Fix 1.0.0` をロード
+- `HSceneProc.Update` Patch適用成功、`v1.0.0 active` を確認
+- 5回のHアニメーション変更が `GATE START -> ALLOW CHANGE -> GATE RELEASE` まで完走
+- #2〜#5では `CrossFader=True` を検出し、安全状態まで待機してから変更を許可
+- native crash / Access Violation なし
+- Hシーン終了後、ゲームの通常終了まで到達
 - 最終確認ログの `BLOCK WRITE` は0回
 
 最後の点から、後続setter書き込みの実ブロック発生そのものは最終確認ログでは未観測。したがって「ブロックが発生したからクラッシュを防げた」とまでは断定しない。確認できた事実は、要求を安全状態まで保持する経路で連続遷移が正常完走したこと。
@@ -83,4 +84,4 @@ BATを実行するとPowerShell経由でFramework v4 `csc.exe`を使用してビ
 
 ## 正本上の注意
 
-v1.0.0は正式版ソース。実機検証済みロジックはv0.8.0と同一だが、版番号変更後のv1.0.0 DLLそのものの実機SHA-256はまだ記録されていない。未取得値を推測で補完しない。
+v1.0.0は正式版ソースかつ実機確認済みDLL。Windows配布DLL SHA-256は `1bd4cbcd316b4ec4132f453c732ddcbc95d12911349099b3fe786dbed9036cc7`、配布ZIP SHA-256は `50ce10e547e64f7fa564b8263d2271418e9853fb3b74b38cd1e8add8abd9a0ec`。旧v0.8.0成功版は履歴としてarchiveへ保存する。
