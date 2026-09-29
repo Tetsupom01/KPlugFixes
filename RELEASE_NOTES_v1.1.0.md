@@ -43,7 +43,7 @@ SHA-256:
 
 `3077ac3b8ea547c6c8e7a0cf96e5e11ab3aa1495e506ca7ac998f5cd5470f5e4`
 
-The v1.0.0 DLL has now been rebuilt and collected from the user's current Koikatu installation. Internal plugin/version strings report v1.0.0. DLL SHA-256: `1bd4cbcd316b4ec4132f453c732ddcbc95d12911349099b3fe786dbed9036cc7`. Exact post-rebuild runtime verification has not yet been separately recorded.
+The v1.0.0 DLL has now been rebuilt and collected from the user's current Koikatu installation. Internal plugin/version strings report v1.0.0. DLL SHA-256: `1bd4cbcd316b4ec4132f453c732ddcbc95d12911349099b3fe786dbed9036cc7`. This exact rebuilt binary is the current installed build; a separate post-rebuild runtime verification record has not yet been captured.
 
 ## Prebuilt Windows binaries
 

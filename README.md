@@ -113,7 +113,7 @@ KPlugFixes/
 
 ## Prebuilt Windows binaries
 
-For users who do not compile from source, exact runtime-tested DLLs are provided as individual ZIP files under `release/windows/`.
+For users who do not compile from source, prebuilt Windows DLLs are provided as individual ZIP files under `release/windows/`. Runtime verification status is stated per build.
 
 | Package | Runtime DLL version | DLL SHA-256 | ZIP SHA-256 |
 | --- | --- | --- | --- |
