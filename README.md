@@ -70,6 +70,8 @@ It waits for the real Animator state and cancels the pending resume when the H c
 KPlugFixes/
 ├─ README.md
 ├─ RELEASE_NOTES_v1.0.0.md
+├─ RELEASE_NOTES_v1.0.1.md
+├─ RELEASE_NOTES_v1.1.0.md
 ├─ SHA256SUMS.txt
 ├─ .gitignore
 │
@@ -79,7 +81,7 @@ KPlugFixes/
 │  ├─ NullGuardsFix/
 │  │  ├─ KPlugNullGuardsFix_v0.2.0.cs
 │  │  └─ KPlugNullGuardsFix_v0.1.0.cs
-│  ├─ PistonTransitionFix/
+│  └─ PistonTransitionFix/
 │     ├─ WaitFix/
 │     │  └─ KPlugPistonWaitFix_v1.0.0.cs
 │     └─ AutoResume/
@@ -93,10 +95,14 @@ KPlugFixes/
 ├─ docs/
 │  ├─ GaugeSwapFix/
 │  ├─ NullGuardsFix/
-│  └─ PistonTransitionFix/
+│  ├─ PistonTransitionFix/
+│  └─ CrossFaderCompatFix/
+│     ├─ README_ja.md
+│     └─ HISTORY.md
 │
 └─ release/
-   └─ generated packages only
+   └─ CrossFaderCompatFix/
+      └─ KPlugCrossFaderCompatFix_v1.0.0-source.zip
 ```
 
 ## Build policy
