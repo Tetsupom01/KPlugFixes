@@ -45,23 +45,18 @@ SHA-256:
 
 The exact v1.0.0 rebuilt DLL SHA-256 is intentionally not invented. It should be recorded from the first formal v1.0.0 build manifest.
 
+## Prebuilt Windows binaries
 
-## Prebuilt Windows package
+No-build Windows packages are provided individually under `release/windows/`:
 
-A no-build package for Windows users is included at:
+- `KPlugGaugeSwapFix_v0.2.0.zip`
+- `KPlugNullGuardsFix_v0.2.0.zip`
+- `KPlugPistonWaitFix_v1.0.0.zip`
+- `KPlugPistonAutoResume_v0.2.0.zip`
+- `KPlugCrossFaderCompatFix_v0.8.0-runtime-tested.zip`
 
-`release/windows/KPlugFixes_Windows_RuntimeTested_20260929.zip`
+Each package contains the exact DLL recovered from the active runtime-tested Koikatu environment on 2026-09-29.
 
-SHA-256:
+CrossFaderCompatFix is deliberately distributed as the exact runtime-tested v0.8.0 DLL. The v1.0.0 package in `release/CrossFaderCompatFix/` remains source-only until a v1.0.0 DLL is built and verified.
 
-`342b4ff787f6c7344511e8c1c07ee1d778364a12807fce3a9524036fad3ee010`
-
-It contains the exact DLLs collected from the active runtime-tested Koikatu environment on 2026-09-29:
-
-- KPlugGaugeSwapFix.dll v0.2.0
-- KPlugNullGuardsFix.dll v0.2.0
-- KPlugPistonWaitFix.dll v1.0.0
-- KPlugPistonAutoResume.dll v0.2.0
-- KPlugCrossFaderCompatFix.dll v0.8.0 runtime-tested success build
-
-CrossFaderCompatFix is not relabeled as v1.0.0. The package preserves the exact tested v0.8.0 binary while v1.0.0 remains the formalized source version until a v1.0.0 binary is built and verified.
+The independent MyRoom mannequin Harmony fix is not included because it has not yet reached its formal runtime-verified release state.

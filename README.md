@@ -101,29 +101,29 @@ KPlugFixes/
 │     └─ HISTORY.md
 │
 └─ release/
-   └─ CrossFaderCompatFix/
-      └─ KPlugCrossFaderCompatFix_v1.0.0-source.zip
+   ├─ CrossFaderCompatFix/
+   │  └─ KPlugCrossFaderCompatFix_v1.0.0-source.zip
+   └─ windows/
+      ├─ KPlugGaugeSwapFix_v0.2.0.zip
+      ├─ KPlugNullGuardsFix_v0.2.0.zip
+      ├─ KPlugPistonWaitFix_v1.0.0.zip
+      ├─ KPlugPistonAutoResume_v0.2.0.zip
+      └─ KPlugCrossFaderCompatFix_v0.8.0-runtime-tested.zip
 ```
 
 ## Prebuilt Windows binaries
 
-For users who do not compile from source, the repository includes a runtime-tested Windows binary package:
+For users who do not compile from source, exact runtime-tested DLLs are provided as individual ZIP files under `release/windows/`.
 
-`release/windows/KPlugFixes_Windows_RuntimeTested_20260929.zip`
+| Package | Runtime DLL version | DLL SHA-256 | ZIP SHA-256 |
+| --- | --- | --- | --- |
+| `KPlugGaugeSwapFix_v0.2.0.zip` | v0.2.0 | `7039f65e09ff3de19b56a1c152a3156b147bf17b70e817862fde5a1684ee8cc9` | `7bae97d1a68ead58cba5a467fd44708ae0021a8102f9801c981e7bf0dd21c77b` |
+| `KPlugNullGuardsFix_v0.2.0.zip` | v0.2.0 | `da40fb1db618baccb229d36bbe4f557df499a0f7227b720bd3298090887cd087` | `650bf318eafb1b7cbe7c0f7094b7c73d49caf3e014ca3d5ab0af89194d803033` |
+| `KPlugPistonWaitFix_v1.0.0.zip` | v1.0.0 | `c134bde2967194477c686e26ebca12010c3d81653e97a7b226e33a6b7294eabd` | `955de4cc6c72d0e852cd4f3b75e7e13bf6efd9094d84cc5d4096427adb3be48a` |
+| `KPlugPistonAutoResume_v0.2.0.zip` | v0.2.0 | `0abaa27f88469dcb9e73a1f83878da522e61f3a73cd3a7df9aad4ad668290f4f` | `a7e8a19766570f441f6d059053eeb0333ae266b7b99824a0e75c72793b5c1c48` |
+| `KPlugCrossFaderCompatFix_v0.8.0-runtime-tested.zip` | v0.8.0 runtime-tested success build | `2a29634a67ae5a1da31db872dcb083115834564c167b0ccbe2dc3a8961edec7f` | `8aa11033cb70370cf3dbe2b9cd0efcf36759b91b05ca61f7a256be459c212365` |
 
-Package SHA-256:
-
-`342b4ff787f6c7344511e8c1c07ee1d778364a12807fce3a9524036fad3ee010`
-
-Included DLLs:
-
-| DLL | Runtime version | SHA-256 |
-| --- | --- | --- |
-| KPlugGaugeSwapFix.dll | v0.2.0 | `7039f65e09ff3de19b56a1c152a3156b147bf17b70e817862fde5a1684ee8cc9` |
-| KPlugNullGuardsFix.dll | v0.2.0 | `da40fb1db618baccb229d36bbe4f557df499a0f7227b720bd3298090887cd087` |
-| KPlugPistonWaitFix.dll | v1.0.0 | `c134bde2967194477c686e26ebca12010c3d81653e97a7b226e33a6b7294eabd` |
-| KPlugPistonAutoResume.dll | v0.2.0 | `0abaa27f88469dcb9e73a1f83878da522e61f3a73cd3a7df9aad4ad668290f4f` |
-| KPlugCrossFaderCompatFix.dll | v0.8.0 runtime-tested success build | `2a29634a67ae5a1da31db872dcb083115834564c167b0ccbe2dc3a8961edec7f` |
+Each ZIP contains the corresponding project-produced DLL with its normal runtime filename.
 
 The CrossFader binary is deliberately kept as **v0.8.0** because that exact DLL was runtime-tested. The separately stored v1.0.0 source is the formalized source version; no v1.0.0 binary is relabeled or substituted.
 
