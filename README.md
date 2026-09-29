@@ -105,6 +105,30 @@ KPlugFixes/
       └─ KPlugCrossFaderCompatFix_v1.0.0-source.zip
 ```
 
+## Prebuilt Windows binaries
+
+For users who do not compile from source, the repository includes a runtime-tested Windows binary package:
+
+`release/windows/KPlugFixes_Windows_RuntimeTested_20260929.zip`
+
+Package SHA-256:
+
+`342b4ff787f6c7344511e8c1c07ee1d778364a12807fce3a9524036fad3ee010`
+
+Included DLLs:
+
+| DLL | Runtime version | SHA-256 |
+| --- | --- | --- |
+| KPlugGaugeSwapFix.dll | v0.2.0 | `7039f65e09ff3de19b56a1c152a3156b147bf17b70e817862fde5a1684ee8cc9` |
+| KPlugNullGuardsFix.dll | v0.2.0 | `da40fb1db618baccb229d36bbe4f557df499a0f7227b720bd3298090887cd087` |
+| KPlugPistonWaitFix.dll | v1.0.0 | `c134bde2967194477c686e26ebca12010c3d81653e97a7b226e33a6b7294eabd` |
+| KPlugPistonAutoResume.dll | v0.2.0 | `0abaa27f88469dcb9e73a1f83878da522e61f3a73cd3a7df9aad4ad668290f4f` |
+| KPlugCrossFaderCompatFix.dll | v0.8.0 runtime-tested success build | `2a29634a67ae5a1da31db872dcb083115834564c167b0ccbe2dc3a8961edec7f` |
+
+The CrossFader binary is deliberately kept as **v0.8.0** because that exact DLL was runtime-tested. The separately stored v1.0.0 source is the formalized source version; no v1.0.0 binary is relabeled or substituted.
+
+The independent MyRoom mannequin Harmony fix is not included yet because it has not reached its formal runtime-verified release state.
+
 ## Build policy
 
 The source is intentionally kept compatible with the legacy .NET Framework compiler used by this Koikatu environment.
@@ -154,9 +178,7 @@ KPlugPistonAutoResume.dll
 0abaa27f88469dcb9e73a1f83878da522e61f3a73cd3a7df9aad4ad668290f4f
 ```
 
-The successful runtime-tested KPlugGaugeSwapFix v0.2.0 binary hash was not recorded at the time of testing, so no replacement value is invented here.
-
-The integrated KPlugNullGuardsFix v0.2.0 DLL is runtime-tested and is the current stable version. Its runtime-tested binary SHA-256 was not captured in the verification log, so no hash is invented for v0.2.0.
+`KPlugGaugeSwapFix v0.2.0` and `KPlugNullGuardsFix v0.2.0` hashes were later recovered directly from the active runtime-tested game environment and are recorded in the prebuilt Windows package section above.
 
 ## Migration note
 

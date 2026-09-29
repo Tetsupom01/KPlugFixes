@@ -44,3 +44,24 @@ SHA-256:
 `3077ac3b8ea547c6c8e7a0cf96e5e11ab3aa1495e506ca7ac998f5cd5470f5e4`
 
 The exact v1.0.0 rebuilt DLL SHA-256 is intentionally not invented. It should be recorded from the first formal v1.0.0 build manifest.
+
+
+## Prebuilt Windows package
+
+A no-build package for Windows users is included at:
+
+`release/windows/KPlugFixes_Windows_RuntimeTested_20260929.zip`
+
+SHA-256:
+
+`342b4ff787f6c7344511e8c1c07ee1d778364a12807fce3a9524036fad3ee010`
+
+It contains the exact DLLs collected from the active runtime-tested Koikatu environment on 2026-09-29:
+
+- KPlugGaugeSwapFix.dll v0.2.0
+- KPlugNullGuardsFix.dll v0.2.0
+- KPlugPistonWaitFix.dll v1.0.0
+- KPlugPistonAutoResume.dll v0.2.0
+- KPlugCrossFaderCompatFix.dll v0.8.0 runtime-tested success build
+
+CrossFaderCompatFix is not relabeled as v1.0.0. The package preserves the exact tested v0.8.0 binary while v1.0.0 remains the formalized source version until a v1.0.0 binary is built and verified.
