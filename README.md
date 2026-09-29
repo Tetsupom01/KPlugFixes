@@ -108,7 +108,9 @@ KPlugFixes/
       ├─ KPlugNullGuardsFix_v0.2.0.zip
       ├─ KPlugPistonWaitFix_v1.0.0.zip
       ├─ KPlugPistonAutoResume_v0.2.0.zip
-      ├─ KPlugCrossFaderCompatFix_v1.0.0.zip\n      └─ archive/\n         └─ KPlugCrossFaderCompatFix_v0.8.0-runtime-tested.zip
+      ├─ KPlugCrossFaderCompatFix_v1.0.0.zip
+      └─ archive/
+         └─ KPlugCrossFaderCompatFix_v0.8.0-runtime-tested.zip
 ```
 
 ## Prebuilt Windows binaries
