@@ -108,9 +108,7 @@ KPlugFixes/
       ├─ KPlugNullGuardsFix_v0.2.0.zip
       ├─ KPlugPistonWaitFix_v1.0.0.zip
       ├─ KPlugPistonAutoResume_v0.2.0.zip
-      ├─ KPlugCrossFaderCompatFix_v1.0.0.zip
-      └─ archive/
-         └─ KPlugCrossFaderCompatFix_v0.8.0-runtime-tested.zip
+      └─ KPlugCrossFaderCompatFix_v1.0.0.zip
 ```
 
 ## Prebuilt Windows binaries
@@ -127,7 +125,7 @@ For users who do not compile from source, prebuilt Windows DLLs are provided as 
 
 Each ZIP contains the corresponding project-produced DLL with its normal runtime filename.
 
-CrossFaderCompatFix **v1.0.0 is the current runtime-tested Windows release**. The distributed DLL was collected from the user's installed Koikatu environment; its internal plugin/version strings report v1.0.0. The supplied runtime log confirms v1.0.0 loaded and patched successfully, five H-animation gate transactions completed, CrossFader transition waits were exercised, no native crash / Access Violation occurred, and the game reached normal quit. The previous v0.8.0 runtime-tested package remains under `release/windows/archive/` as historical evidence.
+CrossFaderCompatFix **v1.0.0 is the current runtime-tested Windows release**. The distributed DLL was collected from the user's installed Koikatu environment; its internal plugin/version strings report v1.0.0. The supplied runtime log confirms v1.0.0 loaded and patched successfully, five H-animation gate transactions completed, CrossFader transition waits were exercised, no native crash / Access Violation occurred, and the game reached normal quit.
 
 The independent MyRoom mannequin Harmony fix is not included yet because it has not reached its formal runtime-verified release state.
 

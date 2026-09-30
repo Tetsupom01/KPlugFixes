@@ -57,6 +57,4 @@ No-build Windows packages are provided individually under `release/windows/`:
 
 Each package contains the corresponding project-produced Windows DLL. CrossFaderCompatFix v1.0.0 is now included as the current runtime-tested binary. Its verification run completed five `GATE START -> ALLOW CHANGE -> GATE RELEASE` transactions, exercised CrossFader transition waits, showed no native crash / Access Violation, and reached normal game quit.
 
-The previous v0.8.0 runtime-tested CrossFader package is preserved under `release/windows/archive/` for history only.
-
 The independent MyRoom mannequin Harmony fix is not included because it has not yet reached its formal runtime-verified release state.

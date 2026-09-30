@@ -84,4 +84,4 @@ BATを実行するとPowerShell経由でFramework v4 `csc.exe`を使用してビ
 
 ## 正本上の注意
 
-v1.0.0は正式版ソースかつ実機確認済みDLL。Windows配布DLL SHA-256は `1bd4cbcd316b4ec4132f453c732ddcbc95d12911349099b3fe786dbed9036cc7`、配布ZIP SHA-256は `50ce10e547e64f7fa564b8263d2271418e9853fb3b74b38cd1e8add8abd9a0ec`。旧v0.8.0成功版は履歴としてarchiveへ保存する。
+v1.0.0は正式版ソースかつ実機確認済みDLL。Windows配布DLL SHA-256は `1bd4cbcd316b4ec4132f453c732ddcbc95d12911349099b3fe786dbed9036cc7`、配布ZIP SHA-256は `50ce10e547e64f7fa564b8263d2271418e9853fb3b74b38cd1e8add8abd9a0ec`。
