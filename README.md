@@ -51,6 +51,20 @@ CrossFader itself is not disabled or rewritten; its `SetPlayHook` / `CrossFadeIn
 
 v1.0.0 is the current runtime-tested release. In the supplied verification run, the plugin loaded successfully, five H-animation gate transactions completed through `GATE START -> ALLOW CHANGE -> GATE RELEASE`, CrossFader-active transitions were observed and waited out, no native crash / Access Violation occurred, and the game exited normally. Investigation history and verification limits are documented under `docs/CrossFaderCompatFix/`.
 
+### PoseBridge
+
+**KPlugPoseBridge v0.2.0.0**
+
+Synchronizes the vanilla/main H insertion-position list (mode 2) with the same canonical pose set used by kPlug Pose Selector.
+
+The plugin reuses kPlug's own resolution path:
+
+`ToolAnimSelector.GetAvailablePiston()` → `ParserAnim.GetHAnim(canonical)`
+
+It synchronizes once after `ExtraAnimManager.Start` and again after `HSceneProc.CreateListAnimationFileName(bool,int)`, so H-point/category changes rebuild the vanilla list to the kPlug-visible set.
+
+Runtime verification on 2026-10-08 confirmed successful synchronization for floor (77), wall (12), and desk (20) sets, with no `SYNC_ABORT` / sync failure in the supplied log. Poses selected during the test behaved normally; exhaustive selection of every pose was not performed.
+
 ### PistonTransitionFix
 
 Contains two independent plugins:
@@ -81,6 +95,8 @@ KPlugFixes/
 │  ├─ NullGuardsFix/
 │  │  ├─ KPlugNullGuardsFix_v0.2.0.cs
 │  │  └─ KPlugNullGuardsFix_v0.1.0.cs
+│  ├─ PoseBridge/
+│  │  └─ KPlugPoseBridge_v0.2.0.0.cs
 │  └─ PistonTransitionFix/
 │     ├─ WaitFix/
 │     │  └─ KPlugPistonWaitFix_v1.0.0.cs
@@ -90,15 +106,18 @@ KPlugFixes/
 ├─ scripts/
 │  ├─ GaugeSwapFix/
 │  ├─ NullGuardsFix/
-│  └─ PistonTransitionFix/
+│  ├─ PistonTransitionFix/
+│  └─ PoseBridge/
 │
 ├─ docs/
 │  ├─ GaugeSwapFix/
 │  ├─ NullGuardsFix/
 │  ├─ PistonTransitionFix/
-│  └─ CrossFaderCompatFix/
-│     ├─ README_ja.md
-│     └─ HISTORY.md
+│  ├─ CrossFaderCompatFix/
+│  │  ├─ README_ja.md
+│  │  └─ HISTORY.md
+│  └─ PoseBridge/
+│     └─ README_ja.md
 │
 └─ release/
    ├─ CrossFaderCompatFix/
@@ -122,6 +141,7 @@ For users who do not compile from source, prebuilt Windows DLLs are provided as 
 | `KPlugPistonWaitFix_v1.0.0.zip` | v1.0.0 | `c134bde2967194477c686e26ebca12010c3d81653e97a7b226e33a6b7294eabd` | `955de4cc6c72d0e852cd4f3b75e7e13bf6efd9094d84cc5d4096427adb3be48a` |
 | `KPlugPistonAutoResume_v0.2.0.zip` | v0.2.0 | `0abaa27f88469dcb9e73a1f83878da522e61f3a73cd3a7df9aad4ad668290f4f` | `a7e8a19766570f441f6d059053eeb0333ae266b7b99824a0e75c72793b5c1c48` |
 | `KPlugCrossFaderCompatFix_v1.0.0.zip` | v1.0.0 runtime-tested | `1bd4cbcd316b4ec4132f453c732ddcbc95d12911349099b3fe786dbed9036cc7` | `50ce10e547e64f7fa564b8263d2271418e9853fb3b74b38cd1e8add8abd9a0ec` |
+| `KPlugPoseBridge_v0.2.0.0.zip` | v0.2.0.0 success build | not preserved separately | `df98829f15469b20868a4fe69f20f8c6a58f041dbf54e3c315b96f928f235a5c` |
 
 Each ZIP contains the corresponding project-produced DLL with its normal runtime filename.
 
