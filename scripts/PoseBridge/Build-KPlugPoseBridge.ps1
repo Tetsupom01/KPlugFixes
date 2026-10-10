@@ -5,6 +5,12 @@ param(
 $ErrorActionPreference = "Stop"
 $Here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $Src  = Join-Path $Here "KPlugPoseBridge.cs"
+if (-not (Test-Path -LiteralPath $Src)) {
+    $RepoSrc = Join-Path (Split-Path -Parent (Split-Path -Parent $Here)) "src\PoseBridge\KPlugPoseBridge_v0.2.0.1.cs"
+    if (Test-Path -LiteralPath $RepoSrc) {
+        $Src = $RepoSrc
+    }
+}
 $Out  = Join-Path $Here "KPlugPoseBridge.dll"
 
 $managed = Join-Path $GameRoot "Koikatu_Data\Managed"
@@ -32,7 +38,7 @@ $csc = $cscCandidates | Where-Object { Test-Path -LiteralPath $_ } | Select-Obje
 if (-not $csc) { throw "csc.exe not found." }
 
 Write-Host "Compiler: $csc"
-Write-Host "Building KPlug Pose Bridge v0.2.0.0..."
+Write-Host "Building KPlug Pose Bridge v0.2.0.1..."
 
 $args = @("/nologo","/target:library","/optimize+","/out:$Out")
 foreach ($r in $refs) { $args += "/reference:$r" }
