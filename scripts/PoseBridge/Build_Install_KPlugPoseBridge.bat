@@ -8,7 +8,7 @@ set "DLL=%HERE%KPlugPoseBridge.dll"
 set "PLUGIN=%ROOT%\BepInEx\plugins\KPlugPoseBridge.dll"
 
 echo ============================================================
-echo KPlug Pose Bridge v0.2.0.0
+echo KPlug Pose Bridge v0.2.0.1
 echo Build + Install
 echo mode=2 / sync vanilla main UI to kPlug GetAvailablePiston
 echo ============================================================
@@ -69,6 +69,7 @@ echo   7. If possible compare with U Pose Selector at the same point.
 echo   8. Exit normally and send output_log.txt plus screenshots if useful.
 echo.
 echo Expected log: [PoseBridge] SYNC_OK
+If GetHAnim is temporarily unavailable: [PoseBridge] SYNC_DEFER
 echo If SYNC_ABORT appears, the bridge leaves the existing list untouched.
 echo.
 pause
