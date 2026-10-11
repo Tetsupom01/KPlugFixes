@@ -65,6 +65,14 @@ It synchronizes once after `ExtraAnimManager.Start` and again after `HSceneProc.
 
 Runtime verification on 2026-10-08 confirmed successful synchronization for floor (77), wall (12), and desk (20) sets, with no `SYNC_ABORT` / sync failure in the supplied log. Poses selected during the test behaved normally; exhaustive selection of every pose was not performed.
 
+### Sideloader HList Name Cache
+
+**SideloaderHListNameCache v0.1.0 (runtime-tested; frozen)**
+
+Independent H-list asset-name caching for six exact `abdata/h/list/` bundles. Two runtime sessions confirmed 852 and 480 cache hits **per bundle**, respectively, with no cache-patch-origin errors. The second test also confirmed normal H controls, pose-list selection, and H-point movement. This is not a PoseBridge component and does not address the separate intermittent HPointMove pose-collapse issue.
+
+The tested, byte-identical DLL, source, one-step Windows installer/remover, SHA-256 manifest, and test record are archived together in `release/windows/Sideloader_HListNameCache_v0.1.0_Stable_Frozen.zip`. **The frozen stable installer has not yet been separately verified on Windows.** See `docs/HListNameCache/README_ja.md` for exact hash and test limits.
+
 ### PistonTransitionFix
 
 Contains two independent plugins:
@@ -127,7 +135,8 @@ KPlugFixes/
       ├─ KPlugNullGuardsFix_v0.2.0.zip
       ├─ KPlugPistonWaitFix_v1.0.0.zip
       ├─ KPlugPistonAutoResume_v0.2.0.zip
-      └─ KPlugCrossFaderCompatFix_v1.0.0.zip
+      ├─ KPlugCrossFaderCompatFix_v1.0.0.zip
+      └─ Sideloader_HListNameCache_v0.1.0_Stable_Frozen.zip
 ```
 
 ## Prebuilt Windows binaries
@@ -142,6 +151,7 @@ For users who do not compile from source, prebuilt Windows DLLs are provided as 
 | `KPlugPistonAutoResume_v0.2.0.zip` | v0.2.0 | `0abaa27f88469dcb9e73a1f83878da522e61f3a73cd3a7df9aad4ad668290f4f` | `a7e8a19766570f441f6d059053eeb0333ae266b7b99824a0e75c72793b5c1c48` |
 | `KPlugCrossFaderCompatFix_v1.0.0.zip` | v1.0.0 runtime-tested | `1bd4cbcd316b4ec4132f453c732ddcbc95d12911349099b3fe786dbed9036cc7` | `50ce10e547e64f7fa564b8263d2271418e9853fb3b74b38cd1e8add8abd9a0ec` |
 | `KPlugPoseBridge_v0.2.0.0.zip` | v0.2.0.0 success build | not preserved separately | `df98829f15469b20868a4fe69f20f8c6a58f041dbf54e3c315b96f928f235a5c` |
+| `Sideloader_HListNameCache_v0.1.0_Stable_Frozen.zip` | v0.1.0 runtime-tested frozen | `17f571acb7901776f1069c1b218e85edb67918c50a1ce844837c7da3616429c4` | `2cf2ba5af6602e49ee8bdc8dffe8197c0e3e500c31911ce2b95b98864b8195bc` |
 
 Each ZIP contains the corresponding project-produced DLL with its normal runtime filename.
 
