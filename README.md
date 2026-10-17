@@ -73,6 +73,14 @@ Independent H-list asset-name caching for six exact `abdata/h/list/` bundles. Tw
 
 The tested, byte-identical DLL, source, one-step Windows installer/remover, SHA-256 manifest, and test record are archived together in `release/windows/Sideloader_HListNameCache_v0.1.0_Stable_Frozen.zip`. **The frozen stable installer has not yet been separately verified on Windows.** See `docs/HListNameCache/README_ja.md` for exact hash and test limits.
 
+### HPointIK DeskScoped ExtraIK Guard
+
+**HPointIK DeskScoped ExtraIK Guard v0.2.0 RC1 (runtime-tested, frozen)**
+
+Prevents a narrowly identified stale extra-IK call from overwriting the desk-back caress IK after an H-point transition, while leaving nonmatching cases on their original path. In its recorded RC1 session, four qualifying transitions were suppressed with zero guard errors; the tester reported substantially improved behavior.
+
+The exact successful RC1 DLL is identified by SHA-256 `F167EF2459C695B4A7B1782141E9640E1C013D00B833D1E48D5B0C54FD4ECC54`. **Only metadata is registered here so far; the exact frozen distribution ZIP is not yet in the repository.** Do not build a replacement and call it the same RC1. The separate pre-existing Numpad Enter transient (issue B) is still under investigation. See [frozen identity, test record and preservation rules](docs/HPointIKDeskScopedExtraIKGuard/README_ja.md).
+
 ### PistonTransitionFix
 
 Contains two independent plugins:
