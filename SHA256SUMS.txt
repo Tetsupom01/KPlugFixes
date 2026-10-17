@@ -14,3 +14,5 @@ df98829f15469b20868a4fe69f20f8c6a58f041dbf54e3c315b96f928f235a5c  release/window
 17f571acb7901776f1069c1b218e85edb67918c50a1ce844837c7da3616429c4  SideloaderHListNameCache.dll  # runtime-tested frozen v0.1.0 embedded in release/windows/Sideloader_HListNameCache_v0.1.0_Stable_Frozen.zip
 d873cc477af79ad90d69e976095f25e2e1b16f129906ec24d3c0cca98c93f76d  SideloaderHListNameCache.cs  # embedded source in frozen v0.1.0 ZIP
 2cf2ba5af6602e49ee8bdc8dffe8197c0e3e500c31911ce2b95b98864b8195bc  release/windows/Sideloader_HListNameCache_v0.1.0_Stable_Frozen.zip
+ddaaf270e707fd9b8f7074fb4641565511e2e2d5065e13c2b5566477cfb4f951  release/windows/HPointIK_DeskScopedExtraIKGuard_v0.2.0_RC1_Frozen_OneStep.zip
+f167ef2459c695b4a7b1782141e9640e1c013d00b833d1e48d5b0c54fd4ecc54  HPointIKStaleExtraIKGuard.dll  # runtime-tested frozen v0.2.0 RC1 embedded in release/windows/HPointIK_DeskScopedExtraIKGuard_v0.2.0_RC1_Frozen_OneStep.zip

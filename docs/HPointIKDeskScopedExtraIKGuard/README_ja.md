@@ -2,7 +2,7 @@
 
 記録日：2026-10-17 JST
 
-**状態：実機検証済みRC1。GitHubへの固定情報・検証記録の登録は完了。ただし、成功済みZIP/DLLの実体は未登録。** 今回の作業環境ではLibraryにある元ZIPのバイト列を取得できなかったため、同じ名前の代替物を生成・登録しない。
+**状態：実機検証済みRC1。固定情報・検証記録と成功済み原本ZIPのGitHub登録は完了。** 原本ZIPと内包DLLのSHA-256を照合し、ZIPを改変せず登録した。GitHubから再取得したZIPと内包DLLも同じSHA-256であることを確認済み。
 
 ## 対象と変更範囲
 
@@ -24,7 +24,7 @@ RC1は成功済みEXP v0.2.0 DLLと**バイト完全同一**。内部の `EXPERI
 | kPlug.dll基準SHA（再配布しない） | `34C13976108DB0A18A7AD6B7CFDA5517B4A9A83D85C9A909820144264C743855` |
 | Assembly-CSharp.dll基準SHA（再配布しない） | `0038281CAF8DF48A7903C55DC389642EEEB3F2A9114BD9D68AC11C8AC0396BC5` |
 
-実機配置先：`BepInEx\\plugins\\KPlugFixes\\HPointIKStaleExtraIKGuard.dll`。元ZIPの実体が取得できた際は、ZIPのSHA・内包DLLのSHAを照合した後、変更なしで `release/windows/` に登録する。それまでは**GitHub上にRC1の配布ZIPがあると表示しない**。
+実機配置先：`BepInEx\\plugins\\KPlugFixes\\HPointIKStaleExtraIKGuard.dll`。配布原本：[HPointIK_DeskScopedExtraIKGuard_v0.2.0_RC1_Frozen_OneStep.zip](../../release/windows/HPointIK_DeskScopedExtraIKGuard_v0.2.0_RC1_Frozen_OneStep.zip)。再ビルド・再圧縮は行わず、原本のバイト列を維持して登録済み。
 
 ## 実機検証結果
 
@@ -48,4 +48,4 @@ END animatorCalls=26 deskCalls=6 checks=6 suppressed=4 passed=0 errors=0
 - RC1、既存CrossFaderCompatFix、NullGuards等、`kPlug.dll`、`Assembly-CSharp.dll`を問題Bの推測で変更しない。
 - FlowDiagは別の診断資産。RC1本番パッケージに混ぜない。
 - 公開GitHubにはPJが作成した成果物だけを格納し、ゲームDLLやkPlug、BepInEx、Harmony等の第三者バイナリを再配布しない。
-- 本文のSHA・動作結果は2026-10-17の引き継ぎMD、EXP実機検証MD、RC1回収ログに基づく記録。GitHub登録時にRC1 ZIP実体を独立検算したという意味ではない。
+- 動作結果は2026-10-17の引き継ぎMD、EXP実機検証MD、RC1回収ログに基づく記録。ZIP・内包DLLのSHAは、原本取得時とGitHub登録後の再取得時に独立検算し、上表との一致を確認済み。
