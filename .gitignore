@@ -1,0 +1,9 @@
+build/
+release/
+*.dll
+*.pdb
+*.zip
+*.log
+*.backup*
+*.v020_off
+*.integrated_off
