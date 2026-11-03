@@ -1,5 +1,15 @@
 # KPlugGaugeSwapFix v0.2.0
 
+## 配布ZIPの使い方（追加の日本語案内）
+
+- [配布ZIP v0.2.0](../../release/windows/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0.zip)
+- [完全ソース](../../src/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0.cs)
+- [公開SHA-256一覧](../../SHA256SUMS.txt)
+
+この旧配布ZIPは**`KPlugGaugeSwapFix.dll`だけ**を収録しており、自動インストーラではありません。Koikatuを終了し、ZIPからDLLを取り出して`BepInEx/plugins/`配下のプラグイン読込場所に配置してください。既存の`KPlugGaugeSwapFix.dll`や旧診断DLLを確認し、重複ロードを避けてください。開発用ビルドスクリプトは`BepInEx/plugins/test/`に配置する設計ですが、配布ZIPにその自動配置機能はありません。
+
+導入後、BepInExログで`GaugeSwapFix v0.2.0`のロードを確認し、Main girlをスワップして別カテゴリへ移動した際のFace/Gauge表示を確認してください。解除するにはゲームを終了し、**今回追加したDLLだけ**を外します。既存版を置き換えた場合は退避した原本から復元してください。ゲーム本体、kPlug.dll、他の修正DLLは変更しません。
+
 ## 目的
 
 kPlug 3.6.0でMain girlをスワップした後、`寝 -> 椅子` などHのカテゴリ/アニメーションを変更すると、

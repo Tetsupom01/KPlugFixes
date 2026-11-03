@@ -1,5 +1,7 @@
 # kPlug Piston Transition Fix
 
+[日本語版README](README_ja.md) | English
+
 BepInEx plugins for Koikatu + kPlug 3.6.0 that fix insertion-animation switching issues and optionally resume piston motion automatically after using Numpad 7 / Backspace.
 
 This project contains two separate plugins with different roles:

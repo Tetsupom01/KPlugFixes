@@ -8,13 +8,15 @@
 
 | プラグイン | 何を改善する？ | 現行版・入手先 |
 | --- | --- | --- |
-| **CrossFaderCompatFix** | Hポイント移動後に姿勢が崩れたままになる問題を低減。CrossFaderとのアニメーション切替競合にも対応 | [v1.2.0 日本語README同梱・KPlugFixes配置版](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0_KPlugFixes_Install.zip) |
-| **PoseBridge** | kPlugの体位選択にある挿入体位を、本体のH画面の体位一覧にも反映 | [v0.2.0.1 日本語README同梱・KPlugFixes配置版](release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.1_KPlugFixes_Install.zip) |
-| **GaugeSwapFix** | H中に相手を入れ替えた際の顔・ゲージ表示の巻き戻りを抑制 | [v0.2.0](release/windows/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0.zip) |
-| **NullGuardsFix** | kPlugの特定のNullReference例外を、kPlug.dllを直接変更せず保護 | [v0.2.0](release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0.zip) |
-| **PistonWaitFix** | 特定の挿入モーション切替後に操作できなくなる状態への対策 | [v1.0.0](release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0.zip) |
-| **PistonAutoResume** | アニメーション切替後、条件が整ったら元のゲームのGo経路でピストン動作を再開 | [v0.2.0](release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0.zip) |
-| **HListNameCache** | H体位一覧に関係する一部アセット名取得処理をキャッシュ | [v0.1.0 凍結版](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Stable_Frozen.zip) |
+| **CrossFaderCompatFix** | Hポイント移動後に姿勢が崩れたままになる問題を低減。CrossFaderとのアニメーション切替競合にも対応 | [v1.2.0 日本語README同梱・KPlugFixes配置版](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0_KPlugFixes_Install.zip) ／ [日本語README](docs/CrossFaderCompatFix/README_ja.md) |
+| **PoseBridge** | kPlugの体位選択にある挿入体位を、本体のH画面の体位一覧にも反映 | [v0.2.0.1 日本語README同梱・KPlugFixes配置版](release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.1_KPlugFixes_Install.zip) ／ [日本語README](docs/PoseBridge/README_ja.md) |
+| **GaugeSwapFix** | H中に相手を入れ替えた際の顔・ゲージ表示の巻き戻りを抑制 | [v0.2.0](release/windows/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0.zip) ／ [日本語README](docs/GaugeSwapFix/README_ja.md) |
+| **NullGuardsFix** | kPlugの特定のNullReference例外を、kPlug.dllを直接変更せず保護 | [v0.2.0](release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0.zip) ／ [日本語README](docs/NullGuardsFix/README_ja.md) |
+| **PistonWaitFix** | 特定の挿入モーション切替後に操作できなくなる状態への対策 | [v1.0.0](release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0.zip) ／ [日本語README](docs/PistonTransitionFix/README_ja.md) |
+| **PistonAutoResume** | アニメーション切替後、条件が整ったら元のゲームのGo経路でピストン動作を再開 | [v0.2.0](release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0.zip) ／ [日本語README](docs/PistonTransitionFix/README_ja.md) |
+| **HListNameCache** | H体位一覧に関係する一部アセット名取得処理をキャッシュ | [v0.1.0 凍結版](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Stable_Frozen.zip) ／ [日本語README](docs/HListNameCache/README_ja.md) |
+
+**過去のDLL単体ZIPについて：** GaugeSwapFix、NullGuardsFix、PistonWaitFix、PistonAutoResumeの配布ZIPにはDLLしか入っていません。ZIPをゲーム本体フォルダに展開するだけでは導入されません。各行の**日本語README**にある配置・更新・解除手順を参照してください。既存ZIPとDLLは改変していません。
 
 **注意：** これらを全部入れる必要はありません。適用したい症状に対応するDLLだけを選んでください。各ZIPの導入手順・検証状況を確認してください。
 

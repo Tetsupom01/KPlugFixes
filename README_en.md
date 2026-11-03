@@ -88,6 +88,8 @@ The tested, byte-identical DLL, source, one-step Windows installer/remover, SHA-
 
 ### PistonTransitionFix
 
+[Japanese installation guide](docs/PistonTransitionFix/README_ja.md)
+
 Contains two independent plugins:
 
 **KPlugPistonWaitFix v1.0.0**
