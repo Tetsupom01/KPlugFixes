@@ -18,3 +18,7 @@ d873cc477af79ad90d69e976095f25e2e1b16f129906ec24d3c0cca98c93f76d  SideloaderHLis
 98627c2243be4a49af164f88a5c47891b372a395b586ca8e454130dc79c2ebac  src/CrossFaderCompatFix/v1.1.0/KPlugCrossFaderCompatFix_v1.1.0.cs  # label-cleaned complete source
 1f6f359255d3501545f1b97e25dc059436fa24c3eeb704ec9db93e80256b4154  KPlugCrossFaderCompatFix_v1.1.0.dll  # verified startup/initialization; embedded in the v1.1.0 official install ZIP
 d826bfc59e8994fefbb862f135ad77fab8354c0e6d003f9e79d230bd02e581a1  release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.1.0_Install.zip  # label-cleaned; H-point move retest pending
+2392ccafe5663efc4fd80f8f72e9741796de1ddd85d92f9a0e2c0f6c3e45acfc  KPlugCrossFaderCompatFix_v1.2.0.dll  # within official v1.2.0 install ZIP
+bb3174313bd716d2273533ea67247b1dccf27039fe4bb9141a8a4cd468372220  release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0_Install.zip
+362c7cd08a9e32dca98367f666a76f822f83c5b25a4bbbc514d6b279a9b0e122  release/source/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0-source.zip
+029be7b0733bd333939e950eb7b2c068139803cbbbdfb097daab07ea56fc772d  src/CrossFaderCompatFix/v1.2.0/KPlugCrossFaderCompatFix_v1.2.0.cs

@@ -41,16 +41,20 @@ v0.2.0 integrates the previously standalone AtHomeDestroyGuard v0.1.1. Final int
 
 ### CrossFaderCompatFix
 
-**KPlugCrossFaderCompatFix v1.1.0** — current adopted version.
+**KPlugCrossFaderCompatFix v1.2.0** — current adopted version (2026-11-03).
 
-This fix keeps the original v1.0.0 first-request-wins gate and Animator stability wait, and adds a narrow H-point MoveBoundary invalidation for pending requests left over from the previous physical H-point. It preserves the vanilla ChangeAnimator body and CrossFader implementation.
+Preserves the v1.1.0 first-request-wins gate, stability wait, and H-point MoveBoundary invalidation. Adds narrowly scoped stale ExtraIK suppression for H-point transitions after insertion motions, with guards for `InsertIdle`, `WLoop`, `OUT_A`, and `Insert` (the `Insert` branch was not observed in the final run). The original state transitions and input handling remain in place.
 
-The v1.1.0 MoveBoundary logic was exercised in the trial run: three obsolete pending requests were invalidated and destination requests were accepted. The label-cleaned production DLL loaded, applied its mandatory Harmony patch and reported `[MOVE_BOUNDARY READY] version=1.1.0` in the 2026-10-31 startup log. The label-cleaned DLL has **not** separately been verified by an H-point move test; do not confuse startup verification with that movement test.
+Diagnostics are **OFF by default**. Set `[Logging] EnableDiagnosticLogs = true` in `BepInEx/config/tetsupom.kplug.crossfader.compatfix.cfg` and restart to record CrossFader and ExtraIK messages together in `BepInEx/KPlugCrossFaderCompatFix.log`.
 
-- [Current installer ZIP](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.1.0_Install.zip)
-- [Current complete source](src/CrossFaderCompatFix/v1.1.0/KPlugCrossFaderCompatFix_v1.1.0.cs)
-- [Public technical overview](docs/CrossFaderCompatFix/README_ja.md) (detailed internal validation records are retained privately)
-- Previous successful v1.0.0 remains available as a historical release.
+The pre-label-cleanup v1.2.0 candidate passed startup and both logging OFF/ON tests on 2026-11-03. The recent logging ON run recorded six ExtraIK suppressions and no internal errors; the user reported no persistent pose collapse in that run. **Known unresolved issues:** intermittent first-Enter transient pose displacement after post-climax H-point moves and occasional Enter nonresponse. The official binary differs from the tested candidate only in equal-length managed metadata strings; the exact label-cleaned binary has **not** separately been tested in-game.
+
+- [Current installer ZIP](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0_Install.zip)
+- [Current complete source](src/CrossFaderCompatFix/v1.2.0/KPlugCrossFaderCompatFix_v1.2.0.cs)
+- [Source and build-material ZIP](release/source/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0-source.zip)
+- [v1.2.0 release notes](docs/CrossFaderCompatFix/RELEASE_NOTES_v1.2.0.md)
+- [Public technical overview](docs/CrossFaderCompatFix/README_ja.md)
+- [Previous v1.1.0 installer](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.1.0_Install.zip) remains available.
 
 ### PoseBridge
 
@@ -108,6 +112,7 @@ Each plugin has its own self-contained ZIP in `release/windows/<FixName>/`. The 
 
 | Package | DLL SHA-256 | ZIP SHA-256 | Verification |
 | --- | --- | --- | --- |
+| [CrossFaderCompatFix v1.2.0](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0_Install.zip) | `2392ccafe5663efc4fd80f8f72e9741796de1ddd85d92f9a0e2c0f6c3e45acfc` | `bb3174313bd716d2273533ea67247b1dccf27039fe4bb9141a8a4cd468372220` | Pre-label-cleanup candidate tested OFF/ON; final metadata-only label cleanup not separately smoke-tested; Enter issues remain |
 | [CrossFaderCompatFix v1.1.0](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.1.0_Install.zip) | `1f6f359255d3501545f1b97e25dc059436fa24c3eeb704ec9db93e80256b4154` | `d826bfc59e8994fefbb862f135ad77fab8354c0e6d003f9e79d230bd02e581a1` | Label-cleaned DLL: startup/patch/MoveBoundary READY verified; separate H-point move retest pending |
 | [CrossFaderCompatFix v1.0.0 (historical)](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.0.0.zip) | `1bd4cbcd316b4ec4132f453c732ddcbc95d12911349099b3fe786dbed9036cc7` | `50ce10e547e64f7fa564b8263d2271418e9853fb3b74b38cd1e8add8abd9a0ec` | Prior runtime-tested baseline |
 | [GaugeSwapFix v0.2.0](release/windows/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0.zip) | `7039f65e09ff3de19b56a1c152a3156b147bf17b70e817862fde5a1684ee8cc9` | `7bae97d1a68ead58cba5a467fd44708ae0021a8102f9801c981e7bf0dd21c77b` | Runtime-tested |
