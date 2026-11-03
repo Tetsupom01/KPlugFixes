@@ -6,9 +6,10 @@ kPlugのPose Selectorで選べる挿入体位（mode 2）を、Koikatu本体H画
 
 - **推奨導入ZIP（日本語README付き）：** [v0.2.0.1／KPlugFixesフォルダ配置](../../release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.1_KPlugFixes_Install.zip)
 - [C#ソース](../../src/PoseBridge/KPlugPoseBridge_v0.2.0.1.cs)
+- [リリースノート](RELEASE_NOTES_v0.2.0.1.md)
 - **配置先：** `BepInEx/plugins/KPlugFixes/KPlugPoseBridge.dll`
 - **DLL SHA-256：** `F1A35FF5A1849001D2705DD3F4C368FCB9A309170B51F244AEB1FD99583C9142`
-- **新ZIP SHA-256：** `929A45F7F3B222194B4F2DACB9FC99E7CB8D48D3C4FE59161457800718E1AEF2`
+- **新ZIP SHA-256：** `76a985805c3817b2caf4f69e787fdcc93125780619a66ce69f3d2ef2d7039ba4`
 
 **インストール：** ゲーム終了→同名DLLをバックアップ→ZIPをゲーム本体フォルダへ展開。旧配置先`BepInEx/plugins/`直下などの同名DLLを残さないよう確認してください。
 

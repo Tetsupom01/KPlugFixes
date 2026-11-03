@@ -9,7 +9,7 @@ Koikatu＋kPlug 3.6.0＋CrossFader 0.11向けです。Hポイント移動後に�
 - [技術リリースノート](RELEASE_NOTES_v1.2.0.md)
 - **配置先：** `BepInEx/plugins/KPlugFixes/KPlugCrossFaderCompatFix.dll`
 - **DLL SHA-256：** `2392CCAFE5663EFC4FD80F8F72E9741796DE1DDD85D92F9A0E2C0F6C3E45ACFC`
-- **新ZIP SHA-256：** `44940FE2951DFC0E747C43CF2117A22043CBFAF7A3B1776ED9033BB7C65B566A`
+- **新ZIP SHA-256：** `f769ee644700fc52c8d59a14f5f80bd9103df2be9543947b6201506ddde499d1`
 
 **インストール：** ゲーム終了→旧DLLをバックアップ→ZIPをゲーム本体フォルダへ展開。既存の`BepInEx/plugins/`直下などに同名DLLがある場合、重複してロードされないよう確認してください。復元時はゲームを終了してから旧DLLを戻します。
 

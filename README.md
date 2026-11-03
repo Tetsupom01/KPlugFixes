@@ -62,8 +62,8 @@ Koikatuを終了し、今回導入した同名DLLを外してください。導�
 
 ## ソース・詳細・更新履歴
 
-- [CrossFader 詳細（日本語）](docs/CrossFaderCompatFix/README_ja.md)／[ソース](src/CrossFaderCompatFix/v1.2.0/KPlugCrossFaderCompatFix_v1.2.0.cs)
-- [PoseBridge 詳細（日本語）](docs/PoseBridge/README_ja.md)／[ソース](src/PoseBridge/KPlugPoseBridge_v0.2.0.1.cs)
+- [CrossFader 詳細（日本語）](docs/CrossFaderCompatFix/README_ja.md)／[ソース](src/CrossFaderCompatFix/v1.2.0/KPlugCrossFaderCompatFix_v1.2.0.cs)／[リリースノート](docs/CrossFaderCompatFix/RELEASE_NOTES_v1.2.0.md)
+- [PoseBridge 詳細（日本語）](docs/PoseBridge/README_ja.md)／[ソース](src/PoseBridge/KPlugPoseBridge_v0.2.0.1.cs)／[リリースノート](docs/PoseBridge/RELEASE_NOTES_v0.2.0.1.md)
 - [SHA-256一覧](SHA256SUMS.txt)：配布物の同一性確認に使用します
 - [英語の技術説明](README_en.md)
 

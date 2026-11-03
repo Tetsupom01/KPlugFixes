@@ -62,6 +62,8 @@ The pre-label-cleanup v1.2.0 candidate passed startup and both logging OFF/ON te
 
 ### PoseBridge
 
+[v0.2.0.1 release notes](docs/PoseBridge/RELEASE_NOTES_v0.2.0.1.md)
+
 **KPlugPoseBridge v0.2.0.1 (currently loaded on user's game; verified startup)**
 
 v0.2.0.1 [complete source](src/PoseBridge/KPlugPoseBridge_v0.2.0.1.cs) and [game-root installation ZIP](release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.1_KPlugFixes_Install.zip) are available. The ZIP contains the byte-identical DLL collected from the runtime on 2026-10-31 (DLL SHA-256 `F1A35FF5A1849001D2705DD3F4C368FCB9A309170B51F244AEB1FD99583C9142`). Startup/patch active was verified; full pose-by-pose retesting of this exact binary was not performed. The v0.2.0.0 installer remains historical.
@@ -116,14 +118,14 @@ Each plugin has its own self-contained ZIP in `release/windows/<FixName>/`. The 
 
 | Package | DLL SHA-256 | ZIP SHA-256 | Verification |
 | --- | --- | --- | --- |
-| [CrossFaderCompatFix v1.2.0](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0_KPlugFixes_Install.zip) | `2392ccafe5663efc4fd80f8f72e9741796de1ddd85d92f9a0e2c0f6c3e45acfc` | `44940fe2951dfc0e747c43cf2117a22043cbfaf7a3b1776ed9033bb7c65b566a` | Pre-label-cleanup candidate tested OFF/ON; final metadata-only label cleanup not separately smoke-tested; Enter issues remain |
+| [CrossFaderCompatFix v1.2.0](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0_KPlugFixes_Install.zip) | `2392ccafe5663efc4fd80f8f72e9741796de1ddd85d92f9a0e2c0f6c3e45acfc` | `f769ee644700fc52c8d59a14f5f80bd9103df2be9543947b6201506ddde499d1` | Pre-label-cleanup candidate tested OFF/ON; final metadata-only label cleanup not separately smoke-tested; Enter issues remain |
 | [CrossFaderCompatFix v1.1.0](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.1.0_Install.zip) | `1f6f359255d3501545f1b97e25dc059436fa24c3eeb704ec9db93e80256b4154` | `d826bfc59e8994fefbb862f135ad77fab8354c0e6d003f9e79d230bd02e581a1` | Label-cleaned DLL: startup/patch/MoveBoundary READY verified; separate H-point move retest pending |
 | [CrossFaderCompatFix v1.0.0 (historical)](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.0.0.zip) | `1bd4cbcd316b4ec4132f453c732ddcbc95d12911349099b3fe786dbed9036cc7` | `50ce10e547e64f7fa564b8263d2271418e9853fb3b74b38cd1e8add8abd9a0ec` | Prior runtime-tested baseline |
 | [GaugeSwapFix v0.2.0](release/windows/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0.zip) | `7039f65e09ff3de19b56a1c152a3156b147bf17b70e817862fde5a1684ee8cc9` | `7bae97d1a68ead58cba5a467fd44708ae0021a8102f9801c981e7bf0dd21c77b` | Runtime-tested |
 | [NullGuardsFix v0.2.0](release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0.zip) | `da40fb1db618baccb229d36bbe4f557df499a0f7227b720bd3298090887cd087` | `650bf318eafb1b7cbe7c0f7094b7c73d49caf3e014ca3d5ab0af89194d803033` | Runtime-tested |
 | [PistonWaitFix v1.0.0](release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0.zip) | `c134bde2967194477c686e26ebca12010c3d81653e97a7b226e33a6b7294eabd` | `955de4cc6c72d0e852cd4f3b75e7e13bf6efd9094d84cc5d4096427adb3be48a` | Prior successful fix |
 | [PistonAutoResume v0.2.0](release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0.zip) | `0abaa27f88469dcb9e73a1f83878da522e61f3a73cd3a7df9aad4ad668290f4f` | `a7e8a19766570f441f6d059053eeb0333ae266b7b99824a0e75c72793b5c1c48` | Prior successful fix |
-| [PoseBridge v0.2.0.1 (current)](release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.1_KPlugFixes_Install.zip) | `f1a35ff5a1849001d2705dd3f4c368fcb9a309170b51f244aeb1fd99583c9142` | `929a45f7f3b222194b4f2dacb9fc99e7cb8d48d3c4fe59161457800718e1aef2` | Runtime-collected exact DLL, startup patch active |
+| [PoseBridge v0.2.0.1 (current)](release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.1_KPlugFixes_Install.zip) | `f1a35ff5a1849001d2705dd3f4c368fcb9a309170b51f244aeb1fd99583c9142` | `76a985805c3817b2caf4f69e787fdcc93125780619a66ce69f3d2ef2d7039ba4` | Runtime-collected exact DLL, startup patch active |
 | [PoseBridge v0.2.0.0 (historical)](release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.0.zip) | Not separately recorded | `df98829f15469b20868a4fe69f20f8c6a58f041dbf54e3c315b96f928f235a5c` | Historical installer, not current |
 | [HListNameCache v0.1.0](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Stable_Frozen.zip) | `17f571acb7901776f1069c1b218e85edb67918c50a1ce844837c7da3616429c4` | `2cf2ba5af6602e49ee8bdc8dffe8197c0e3e500c31911ce2b95b98864b8195bc` | Exact frozen runtime-tested DLL; installer not separately Windows-verified |
 
