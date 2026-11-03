@@ -1,6 +1,29 @@
-# CrossFaderCompatFix
+# CrossFaderCompatFix｜日本語ガイド
 
-## v1.1.0 正式版（2026-10-31）
+## 現行版：v1.2.0（2026-11-03）
+
+Koikatu＋kPlug 3.6.0＋CrossFader 0.11向けです。Hポイント移動後に旧ExtraIKが残って姿勢が崩れる現象を抑えるため、従来のCrossFader待機処理・MoveBoundary処理に、限定的なExtraIK抑制を追加しています。
+
+- **推奨導入ZIP（日本語README付き）：** [v1.2.0／KPlugFixesフォルダ配置](../../release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0_KPlugFixes_Install.zip)
+- [C#ソース](../../src/CrossFaderCompatFix/v1.2.0/KPlugCrossFaderCompatFix_v1.2.0.cs)
+- [技術リリースノート](RELEASE_NOTES_v1.2.0.md)
+- **配置先：** `BepInEx/plugins/KPlugFixes/KPlugCrossFaderCompatFix.dll`
+- **DLL SHA-256：** `2392CCAFE5663EFC4FD80F8F72E9741796DE1DDD85D92F9A0E2C0F6C3E45ACFC`
+- **新ZIP SHA-256：** `44940FE2951DFC0E747C43CF2117A22043CBFAF7A3B1776ED9033BB7C65B566A`
+
+**インストール：** ゲーム終了→旧DLLをバックアップ→ZIPをゲーム本体フォルダへ展開。既存の`BepInEx/plugins/`直下などに同名DLLがある場合、重複してロードされないよう確認してください。復元時はゲームを終了してから旧DLLを戻します。
+
+**実機確認：** v1.2.0の統合ExtraIK対策は実機で発火を確認し、ログON/OFFを検証済みです。表記調整後の正式DLLは、フォルダ移行後にBepInExで1回ロードされ、初期化READYを確認しています。最終DLLでのすべてのHポイント操作の網羅的な再試験は未実施です。
+
+**残課題：** 絶頂後のHポイント移動の直後にEnterを押すと一瞬座標がずれることがあり、Enter無反応も低頻度で残っています。
+
+**診断ログ：** `BepInEx/config/tetsupom.kplug.crossfader.compatfix.cfg` の `[Logging] EnableDiagnosticLogs = true` で有効化し、ゲーム再起動。CrossFaderとExtraIKは `BepInEx/KPlugCrossFaderCompatFix.log` に記録されます。通常運用では `false` に戻してください。
+
+旧v1.2.0の`KPlugCrossFaderCompatFix_v1.2.0_Install.zip`は、`plugins`直下への配置だった歴史的ファイルです。新規導入では上記の新ZIPを使用してください。
+
+---
+
+## 過去の正式版：v1.1.0（2026-10-31）
 
 既存のfirst request winsとAnimator遷移時の安全待機を維持したまま、Hポイント移動境界を越えて残る旧pending要求だけを条件付きで失効させる修正を追加した。
 

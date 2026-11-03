@@ -1,199 +1,70 @@
-# KPlugFixes
+# KPlugFixes（日本語ガイド）
 
-Independent BepInEx / Harmony fixes for **Koikatu + kPlug 3.6.0**.
+[English README](README_en.md)
 
-This repository groups stable fixes by issue while keeping each runtime plugin as a separate DLL.  
-Each fix can therefore be built, tested, enabled, updated, or rolled back independently.
+**Koikatu＋kPlug 3.6.0 向けの不具合修正プラグイン集**です。必要な修正を1つずつ選んで導入できるよう、機能ごとにDLLを分けています。ゲーム本体、kPlug本体、CrossFader本体を配布・改造するものではありません。
 
-## Included fixes
+## まずどれを入れる？
 
-### GaugeSwapFix
+| プラグイン | 何を改善する？ | 現行版・入手先 |
+| --- | --- | --- |
+| **CrossFaderCompatFix** | Hポイント移動後に姿勢が崩れたままになる問題を低減。CrossFaderとのアニメーション切替競合にも対応 | [v1.2.0 日本語README同梱・KPlugFixes配置版](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0_KPlugFixes_Install.zip) |
+| **PoseBridge** | kPlugの体位選択にある挿入体位を、本体のH画面の体位一覧にも反映 | [v0.2.0.1 日本語README同梱・KPlugFixes配置版](release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.1_KPlugFixes_Install.zip) |
+| **GaugeSwapFix** | H中に相手を入れ替えた際の顔・ゲージ表示の巻き戻りを抑制 | [v0.2.0](release/windows/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0.zip) |
+| **NullGuardsFix** | kPlugの特定のNullReference例外を、kPlug.dllを直接変更せず保護 | [v0.2.0](release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0.zip) |
+| **PistonWaitFix** | 特定の挿入モーション切替後に操作できなくなる状態への対策 | [v1.0.0](release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0.zip) |
+| **PistonAutoResume** | アニメーション切替後、条件が整ったら元のゲームのGo経路でピストン動作を再開 | [v0.2.0](release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0.zip) |
+| **HListNameCache** | H体位一覧に関係する一部アセット名取得処理をキャッシュ | [v0.1.0 凍結版](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Stable_Frozen.zip) |
 
-**KPlugGaugeSwapFix v0.2.0**
+**注意：** これらを全部入れる必要はありません。適用したい症状に対応するDLLだけを選んでください。各ZIPの導入手順・検証状況を確認してください。
 
-Fixes a kPlug H-scene issue where, after inviting a girl with the I-key and swapping her into Main, changing H animation/category can restore the Face/Gauge display to the original H-start state even though the actual partner remains the swapped girl.
+## CrossFaderとPoseBridgeのインストール方法
 
-Patch boundary:
-
-`HSceneProc.ChangeAnimator`
-
-The vanilla method completes normally. The plugin preserves the current swapped Face/Gauge state across that reinitialization boundary.
-
-### NullGuardsFix
-
-**KPlugNullGuardsFix v0.2.0**
-
-Reproduces the null-guard changes previously embedded in a modified kPlug build without modifying `kPlug.dll` itself.
-
-Runtime patch set:
-
-- 9 H-process guards
-- 2 KokanBehavior guards
-- 1 MenuCorner guard
-- 1 AtHome OnDestroy destroyed-object guard
-- 1 Voice coroutine transpiler
-
-Startup result:
-
-`13 Prefix guards + Voice Transpiler`
-
-v0.2.0 integrates the previously standalone AtHomeDestroyGuard v0.1.1. Final integrated runtime verification completed successfully: the plugin loaded with all 13 Prefix guards plus the Voice Transpiler, MyRoom entry/exit completed normally, the game exited normally, and no AtHomeCtrl.OnDestroy NullReferenceException was observed.
-
-### CrossFaderCompatFix
-
-**KPlugCrossFaderCompatFix v1.2.0** — current adopted version (2026-11-03).
-
-Preserves the v1.1.0 first-request-wins gate, stability wait, and H-point MoveBoundary invalidation. Adds narrowly scoped stale ExtraIK suppression for H-point transitions after insertion motions, with guards for `InsertIdle`, `WLoop`, `OUT_A`, and `Insert` (the `Insert` branch was not observed in the final run). The original state transitions and input handling remain in place.
-
-Diagnostics are **OFF by default**. Set `[Logging] EnableDiagnosticLogs = true` in `BepInEx/config/tetsupom.kplug.crossfader.compatfix.cfg` and restart to record CrossFader and ExtraIK messages together in `BepInEx/KPlugCrossFaderCompatFix.log`.
-
-The pre-label-cleanup v1.2.0 candidate passed startup and both logging OFF/ON tests on 2026-11-03. The recent logging ON run recorded six ExtraIK suppressions and no internal errors; the user reported no persistent pose collapse in that run. **Known unresolved issues:** intermittent first-Enter transient pose displacement after post-climax H-point moves and occasional Enter nonresponse. The official binary differs from the tested candidate only in equal-length managed metadata strings; the exact label-cleaned binary has **not** separately been tested in-game.
-
-- [Current installer ZIP](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0_Install.zip)
-- [Current complete source](src/CrossFaderCompatFix/v1.2.0/KPlugCrossFaderCompatFix_v1.2.0.cs)
-- [Source and build-material ZIP](release/source/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0-source.zip)
-- [v1.2.0 release notes](docs/CrossFaderCompatFix/RELEASE_NOTES_v1.2.0.md)
-- [Public technical overview](docs/CrossFaderCompatFix/README_ja.md)
-- [Previous v1.1.0 installer](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.1.0_Install.zip) remains available.
-
-### PoseBridge
-
-**KPlugPoseBridge v0.2.0.1 (currently loaded on user's game; verified startup)**
-
-v0.2.0.1 [complete source](src/PoseBridge/KPlugPoseBridge_v0.2.0.1.cs) and [game-root installation ZIP](release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.1_Install.zip) are available. The ZIP contains the byte-identical DLL collected from the runtime on 2026-10-31 (DLL SHA-256 `F1A35FF5A1849001D2705DD3F4C368FCB9A309170B51F244AEB1FD99583C9142`). Startup/patch active was verified; full pose-by-pose retesting of this exact binary was not performed. The v0.2.0.0 installer remains historical.
-
-Synchronizes the vanilla/main H insertion-position list (mode 2) with the same canonical pose set used by kPlug Pose Selector.
-
-The plugin reuses kPlug's own resolution path:
-
-`ToolAnimSelector.GetAvailablePiston()` → `ParserAnim.GetHAnim(canonical)`
-
-It synchronizes once after `ExtraAnimManager.Start` and again after `HSceneProc.CreateListAnimationFileName(bool,int)`, so H-point/category changes rebuild the vanilla list to the kPlug-visible set.
-
-Runtime verification on 2026-10-08 confirmed successful synchronization for floor (77), wall (12), and desk (20) sets, with no `SYNC_ABORT` / sync failure in the supplied log. Poses selected during the test behaved normally; exhaustive selection of every pose was not performed.
-
-### Sideloader HList Name Cache
-
-**SideloaderHListNameCache v0.1.0 (runtime-tested; frozen)**
-
-Independent H-list asset-name caching for six exact `abdata/h/list/` bundles. Two runtime sessions confirmed 852 and 480 cache hits **per bundle**, respectively, with no cache-patch-origin errors. The second test also confirmed normal H controls, pose-list selection, and H-point movement. This is not a PoseBridge component and does not address the separate intermittent HPointMove pose-collapse issue.
-
-The tested, byte-identical DLL, source, one-step Windows installer/remover, SHA-256 manifest, and test record are archived together in `release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Stable_Frozen.zip`. **The frozen stable installer has not yet been separately verified on Windows.** See `docs/HListNameCache/README_ja.md` for exact hash and test limits.
-
-### PistonTransitionFix
-
-Contains two independent plugins:
-
-**KPlugPistonWaitFix v1.0.0**
-
-Fixes the kPlug insertion-animation transition path where Numpad 7 / Backspace can leave `AI_Main.InAnswer` waiting indefinitely and make later animation switching unresponsive.
-
-**KPlugPistonAutoResume v0.2.0**
-
-Optionally resumes piston motion through the normal game Go path after a piston/insertion animation change.  
-It waits for the real Animator state and cancels the pending resume when the H context changes.
-
-## Repository structure
+現在の2つの推奨ZIPは次のフォルダに配置されるようになっています。
 
 ```text
-src/<FixName>/                  complete C# source (historic versions retained)
-docs/<FixName>/                 documentation, validation and history
-scripts/<FixName>/              reproducible build/deploy scripts where available
-release/windows/<FixName>/      no-build Windows installation ZIPs
-release/source/CrossFaderCompatFix/  historical v1.0.0 source/build archive
-SHA256SUMS.txt                  current and preserved release checksums
+Koikatu（ゲーム本体フォルダ）
+└─ BepInEx
+   └─ plugins
+      └─ KPlugFixes
+         ├─ KPlugCrossFaderCompatFix.dll
+         └─ KPlugPoseBridge.dll
 ```
 
-Within `release/windows/`, packages are grouped by the fix they belong to. Historical frozen releases retain their exact ZIP bytes and SHA-256; reorganizing paths does not constitute a rebuild. Top-level `RELEASE_NOTES_v*.md` are historical repository release notes, not declarations of the latest individual plugin versions.
+1. **Koikatuを完全に終了**してください。
+2. 既に使用中のDLLがあればバックアップしてください。`BepInEx/plugins/`直下や他のサブフォルダに同名DLLがある場合、先に配置を確認してください。
+3. 上表から必要なZIPを保存し、**ZIPの中にある `BepInEx` フォルダごと、ゲーム本体フォルダへ展開**してください。
+4. 旧配置先の同名DLLを放置しないでください。**同じプラグインを2か所に置くと、重複ロードや競合の原因となります。** 不明なファイルは削除せずバックアップ・確認してください。
+5. ゲームを再起動して `BepInEx/LogOutput.log` を確認してください。各プラグインの`Loading`が**1回だけ**記録されていれば、起動時ロードの確認になります。
 
-## Prebuilt Windows binaries
+既に旧配置で使用している方は、新版ZIPを重ねて入れるだけでは重複する可能性があります。旧DLLの所在を確認し、安全に移行してください。**今回のフォルダ整理は、DLLの中身や動作の変更ではありません。**
 
-Each plugin has its own self-contained ZIP in `release/windows/<FixName>/`. The following checksums identify unchanged original packages unless specifically noted.
+## 確認済みの範囲・残っている問題
 
-| Package | DLL SHA-256 | ZIP SHA-256 | Verification |
-| --- | --- | --- | --- |
-| [CrossFaderCompatFix v1.2.0](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0_Install.zip) | `2392ccafe5663efc4fd80f8f72e9741796de1ddd85d92f9a0e2c0f6c3e45acfc` | `bb3174313bd716d2273533ea67247b1dccf27039fe4bb9141a8a4cd468372220` | Pre-label-cleanup candidate tested OFF/ON; final metadata-only label cleanup not separately smoke-tested; Enter issues remain |
-| [CrossFaderCompatFix v1.1.0](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.1.0_Install.zip) | `1f6f359255d3501545f1b97e25dc059436fa24c3eeb704ec9db93e80256b4154` | `d826bfc59e8994fefbb862f135ad77fab8354c0e6d003f9e79d230bd02e581a1` | Label-cleaned DLL: startup/patch/MoveBoundary READY verified; separate H-point move retest pending |
-| [CrossFaderCompatFix v1.0.0 (historical)](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.0.0.zip) | `1bd4cbcd316b4ec4132f453c732ddcbc95d12911349099b3fe786dbed9036cc7` | `50ce10e547e64f7fa564b8263d2271418e9853fb3b74b38cd1e8add8abd9a0ec` | Prior runtime-tested baseline |
-| [GaugeSwapFix v0.2.0](release/windows/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0.zip) | `7039f65e09ff3de19b56a1c152a3156b147bf17b70e817862fde5a1684ee8cc9` | `7bae97d1a68ead58cba5a467fd44708ae0021a8102f9801c981e7bf0dd21c77b` | Runtime-tested |
-| [NullGuardsFix v0.2.0](release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0.zip) | `da40fb1db618baccb229d36bbe4f557df499a0f7227b720bd3298090887cd087` | `650bf318eafb1b7cbe7c0f7094b7c73d49caf3e014ca3d5ab0af89194d803033` | Runtime-tested |
-| [PistonWaitFix v1.0.0](release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0.zip) | `c134bde2967194477c686e26ebca12010c3d81653e97a7b226e33a6b7294eabd` | `955de4cc6c72d0e852cd4f3b75e7e13bf6efd9094d84cc5d4096427adb3be48a` | Prior successful fix |
-| [PistonAutoResume v0.2.0](release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0.zip) | `0abaa27f88469dcb9e73a1f83878da522e61f3a73cd3a7df9aad4ad668290f4f` | `a7e8a19766570f441f6d059053eeb0333ae266b7b99824a0e75c72793b5c1c48` | Prior successful fix |
-| [PoseBridge v0.2.0.1 (current)](release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.1_Install.zip) | `f1a35ff5a1849001d2705dd3f4c368fcb9a309170b51f244aeb1fd99583c9142` | `35359c57bd06f4926bd41b75f7b0cddadb4bd4cdd8071c4023d25df5b83135ff` | Runtime-collected exact DLL, startup patch active |\n| [PoseBridge v0.2.0.0 (historical)](release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.0.zip) | Not separately recorded | `df98829f15469b20868a4fe69f20f8c6a58f041dbf54e3c315b96f928f235a5c` | Historical installer, not current |
-| [HListNameCache v0.1.0](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Stable_Frozen.zip) | `17f571acb7901776f1069c1b218e85edb67918c50a1ce844837c7da3616429c4` | `2cf2ba5af6602e49ee8bdc8dffe8197c0e3e500c31911ce2b95b98864b8195bc` | Exact frozen runtime-tested DLL; installer not separately Windows-verified |
+- **CrossFaderCompatFix v1.2.0：** 統合ExtraIK抑制を実機ログで確認済み。診断ログON/OFFと、移行後の起動・初期化も確認しています。姿勢崩れの改善を確認しましたが、**絶頂後の移動に続くEnter時の一瞬の位置ズレ**と、**低頻度のEnter無反応**は未解決です。
+- **PoseBridge v0.2.0.1：** 移行後に起動・パッチ有効化を確認済み。体位一覧の同期は一部カテゴリで確認していますが、すべての体位の網羅的な動作確認はしていません。
+- `HListNameCache`の凍結版DLLは実機確認済みですが、**同梱のWindowsインストーラ自体は別途未検証**です。
 
-The independent MyRoom mannequin Harmony fix is not included because its formal runtime-verified release state is not established. No third-party game files or other vendors' DLLs are distributed here.
+### CrossFaderの診断ログ
 
-## Build policy
+通常は記録をOFFにします。詳細調査が必要なときだけ、`BepInEx/config/tetsupom.kplug.crossfader.compatfix.cfg` の設定を切り替えます。
 
-The source is intentionally kept compatible with the legacy .NET Framework compiler used by this Koikatu environment.
-
-Behavior fixes remain separate DLLs. Repository-level consolidation does **not** mean runtime DLL consolidation.
-
-Build scripts keep the established default game root:
-
-```text
-F:\illusion\Koikatu
+```ini
+[Logging]
+EnableDiagnosticLogs = true
 ```
 
-The scripts under each feature folder reference the corresponding source folder in this repository.
+ゲームを再起動すると、CrossFaderとExtraIKの詳細が`BepInEx/KPlugCrossFaderCompatFix.log`に出力されます。確認後は`false`へ戻してください。
 
-## Tested environment
+## 元へ戻すには
 
-Main project environment:
+Koikatuを終了し、今回導入した同名DLLを外してください。導入前に使っていた版がある場合は**保全したバックアップから復元**します。他のプラグインやゲーム本体のファイルは削除しないでください。
 
-- Koikatu 5.1
-- kPlug 3.6.0
-- BepInEx 5.4.23.5
-- Unity 5.6.2f1
-- CLR 2.0.50727.1433
-- HF Patch v4.1
-- Windows 11
+## ソース・詳細・更新履歴
 
-Current virgin kPlug 3.6.0 reference SHA-256:
+- [CrossFader 詳細（日本語）](docs/CrossFaderCompatFix/README_ja.md)／[ソース](src/CrossFaderCompatFix/v1.2.0/KPlugCrossFaderCompatFix_v1.2.0.cs)
+- [PoseBridge 詳細（日本語）](docs/PoseBridge/README_ja.md)／[ソース](src/PoseBridge/KPlugPoseBridge_v0.2.0.1.cs)
+- [SHA-256一覧](SHA256SUMS.txt)：配布物の同一性確認に使用します
+- [英語の技術説明](README_en.md)
 
-`34c13976108db0a18a7ad6b7cfda5517b4a9a83d85c9a909820144264c743855`
-
-Assembly-CSharp.dll reference SHA-256:
-
-`0038281caf8df48a7903c55dc389642eeeb3f2a9114bd9d68ac11c8ac0396bc5`
-
-Historical PistonTransitionFix release documentation is preserved under `docs/PistonTransitionFix/`.
-
-## Known successful DLL hashes
-
-```text
-KPlugNullGuardsFix v0.1.0 historical known-good DLL
-e1e585f3961126adda211d140535ab7590ed2d47c6f0ce97bbd2f146565a1c1e
-
-KPlugPistonWaitFix.dll
-c134bde2967194477c686e26ebca12010c3d81653e97a7b226e33a6b7294eabd
-
-KPlugPistonAutoResume.dll
-0abaa27f88469dcb9e73a1f83878da522e61f3a73cd3a7df9aad4ad668290f4f
-```
-
-`KPlugGaugeSwapFix v0.2.0` and `KPlugNullGuardsFix v0.2.0` hashes were later recovered directly from the active runtime-tested game environment and are recorded in the prebuilt Windows package section above. CrossFaderCompatFix historical v1.0.0 was runtime-tested; its DLL SHA-256 is `1bd4cbcd316b4ec4132f453c732ddcbc95d12911349099b3fe786dbed9036cc7`.
-
-## Migration note
-
-`KPlugPistonTransitionFix` was originally maintained as a separate repository.  
-Its source, build scripts, release script, and documentation are now also preserved under `PistonTransitionFix/` in this repository.
-
-
-## Distribution policy
-
-Stable fixes should provide both reproducible source and prebuilt Windows binaries.
-
-For each stable runtime fix, preserve:
-
-- source code
-- build/deploy scripts
-- documentation and investigation history
-- the runtime-tested Windows `.dll` when available
-- SHA-256 for each distributed DLL
-- a release package for users who do not compile from source
-
-Prebuilt binaries are limited to DLLs produced by this project. Third-party binaries such as kPlug, BepInEx, Harmony, Unity, or game assemblies are not redistributed here.
-
-A DLL is not labeled runtime-tested unless that exact binary, or an explicitly documented byte-identical build, was tested. Missing hashes are left missing rather than reconstructed or guessed.
+過去のZIPは再現・比較のため残しています。**新規導入時は上表のリンクを優先**し、旧配置版を重複して入れないでください。
