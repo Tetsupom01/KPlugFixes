@@ -3,15 +3,15 @@
 Status: 正式版・実機確認済み。  
 v0.1.0のNullGuards本体と、standalone版KPlugAtHomeDestroyGuard v0.1.1の処理を統合したv0.2.0を、最終実機テスト通過後の現行Stableとする。
 
-## 配布ZIPの使い方（追加の日本語案内）
+## 推奨導入ZIP（KPlugFixes配置版）
 
-- [配布ZIP v0.2.0](../../release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0.zip)
-- [完全ソース](../../src/NullGuardsFix/KPlugNullGuardsFix_v0.2.0.cs)
-- [公開SHA-256一覧](../../SHA256SUMS.txt)
+- **[NullGuardsFix v0.2.0 推奨導入ZIP](../../release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0_KPlugFixes_Install.zip)**：ゲーム本体フォルダへそのまま展開し、`BepInEx/plugins/KPlugFixes/`にDLLを配置。日本語／英語README、SHA一覧を同梱。
+- [旧DLL単体ZIP（履歴用）](../../release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0.zip)：従来の配布形式。自動配置されません。
+- [C#ソース](../../src/NullGuardsFix/KPlugNullGuardsFix_v0.2.0.cs) ／ [SHA-256一覧](../../SHA256SUMS.txt)
 
-この旧配布ZIPは**`KPlugNullGuardsFix.dll`だけ**を収録しており、自動インストーラではありません。ゲームを終了し、既存DLLを退避したうえで`BepInEx/plugins/KPlugFixes/KPlugNullGuardsFix.dll`に配置してください。旧`KPlugAtHomeDestroyGuard.dll`は本版に統合されているため、二重パッチを避けるため既存の配置状態を必ず確認してください。不明なDLLを無断削除せず、退避・比較してから処理してください。
+**DLLは旧ZIPとバイト単位で同一です。** Runtimeバージョンと動作処理は変更していません。ゲーム終了→既存の同名DLLをバックアップ→ZIPをゲームルートへ展開→他の`plugins`サブフォルダに同名DLLが残らないことを確認→BepInExロードログを確認、の順に実施してください。解除時はゲームを終了し、今回導入したDLLだけを外して、必要なら旧版をバックアップから復元します。**新しい導入ZIPの実機配置・起動テストは未実施**です。
 
-起動ログで`v0.2.0 active. 13 Prefix guards + Voice Transpiler`を確認します。削除時はゲームを終了して**今回導入したDLLだけ**を外し、旧版が必要ならバックアップから復元してください。ZIP内には自動バックアップ・復元ツールはありません。
+旧`KPlugAtHomeDestroyGuard.dll`と同時に有効化すると対象処理が重複し得るため、導入前に既存状態を確認してください。
 
 ## 目的
 

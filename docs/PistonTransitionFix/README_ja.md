@@ -8,8 +8,8 @@ Koikatu＋kPlug 3.6.0向けの**独立した2つのBepInExプラグイン**で�
 
 | 名前 | 用途 | ダウンロード | 個別の日本語説明 |
 | --- | --- | --- | --- |
-| **KPlugPistonWaitFix v1.0.0** | 挿入中にテンキー7／Backspaceでアニメーションを切り替えた後、入力が反応しなくなる問題を修正。元の`IE_AskPistonChange`の待機判定を限定修正 | [ZIP](../../release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0.zip) | [詳しいREADME](KPlugPistonWaitFix_v1.0.0_README_ja.txt) |
-| **KPlugPistonAutoResume v0.2.0** | 挿入モーション切替後に、元のGo処理を使ってピストン動作を自動再開。別操作があれば予約した再開を取り消す | [ZIP](../../release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0.zip) | [詳しいREADME](KPlugPistonAutoResume_v0.2.0_README_ja.txt) |
+| **KPlugPistonWaitFix v1.0.0** | 挿入中にテンキー7／Backspaceでアニメーションを切り替えた後、入力が反応しなくなる問題を修正。元の`IE_AskPistonChange`の待機判定を限定修正 | [推奨配置版ZIP](../../release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0_KPlugFixes_Install.zip) | [詳しいREADME](KPlugPistonWaitFix_v1.0.0_README_ja.txt) |
+| **KPlugPistonAutoResume v0.2.0** | 挿入モーション切替後に、元のGo処理を使ってピストン動作を自動再開。別操作があれば予約した再開を取り消す | [推奨配置版ZIP](../../release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0_KPlugFixes_Install.zip) | [詳しいREADME](KPlugPistonAutoResume_v0.2.0_README_ja.txt) |
 
 **AutoResumeはWaitFixを置き換えません。** AutoResumeを使用する場合はWaitFix v1.0.0を維持してください。
 
@@ -21,19 +21,19 @@ Koikatu＋kPlug 3.6.0向けの**独立した2つのBepInExプラグイン**で�
 
 このSHAは当時の検証環境を示すもので、現在のkPlug.dllを置き換える指示ではありません。他バージョンの互換性を保証しません。
 
-## 既存ZIPの導入方法
+## 推奨ZIPの導入方法（KPlugFixes共通配置）
 
-**各ZIPにはDLLが1個だけ入っています。** ゲーム本体フォルダへZIPをそのまま展開しても自動配置されません。
+**各推奨ZIPには1つのDLLと日本語／英語README、SHA一覧を同梱しています。** ZIPをゲーム本体フォルダへ展開すると`BepInEx/plugins/KPlugFixes/`へ配置されます。旧DLL単体ZIPは履歴として残し、DLL本体は一切変更していません。
 
 1. Koikatuを完全終了します。
 2. 既存の`KPlugPistonWaitFix.dll`と`KPlugPistonAutoResume.dll`の場所を調べ、使用中なら先にバックアップを取ります。
-3. ZIPからDLLを取り出し、既存の配布ドキュメントにある次の配置先へ置きます。
+3. 推奨ZIP内の`BepInEx`フォルダをゲーム本体フォルダへ展開します。必要なDLLのみを導入します。
 
 ```text
 Koikatu/
 └─ BepInEx/
    └─ plugins/
-      └─ KPlugPistonTransitionFix/
+      └─ KPlugFixes/
          ├─ KPlugPistonWaitFix.dll
          └─ KPlugPistonAutoResume.dll
 ```
@@ -46,7 +46,9 @@ Koikatu/
 [PistonAutoResume] v0.2.0 active.
 ```
 
-既存の**開発用ビルドスクリプト**は`BepInEx/plugins/test/`へ配置する仕様です。上記の配布時配置先と混同しないでください。
+既存の**開発用ビルドスクリプト**は`BepInEx/plugins/test/`へ配置する仕様です。配布ZIPとは異なります。**今回の推奨ZIPは実機インストール未検証**ですが、中のDLLは従来と同一です。
+
+旧手動配置ZIP：[WaitFix v1.0.0](../../release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0.zip)／[AutoResume v0.2.0](../../release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0.zip)
 
 ## AutoResumeの設定と安全動作
 
@@ -74,4 +76,4 @@ ResumeDelaySeconds = 0.8
 - [英語の総合README](README.md)
 - [公開SHA-256一覧](../../SHA256SUMS.txt)
 
-本書は既存配布物への補足説明です。配布ZIPや実機成功済みDLLを変更するものではありません。
+今回、新しい配置版ZIPを別名で追加しました。**旧配布ZIPおよび実機成功済みDLLは変更していません。**

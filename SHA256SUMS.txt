@@ -26,3 +26,7 @@ bb3174313bd716d2273533ea67247b1dccf27039fe4bb9141a8a4cd468372220  release/window
 029be7b0733bd333939e950eb7b2c068139803cbbbdfb097daab07ea56fc772d  src/CrossFaderCompatFix/v1.2.0/KPlugCrossFaderCompatFix_v1.2.0.cs
 f769ee644700fc52c8d59a14f5f80bd9103df2be9543947b6201506ddde499d1  release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0_KPlugFixes_Install.zip  # Japanese README, KPlugFixes layout
 76a985805c3817b2caf4f69e787fdcc93125780619a66ce69f3d2ef2d7039ba4  release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.1_KPlugFixes_Install.zip  # Japanese README, KPlugFixes layout
+ad7eec9aafe1dce177bd5567e41cc9b187d413f3a2fc675f20537f1e9459db00  release/windows/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0_KPlugFixes_Install.zip  # game-root installer; original DLL unchanged; Japanese and English README
+295c959aac2a194fd61d0128544d399ca7e17401fa10b9c224ae6c47b897c81e  release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0_KPlugFixes_Install.zip  # game-root installer; original DLL unchanged; Japanese and English README
+13153506c868289d4f9df47ba1bc8acf170b37224411928168aa38c72c90df55  release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0_KPlugFixes_Install.zip  # game-root installer; original DLL unchanged; Japanese and English README
+9d5e9d399b0ce110782ff527b969271d80a679869c5d8ce375baed2497397940  release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0_KPlugFixes_Install.zip  # game-root installer; original DLL unchanged; Japanese and English README

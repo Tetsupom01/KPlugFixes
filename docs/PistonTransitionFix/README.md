@@ -25,24 +25,27 @@ Validated `kPlug.dll` SHA-256:
 
 `880b34324bf1563a1e09a02a6c0960918270fae7463132d47e5fc813bcf4607f`
 
-## Installation
+## Installation — current KPlugFixes layout
 
-Download the release ZIP from GitHub Releases and extract it into your Koikatu game folder.
+Download the current game-root installation ZIPs from this repository:
 
-Expected layout:
+- [KPlugPistonWaitFix v1.0.0 KPlugFixes installer](../../release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0_KPlugFixes_Install.zip)
+- [KPlugPistonAutoResume v0.2.0 KPlugFixes installer](../../release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0_KPlugFixes_Install.zip)
+
+Each current ZIP contains the unchanged original DLL, Japanese and English READMEs and a SHA256 manifest. Exit Koikatu, back up any existing version, and extract the `BepInEx` folder into your Koikatu game root. The resulting layout (only install the plugins you need) is:
 
 ```text
-Koikatu
-└─ BepInEx
-   └─ plugins
-      └─ KPlugPistonTransitionFix
+Koikatu/
+└─ BepInEx/
+   └─ plugins/
+      └─ KPlugFixes/
          ├─ KPlugPistonWaitFix.dll
          └─ KPlugPistonAutoResume.dll
 ```
 
-Installing both DLLs is recommended.
+AutoResume requires WaitFix v1.0.0 and does not replace it. Check other plugin folders for duplicate copies, then confirm loading in BepInEx/LogOutput.log. To uninstall, exit the game, remove only the DLLs installed by these ZIPs, and restore previous versions from your backups if needed.
 
-`KPlugPistonAutoResume.dll` does **not** replace `KPlugPistonWaitFix.dll v1.0.0`.
+The former single-DLL ZIPs are preserved for historical use: [WaitFix](../../release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0.zip), [AutoResume](../../release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0.zip). The new game-root ZIP layout has not been separately tested on Windows; the DLL payloads are byte-identical to the previous packages.
 
 ## Auto Resume configuration
 
