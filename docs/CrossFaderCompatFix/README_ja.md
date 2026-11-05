@@ -27,8 +27,8 @@ Koikatu＋kPlug 3.6.0＋CrossFader 0.11向けです。Hポイント移動後に�
 
 既存のfirst request winsとAnimator遷移時の安全待機を維持したまま、Hポイント移動境界を越えて残る旧pending要求だけを条件付きで失効させる修正を追加した。
 
-- 現行ソース： [KPlugCrossFaderCompatFix_v1.1.0.cs](../../src/CrossFaderCompatFix/v1.1.0/KPlugCrossFaderCompatFix_v1.1.0.cs)
-- 現行導入ZIP： [KPlugCrossFaderCompatFix_v1.1.0_Install.zip](../../release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.1.0_Install.zip)
+- 旧版ソース： [KPlugCrossFaderCompatFix_v1.1.0.cs](../../src/CrossFaderCompatFix/v1.1.0/KPlugCrossFaderCompatFix_v1.1.0.cs)
+- 旧版導入ZIP： [KPlugCrossFaderCompatFix_v1.1.0_Install.zip](../../release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.1.0_Install.zip)
 - 導入先： `BepInEx/plugins/KPlugCrossFaderCompatFix.dll`
 - DLL SHA-256： `1F6F359255D3501545F1B97E25DC059436FA24C3EEB704EC9DB93E80256B4154`
 - 導入ZIP SHA-256： `D826BFC59E8994FEFBB862F135AD77FAB8354C0E6D003F9E79D230BD02E581A1`

@@ -2,7 +2,7 @@
 
 [English README](README.md)
 
-Koikatu＋kPlug 3.6.0向けの**独立した2つのBepInExプラグイン**です。既存の日本語説明と英語READMEに基づき、公開済みのDLL単体ZIPを安全に導入するための案内をまとめています。
+Koikatu＋kPlug 3.6.0向けの**独立した2つのBepInExプラグイン**です。現在の推奨配布物は`BepInEx/plugins/KPlugFixes/`に配置するゲームルート展開用ZIPです。従来のDLL単体ZIPは歴史的配布物として別に保存しています。
 
 ## 対象プラグイン
 

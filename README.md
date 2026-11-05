@@ -2,9 +2,11 @@
 
 [English README](README_en.md)
 
-**Koikatu＋kPlug 3.6.0 向けの不具合修正プラグイン集**です。必要な修正を1つずつ選んで導入できるよう、機能ごとにDLLを分けています。ゲーム本体、kPlug本体、CrossFader本体を配布・改造するものではありません。
+**Koikatu＋kPlug 3.6.0環境で検証した、kPlug関連の不具合修正6種類と、独立したHリスト最適化1種類**を公開しています。必要なものだけ選べるよう、機能ごとにDLLを分けています。HListNameCacheはkPlug.dll本体を修正するパッチではありません。ゲーム本体、kPlug本体、CrossFader本体を配布・改造するものではありません。
 
 ## まずどれを入れる？
+
+### kPlug関連の不具合修正（6種類）
 
 | プラグイン | 何を改善する？ | 現行版・入手先 |
 | --- | --- | --- |
@@ -14,15 +16,23 @@
 | **NullGuardsFix** | kPlugの特定のNullReference例外を、kPlug.dllを直接変更せず保護 | [v0.2.0・KPlugFixes配置版](release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0_KPlugFixes_Install.zip) ／ [日本語README](docs/NullGuardsFix/README_ja.md) |
 | **PistonWaitFix** | 特定の挿入モーション切替後に操作できなくなる状態への対策 | [v1.0.0・KPlugFixes配置版](release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0_KPlugFixes_Install.zip) ／ [日本語README](docs/PistonTransitionFix/README_ja.md) |
 | **PistonAutoResume** | アニメーション切替後、条件が整ったら元のゲームのGo経路でピストン動作を再開 | [v0.2.0・KPlugFixes配置版](release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0_KPlugFixes_Install.zip) ／ [日本語README](docs/PistonTransitionFix/README_ja.md) |
-| **HListNameCache** | H体位一覧に関係する一部アセット名取得処理をキャッシュ | [v0.1.0 凍結版](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Stable_Frozen.zip) ／ [日本語README](docs/HListNameCache/README_ja.md) |
+### Hリスト取得の最適化（1種類・別カテゴリ）
 
-**現行推奨ZIPについて：** GaugeSwapFix、NullGuardsFix、PistonWaitFix、PistonAutoResumeも、CrossFaderCompatFix・PoseBridgeと同じ `BepInEx/plugins/KPlugFixes/` 配置版へ統一しました。ゲーム本体フォルダへ展開して導入できます。日本語／英語READMEをZIP内に同梱しています。旧DLL単体ZIPは履歴として残し、DLL本体は変えていません。
+kPlugの不具合修正ではなく、Koikatuの`AssetBundleCheck.GetAllAssetName()`の対象を限定した最適化です。**kPlug 3.6.0が入った環境で実機検証済み**ですが、kPlugなしの環境での動作は未検証です。
+
+| プラグイン | 何を改善する？ | 現行版・入手先 |
+| --- | --- | --- |
+| **SideloaderHListNameCache** | H体位一覧の特定6アセットについて、名前一覧の反復取得をキャッシュ（kPlug本体の修正ではない） | [v0.1.0・KPlugFixes配置版](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_KPlugFixes_Install.zip) ／ [日本語README](docs/HListNameCache/README_ja.md) |
+
+旧凍結保全パッケージ（ソース・専用スクリプトを収録）：[Sideloader HListNameCache v0.1.0](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Stable_Frozen.zip)。現行のゲームルート展開用ZIPとは別の形式です。
+
+**現行推奨ZIPについて：** 上記7種類はすべて、ゲーム本体へ展開すると `BepInEx/plugins/KPlugFixes/` に各DLLが配置される形式です。各ZIPは日本語／英語READMEとSHA一覧を同梱しています。旧DLL単体ZIPやHListNameCache凍結保全ZIPは履歴として残し、成功済みDLL本体を変更していません。**新規に作成した再梱包ZIPは、実機での展開・起動を別途確認していません。**
 
 **注意：** これらを全部入れる必要はありません。適用したい症状に対応するDLLだけを選んでください。各ZIPの導入手順・検証状況を確認してください。
 
 ## KPlugFixes配置版ZIPのインストール方法
 
-現在の6種類の推奨ZIPは、次の共通フォルダへDLLを配置します。**必要なプラグインだけを選んでください。** 下図は配置先をまとめて示したもので、全6種類の同時導入を求めるものではありません。
+現在の7種類の推奨ZIPは、各DLLを次の共通フォルダへ配置します。**必要なプラグインだけを選んでください。** 下図は配置先をまとめて示したもので、全7種類の同時導入を求めるものではありません。
 
 ```text
 Koikatu（ゲーム本体フォルダ）
@@ -34,7 +44,8 @@ Koikatu（ゲーム本体フォルダ）
          ├─ KPlugGaugeSwapFix.dll
          ├─ KPlugNullGuardsFix.dll
          ├─ KPlugPistonWaitFix.dll
-         └─ KPlugPistonAutoResume.dll
+         ├─ KPlugPistonAutoResume.dll
+         └─ SideloaderHListNameCache.dll
 ```
 
 1. **Koikatuを完全に終了**してください。
@@ -49,7 +60,7 @@ Koikatu（ゲーム本体フォルダ）
 
 - **CrossFaderCompatFix v1.2.0：** 統合ExtraIK抑制を実機ログで確認済み。診断ログON/OFFと、移行後の起動・初期化も確認しています。姿勢崩れの改善を確認しましたが、**絶頂後の移動に続くEnter時の一瞬の位置ズレ**と、**低頻度のEnter無反応**は未解決です。
 - **PoseBridge v0.2.0.1：** 移行後に起動・パッチ有効化を確認済み。体位一覧の同期は一部カテゴリで確認していますが、すべての体位の網羅的な動作確認はしていません。
-- `HListNameCache`の凍結版DLLは実機確認済みですが、**同梱のWindowsインストーラ自体は別途未検証**です。
+- **SideloaderHListNameCache v0.1.0：** 凍結版に収録したDLL本体は実機成功確認済みです。旧凍結版の専用Windowsインストールスクリプト、および今回の新しいゲームルート展開用ZIPは**それぞれ実機導入未検証**です。kPlugなしでの動作も未検証です。
 
 ### CrossFaderの診断ログ
 
@@ -73,6 +84,7 @@ Koikatuを終了し、今回導入した同名DLLを外してください。導�
 - [GaugeSwapFix 日本語README](docs/GaugeSwapFix/README_ja.md)／[ソース](src/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0.cs)
 - [NullGuardsFix 日本語README](docs/NullGuardsFix/README_ja.md)／[ソース](src/NullGuardsFix/KPlugNullGuardsFix_v0.2.0.cs)
 - [Piston系 日本語README](docs/PistonTransitionFix/README_ja.md)／[WaitFixソース](src/PistonTransitionFix/WaitFix/KPlugPistonWaitFix_v1.0.0.cs)／[AutoResumeソース](src/PistonTransitionFix/AutoResume/KPlugPistonAutoResume_v0.2.0.cs)
+- [HListNameCache（Hリスト最適化）日本語README](docs/HListNameCache/README_ja.md)／[旧凍結保全パッケージ（ソース同梱）](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Stable_Frozen.zip)
 - [SHA-256一覧](SHA256SUMS.txt)：配布物の同一性確認に使用します
 - [英語の技術説明](README_en.md)
 

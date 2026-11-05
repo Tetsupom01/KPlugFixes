@@ -84,12 +84,14 @@ When both plugins load successfully, the BepInEx log should contain:
 
 ## Uninstallation
 
-Remove:
+Exit Koikatu and remove only the DLL(s) installed with the current packages:
 
 ```text
-BepInEx/plugins/KPlugPistonTransitionFix/KPlugPistonWaitFix.dll
-BepInEx/plugins/KPlugPistonTransitionFix/KPlugPistonAutoResume.dll
+BepInEx/plugins/KPlugFixes/KPlugPistonWaitFix.dll
+BepInEx/plugins/KPlugFixes/KPlugPistonAutoResume.dll
 ```
+
+The older `BepInEx/plugins/KPlugPistonTransitionFix/` location belongs to historical manual installation. Check it for duplicate DLLs when migrating; do not delete unrelated files.
 
 To remove the Auto Resume configuration as well:
 

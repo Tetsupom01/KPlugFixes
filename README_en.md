@@ -1,10 +1,10 @@
 [日本語](README.md) | English
 
-> **Updated installers (2026-11-04):** CrossFaderCompatFix, PoseBridge, GaugeSwapFix, NullGuardsFix, PistonWaitFix, and PistonAutoResume now have game-root installation ZIPs that place the original DLL in `BepInEx/plugins/KPlugFixes/`. Each includes Japanese `README.txt`, English `README_EN.txt`, and `SHA256SUMS.txt`. The older ZIPs remain preserved for historical reproduction. Avoid duplicate plugin DLLs across plugin directories. The newly repackaged four legacy-plugin installers have not been separately runtime-tested.
+> **Updated installers (2026-11-05):** All seven current packages (six kPlug-related fixes plus the separate Sideloader HList Name Cache optimization) have game-root installation ZIPs placing each unchanged DLL in `BepInEx/plugins/KPlugFixes/`. They include Japanese `README.txt`, English `README_EN.txt`, and `SHA256SUMS.txt`. Earlier ZIPs remain for historical reproduction; do not duplicate plugin DLLs across directories. The newly repackaged installers have not been separately runtime-tested.
 
 # KPlugFixes
 
-Independent BepInEx / Harmony fixes for **Koikatu + kPlug 3.6.0**.
+Six independent BepInEx / Harmony **kPlug-related fixes** and one separately classified **H-list asset-name caching optimization**, validated within a **Koikatu + kPlug 3.6.0** environment. HListNameCache does not patch kPlug itself; operation without kPlug is untested.
 
 This repository groups stable fixes by issue while keeping each runtime plugin as a separate DLL.  
 Each fix can therefore be built, tested, enabled, updated, or rolled back independently.
@@ -80,11 +80,15 @@ Runtime verification on 2026-10-08 confirmed successful synchronization for floo
 
 ### Sideloader HList Name Cache
 
-**SideloaderHListNameCache v0.1.0 (runtime-tested; frozen)**
+**SideloaderHListNameCache v0.1.0 — H-list optimization, not a kPlug fix (tested DLL; frozen baseline).**
 
-Independent H-list asset-name caching for six exact `abdata/h/list/` bundles. Two runtime sessions confirmed 852 and 480 cache hits **per bundle**, respectively, with no cache-patch-origin errors. The second test also confirmed normal H controls, pose-list selection, and H-point movement. This is not a PoseBridge component and does not address the separate intermittent HPointMove pose-collapse issue.
+This independent BepInEx/Harmony plugin caches asset-name arrays for six exact `abdata/h/list/` bundles via `AssetBundleCheck.GetAllAssetName()`. It does **not** patch `kPlug.dll`. The existing test environment included kPlug 3.6.0 and Sideloader; **operation without kPlug has not been verified**. Two runtime sessions confirmed 852 and 480 cache hits **per bundle**, respectively. The second test confirmed normal H controls, pose-list selection and H-point movement. This plugin does not address the separate intermittent HPointMove pose-collapse issue.
 
-The tested, byte-identical DLL, source, one-step Windows installer/remover, SHA-256 manifest, and test record are archived together in `release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Stable_Frozen.zip`. **The frozen stable installer has not yet been separately verified on Windows.** See `docs/HListNameCache/README_ja.md` for exact hash and test limits.
+- [Current KPlugFixes-layout installer](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_KPlugFixes_Install.zip) — extract into the Koikatu game root; the DLL goes to `BepInEx/plugins/KPlugFixes/SideloaderHListNameCache.dll`.
+- [Historical frozen archive (DLL, source, install/removal scripts, records)](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Stable_Frozen.zip) — retained byte-for-byte unchanged; not a game-root overlay ZIP.
+- [Technical README in Japanese](docs/HListNameCache/README_ja.md).
+
+The **DLL** inside the new ZIP is byte-identical to the successfully runtime-tested frozen build. The **new ZIP installation** and the **historical installer script** have not been separately tested on Windows.
 
 ### PistonTransitionFix
 
@@ -114,13 +118,33 @@ SHA256SUMS.txt                  current and preserved release checksums
 
 Within `release/windows/`, packages are grouped by the fix they belong to. Historical frozen releases retain their exact ZIP bytes and SHA-256; reorganizing paths does not constitute a rebuild. Top-level `RELEASE_NOTES_v*.md` are historical repository release notes, not declarations of the latest individual plugin versions.
 
+## Installation directory (current seven packages)
+
+Each current ZIP is extracted into the **Koikatu game root**, placing its individual DLL in this directory. Install only the fixes/optimizations you need, rather than all seven automatically:
+
+```text
+Koikatu/
+└─ BepInEx/
+   └─ plugins/
+      └─ KPlugFixes/
+         ├─ KPlugCrossFaderCompatFix.dll
+         ├─ KPlugPoseBridge.dll
+         ├─ KPlugGaugeSwapFix.dll
+         ├─ KPlugNullGuardsFix.dll
+         ├─ KPlugPistonWaitFix.dll
+         ├─ KPlugPistonAutoResume.dll
+         └─ SideloaderHListNameCache.dll
+```
+
+Close the game, locate and back up any previous copy of the same DLL, extract the current ZIP to the game root, and ensure there is no duplicate DLL elsewhere under `BepInEx/plugins/`. Check `BepInEx/LogOutput.log` after restarting. All packages contain unchanged binaries from their respective tested releases; the **packaging layout is not a new runtime validation**. HListNameCache is an H-list optimization (not a kPlug.dll patch), and has only been tested in the original environment with kPlug 3.6.0 present.
+
 ## Prebuilt Windows binaries
 
 Each plugin has its own self-contained ZIP in `release/windows/<FixName>/`. The following checksums identify the published packages. The four newly repackaged legacy fixes contain byte-identical DLL payloads; their installer layout has not been separately tested in-game. Historical DLL-only ZIPs remain available at their original paths.
 
 | Package | DLL SHA-256 | ZIP SHA-256 | Verification |
 | --- | --- | --- | --- |
-| [CrossFaderCompatFix v1.2.0](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0_KPlugFixes_Install.zip) | `2392ccafe5663efc4fd80f8f72e9741796de1ddd85d92f9a0e2c0f6c3e45acfc` | `f769ee644700fc52c8d59a14f5f80bd9103df2be9543947b6201506ddde499d1` | Pre-label-cleanup candidate tested OFF/ON; final metadata-only label cleanup not separately smoke-tested; Enter issues remain |
+| [CrossFaderCompatFix v1.2.0](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0_KPlugFixes_Install.zip) | `2392ccafe5663efc4fd80f8f72e9741796de1ddd85d92f9a0e2c0f6c3e45acfc` | `f769ee644700fc52c8d59a14f5f80bd9103df2be9543947b6201506ddde499d1` | Pre-label-cleanup candidate tested OFF/ON; final DLL startup/patch activation verified after migration; full H-point regression retest incomplete; Enter issues remain |
 | [CrossFaderCompatFix v1.1.0](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.1.0_Install.zip) | `1f6f359255d3501545f1b97e25dc059436fa24c3eeb704ec9db93e80256b4154` | `d826bfc59e8994fefbb862f135ad77fab8354c0e6d003f9e79d230bd02e581a1` | Label-cleaned DLL: startup/patch/MoveBoundary READY verified; separate H-point move retest pending |
 | [CrossFaderCompatFix v1.0.0 (historical)](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.0.0.zip) | `1bd4cbcd316b4ec4132f453c732ddcbc95d12911349099b3fe786dbed9036cc7` | `50ce10e547e64f7fa564b8263d2271418e9853fb3b74b38cd1e8add8abd9a0ec` | Prior runtime-tested baseline |
 | [GaugeSwapFix v0.2.0 (KPlugFixes installer)](release/windows/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0_KPlugFixes_Install.zip) | `7039f65e09ff3de19b56a1c152a3156b147bf17b70e817862fde5a1684ee8cc9` | `ad7eec9aafe1dce177bd5567e41cc9b187d413f3a2fc675f20537f1e9459db00` | Original runtime-tested DLL retained byte-for-byte; new game-root ZIP not separately installed/tested |
@@ -129,7 +153,9 @@ Each plugin has its own self-contained ZIP in `release/windows/<FixName>/`. The 
 | [PistonAutoResume v0.2.0 (KPlugFixes installer)](release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0_KPlugFixes_Install.zip) | `0abaa27f88469dcb9e73a1f83878da522e61f3a73cd3a7df9aad4ad668290f4f` | `9d5e9d399b0ce110782ff527b969271d80a679869c5d8ce375baed2497397940` | Original runtime-tested DLL retained byte-for-byte; new game-root ZIP not separately installed/tested |
 | [PoseBridge v0.2.0.1 (current)](release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.1_KPlugFixes_Install.zip) | `f1a35ff5a1849001d2705dd3f4c368fcb9a309170b51f244aeb1fd99583c9142` | `76a985805c3817b2caf4f69e787fdcc93125780619a66ce69f3d2ef2d7039ba4` | Runtime-collected exact DLL, startup patch active |
 | [PoseBridge v0.2.0.0 (historical)](release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.0.zip) | Not separately recorded | `df98829f15469b20868a4fe69f20f8c6a58f041dbf54e3c315b96f928f235a5c` | Historical installer, not current |
-| [HListNameCache v0.1.0](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Stable_Frozen.zip) | `17f571acb7901776f1069c1b218e85edb67918c50a1ce844837c7da3616429c4` | `2cf2ba5af6602e49ee8bdc8dffe8197c0e3e500c31911ce2b95b98864b8195bc` | Exact frozen runtime-tested DLL; installer not separately Windows-verified |
+| [HListNameCache v0.1.0 (H-list optimization; KPlugFixes installer)](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_KPlugFixes_Install.zip) | `17f571acb7901776f1069c1b218e85edb67918c50a1ce844837c7da3616429c4` | `1e05cdf4e64fef04f8695155e3cf4276bb2deff529700d8165d999eea3961202` | Original runtime-tested DLL unchanged; new ZIP not separately installed/tested; kPlug-free operation untested |
+
+**Historical HListNameCache frozen archive (source and scripts, not a game-root overlay):** [v0.1.0 Stable Frozen](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Stable_Frozen.zip).
 
 **Historical DLL-only ZIPs retained (manual placement):** [GaugeSwapFix](release/windows/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0.zip), [NullGuardsFix](release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0.zip), [PistonWaitFix](release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0.zip), [PistonAutoResume](release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0.zip).
 

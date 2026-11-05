@@ -1,12 +1,25 @@
 # Sideloader HList Name Cache v0.1.0｜実機成功版（固定）
 
 ## 目的と修正範囲
-Koikatu + kPlug 3.6.0向け、PoseBridgeとは独立したBepInEx/Harmonyプラグイン。Hリストのアセット名一覧の不要な反復取得を抑える。
+KoikatuのHリストのアセット名一覧の不要な反復取得を抑える、PoseBridgeとは独立したBepInEx/Harmony最適化プラグイン。**kPlug本体の不具合修正パッチではなく、kPlug.dllを書き換えるものでもありません。** 実機確認はKoikatu＋kPlug 3.6.0＋Sideloaderの既存環境で行いました。**kPlugなしの環境での動作は未検証**です。
 
 対象は `abdata/h/list/` 配下の次の6 Bundleのみ：
 `hs2suite.unity3d`、`mmbath.unity3d`、`mmhouse01.unity3d`、`poolmap.unity3d`、`purpleroom.unity3d`、`sakuraroom.unity3d`。
 
 `AssetBundleCheck.GetAllAssetName(string,bool,string,bool)` に対し、`withExtension=false`、manifestがnull/空、`isAllCheck=false`の場合だけキャッシュする。初回の正常かつ非空の文字列配列を複製して保持し、以後も複製して返す。Bundle本体・TextAssetの読み込み／解放、他のパス・引数、Sideloader.dll・Assembly-CSharp.dllには変更を加えない。
+
+## 現行配布：KPlugFixes共通配置版ZIP
+
+- **[推奨導入ZIP v0.1.0](../../release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_KPlugFixes_Install.zip)**：Koikatuゲーム本体へ展開すると、`BepInEx/plugins/KPlugFixes/SideloaderHListNameCache.dll`へ配置されます。
+- ZIP SHA-256：`1E05CDF4E64FEF04F8695155E3CF4276BB2DEFF529700D8165D999EEA3961202`
+- DLL SHA-256：`17F571ACB7901776F1069C1B218E85EDB67918C50A1CE844837C7DA3616429C4`（下記の実機成功済み凍結版とバイト単位で同一）。
+- ZIPには`README.txt`（日本語）、`README_EN.txt`（英語）、`SHA256SUMS.txt`を同梱。kPlugやゲーム本体・Sideloader等の第三者DLLは含みません。
+
+**導入・更新：** ゲーム終了→既存の同名DLLの場所とSHA-256を確認して保全（同じ成功版DLLが既にあれば再配置不要）→推奨ZIP内の`BepInEx`をゲーム本体フォルダへ展開→`plugins`配下に同名DLLの二重配置がないか確認→起動ログの`Loading [Sideloader H List Name Cache 0.1.0]`と`[HListNameCache] PATCH_OK`を確認します。H体位一覧の表示・選択も確認してください。
+
+**解除・復元：** ゲーム終了後、今回導入したDLLだけを外し、必要なら保存しておいた旧版を復元します。不明なファイルや別プラグインを削除しないでください。
+
+**検証範囲：** DLL本体は実機成功済みですが、**新ZIPの展開・インストール動作は実機未検証**です。旧凍結保全ZIPはソース・専用BAT／PowerShell等を収録した別形式で、ゲーム本体へそのまま展開する用途ではありません。両方のパッケージを重ねて導入しないでください。
 
 ## 2026-10-12 実機確認
 2回の実機検証でキャッシュ効果を確認。プラグイン由来のエラーは確認されず、2回目はユーザーがH操作・体位リストの表示と選択・Hポイント移動に問題なしと確認した。
@@ -18,7 +31,7 @@ Koikatu + kPlug 3.6.0向け、PoseBridgeとは独立したBepInEx/Harmonyプラ�
 
 残存Streamingを省略してよいとは判定していない。HPointMove直後に姿勢が崩れる低頻度不具合は別件として未解決。壁ポイントとの関連は仮説段階で、次のモーションに入ると復旧する。キャッシュDLLの原因・修正効果とは断定しない。
 
-## 固定成果物
+## 旧凍結保全パッケージ（原本を維持）
 `release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Stable_Frozen.zip`
 
 - ZIP SHA-256：`2CF2BA5AF6602E49EE8BDC8DFFE8197C0E3E500C31911CE2B95B98864B8195BC`
