@@ -1,67 +1,40 @@
-kPlug Piston Transition Fix v1.0.0
+kPlug Piston Transition Fix｜導入案内
 
-■ 内容
+これはWaitFixとAutoResumeの2種類のプラグインを説明する文書です。
+それぞれ別のZIPとして配布されています。
 
-この配布物には以下の2つのBepInExプラグインが含まれます。
+1. KPlugPistonWaitFix v1.0.0
+   挿入モーションの切替後に操作を受け付けなくなる待機状態を防止します。
+   導入ZIP: ../../release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0_KPlugFixes_Install.zip
 
-1. KPlugPistonWaitFix.dll v1.0.0
-   テンキー7 / Backspaceで挿入状態のアニメーションを変更した後、
-   以後のアニメーション切り替えが反応しなくなることがある問題を修正します。
+2. KPlugPistonAutoResume v0.2.0
+   切替後にゲーム本来のGo経路でピストン動作を自動再開します。
+   導入ZIP: ../../release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0_KPlugFixes_Install.zip
 
-2. KPlugPistonAutoResume.dll v0.2.0
-   ピストン動作中にテンキー7 / Backspaceでアニメーションを変更した後、
-   ゲーム本来のGo処理を使ってピストン動作を自動再開します。
+AutoResumeの使用にはWaitFix v1.0.0が必要です。
 
-■ 対象
+対応環境: Koikatu 5.1 / kPlug 3.6.0 / BepInEx 5.4.23.5
 
-Koikatu 5.1
-kPlug 3.6.0
-BepInEx 5.4.23.5
+導入:
+ゲームを終了し、既存の同名DLLをバックアップしてから、
+必要なZIPをゲーム本体フォルダーへ展開します。
+現在のDLL配置先:
+  BepInEx\plugins\KPlugFixes\KPlugPistonWaitFix.dll
+  BepInEx\plugins\KPlugFixes\KPlugPistonAutoResume.dll
+同じDLLをほかのプラグインフォルダーに重複配置しないでください。
 
-動作確認に使用した kPlug.dll SHA-256:
-880b34324bf1563a1e09a02a6c0960918270fae7463132d47e5fc813bcf4607f
+AutoResumeの設定:
+  BepInEx\config\local.kplug.pistonautoresume.cfg
+  Enabled = true
+  ResumeDelaySeconds = 0.8
+無効にする場合はEnabled = falseです。
 
-■ インストール
+起動ログ:
+  [PistonWaitFix] v1.0.0 active.
+  [PistonAutoResume] v0.2.0 active.
 
-ZIPの中身をKoikatuのゲームフォルダへ展開してください。
+解除:
+ゲームを終了し、導入したDLLを取り外します。
+以前の版があればバックアップから復元します。
 
-導入後:
-
-BepInEx\plugins\KPlugPistonTransitionFix\KPlugPistonWaitFix.dll
-BepInEx\plugins\KPlugPistonTransitionFix\KPlugPistonAutoResume.dll
-
-■ Auto Resume設定
-
-初回起動後:
-
-BepInEx\config\local.kplug.pistonautoresume.cfg
-
-主な設定:
-
-Enabled = true
-ResumeDelaySeconds = 0.8
-
-0.0 = 最速
-0.8 = 標準
-最大3.0秒
-
-自動再開を無効にする場合:
-Enabled = false
-
-■ 起動確認
-
-BepInExログ:
-
-[PistonWaitFix] v1.0.0 active.
-[PistonAutoResume] v0.2.0 active.
-
-■ アンインストール
-
-以下を削除してください。
-
-BepInEx\plugins\KPlugPistonTransitionFix\KPlugPistonWaitFix.dll
-BepInEx\plugins\KPlugPistonTransitionFix\KPlugPistonAutoResume.dll
-
-必要に応じて以下のConfigも削除してください。
-
-BepInEx\config\local.kplug.pistonautoresume.cfg
+詳細: README_ja.md / README.md

@@ -1,86 +1,29 @@
-# KPlugGaugeSwapFix v0.2.0
+# KPlugGaugeSwapFix v0.2.0｜日本語ガイド
 
-## 推奨導入ZIP（KPlugFixes配置版）
+kPlug 3.6.0のHシーンで、女の子をMainへ入れ替えた後にHカテゴリやアニメーションを変更すると、**Face/Gauge表示が入れ替え前へ戻る**問題を補正します。実際の相手を変更するパッチではありません。
 
-- **[GaugeSwapFix v0.2.0 推奨導入ZIP](../../release/windows/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0_KPlugFixes_Install.zip)**：ゲーム本体フォルダへそのまま展開し、`BepInEx/plugins/KPlugFixes/`にDLLを配置。日本語／英語README、SHA一覧を同梱。
-- [旧DLL単体ZIP（履歴用）](../../release/windows/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0.zip)：従来の配布形式。自動配置されません。
-- [C#ソース](../../src/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0.cs) ／ [SHA-256一覧](../../SHA256SUMS.txt)
+[導入ZIP](../../release/windows/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0_KPlugFixes_Install.zip) ／ [C#ソース](../../src/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0.cs) ／ [SHA-256一覧](../../SHA256SUMS.txt)
 
-**DLLは旧ZIPとバイト単位で同一です。** Runtimeバージョンと動作処理は変更していません。ゲーム終了→既存の同名DLLをバックアップ→ZIPをゲームルートへ展開→他の`plugins`サブフォルダに同名DLLが残らないことを確認→BepInExロードログを確認、の順に実施してください。解除時はゲームを終了し、今回導入したDLLだけを外して、必要なら旧版をバックアップから復元します。**新しい導入ZIPの実機配置・起動テストは未実施**です。
+## インストール・解除
 
-## 目的
+1. Koikatuを終了して既存の`KPlugGaugeSwapFix.dll`をバックアップします。
+2. 導入ZIPをゲーム本体フォルダーへ展開します。配置先は`BepInEx/plugins/KPlugFixes/KPlugGaugeSwapFix.dll`です。
+3. 別の`BepInEx/plugins/`フォルダーに同名DLLが残っていないことを確認し、BepInExログでロードを確認します。
 
-kPlug 3.6.0でMain girlをスワップした後、`寝 -> 椅子` などHのカテゴリ/アニメーションを変更すると、
-実際の相手はスワップ後の女の子のままなのにFace/GaugeがH開始時の状態へ戻る問題を局所修正する。
+解除するときはゲームを終了し、このDLLだけを外して必要に応じてバックアップを復元してください。
 
-## 今回の根拠
+## 修正内容
 
-確認済みの処理経路:
+対象は`HSceneProc.ChangeAnimator`です。Mainが入れ替わっている場合だけ、変更前のFace/Gaugeを保存し、ゲーム本来のアニメーション切替を実行した後、**同じMain状態が続いている場合に限って**表示を復元します。kPlugやKoikatu本体のDLLを直接書き換えるものではありません。通常のHや、Mainを入れ替えていない場合には介入しません。
 
-- kPlugのスワップ処理は新Main girlのFaceを `HCtl.faceOverwrite` に保持する。
-- kPlugのスワップ処理は新Main girlの値を `HFlag.gaugeFemale` へ反映する。
-- PointMove/カテゴリ変更ではバニラ `HSceneProc.ChangeCategory` が呼ばれる。
-- その先の `HSceneProc.ChangeAnimator` で `HSprite.InitHeroine(HFlag.lstHeroine)` 等の再初期化が走る。
-- 実機ログではカテゴリ変更直後、`Dealer.Update` に入る前の段階ですでにGaugeが旧側へ変化していた。
-- 同時にkPlugの `lastGaugeValues` にはスワップ後の値が残っていた。
-- kPlugの既存Face再適用経路は `animAtPointMovEntry == Core.hAnim` 条件があり、カテゴリが変わる場合は再適用されない。
+## 動作確認
 
-したがって、修正境界を `HSceneProc.ChangeAnimator` に限定する。
+Koikatu＋kPlug 3.6.0の環境で、Iキーで女の子を呼びMainへ入れ替えた後、寝→椅子などのカテゴリ変更時にFace/Gaugeが維持されることを確認しています。新しいZIPへの再梱包はDLLの変更を伴いませんが、ZIPの展開操作そのものは実機未検証です。
 
-## 実装
-
-Harmony Prefix/Postfixを `HSceneProc.ChangeAnimator` へ1組だけ適用する。
-
-スワップ中 (`HCtl.faceOverwrite != null`) の場合のみ:
-
-1. Prefixで現在の `gaugeFemale / gaugeMale` と `faceOverwrite` を退避。
-2. バニラ `ChangeAnimator` は変更せず最後まで実行。
-3. Postfixで同じ `HCtl` / 同じ `faceOverwrite` が継続中であることを確認。
-4. 退避したGaugeを戻す。
-5. kPlug既存の `ToolUI.ReplaceFaceImage(faceOverwrite)` を呼ぶ。
-
-通常H、スワップしていない状態、`faceOverwrite2` のみの状態には介入しない。
-
-## 変更しないもの
-
-- `HSceneProc.ChangeAnimator` 本体の処理順
-- `HFlag.lstHeroine`
-- `Core.heroine`
-- キャラクター本体
-- アニメーション選択
-- DynamicBone処理
-- SmartUI状態
-- kPlug.dll / Assembly-CSharp.dll 本体
-- 既存のPiston/NullGuard/MyRoom修正
-
-## ビルド条件
-
-- Game root: `F:\illusion\Koikatu`
-- kPlug 3.6.0 SHA-256:
-  `34c13976108db0a18a7ad6b7cfda5517b4a9a83d85c9a909820144264c743855`
-- Assembly-CSharp.dll SHA-256:
-  `0038281caf8df48a7903c55dc389642eeeb3f2a9114bd9d68ac11c8ac0396bc5`
-
-BATをダブルクリックしてビルド/配置する。
-
-## トランザクション
-
-- TEMPへのコンパイル成功前はゲーム側を変更しない。
-- コンパイル成功後に旧GaugeSwap診断/修正DLLだけをOFFへ退避する。
-- インストール失敗時は、この実行で退避したDLLを元へ戻す。
-
-## 実機確認
-
-1. H開始。
-2. Iキーで女の子を呼ぶ。
-3. 呼んだ女の子をMainへスワップ。
-4. Face/Gaugeがスワップ後の女の子になっていることを確認。
-5. 以前失敗した `寝 -> 椅子 -> 別カテゴリ` などを連続実行。
-6. 各変更後もFace/Gaugeがスワップ後状態のままなら成功。
-
-期待ログ:
+起動ログの例：
 
 ```text
 [GaugeSwapFix] v0.2.0 active. Target=HSceneProc::ChangeAnimator. Main-girl swap only.
-[GaugeSwapFix] Rebound swapped main-girl Face/Gauge after ChangeAnimator. ...
 ```
+
+[以前のDLL単体配布ZIP](../../release/windows/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0.zip)は手動配置形式です。新規導入には上記のゲームルート導入ZIPを使用してください。

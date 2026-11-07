@@ -1,120 +1,71 @@
-# KPlugFixes（日本語ガイド）
+# KPlugFixes｜Koikatu用BepInExプラグイン
 
 [English README](README_en.md)
 
-**Koikatu＋kPlug 3.6.0環境で検証した、kPlug関連の不具合修正6種類、独立したHリスト最適化1種類、およびKoikatu本体側のHPoint切替補正1種類**を公開しています。必要なものだけ選べるよう、機能ごとにDLLを分けています。HListNameCacheはkPlug.dll本体を修正するパッチではありません。ゲーム本体、kPlug本体、CrossFader本体を配布・改造するものではありません。
+KoikatuのHシーンなどで確認した不具合の修正と、一部処理の最適化を配布しています。必要な機能だけ選んで導入できます。**ゲーム本体、kPlug、CrossFader、Sideloaderなど第三者のDLLは配布していません。**
 
-## まずどれを入れる？
+## プラグイン一覧
 
-### kPlug関連の不具合修正（6種類）
+### kPlug関連の修正（6種類）
 
-| プラグイン | 何を改善する？ | 現行版・入手先 |
+| プラグイン | 主な機能 | 現行版・ダウンロード |
 | --- | --- | --- |
-| **CrossFaderCompatFix** | Hポイント移動後に姿勢が崩れたままになる問題を低減。CrossFaderとのアニメーション切替競合にも対応 | [v1.2.0 日本語README同梱・KPlugFixes配置版](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0_KPlugFixes_Install.zip) ／ [日本語README](docs/CrossFaderCompatFix/README_ja.md) |
-| **PoseBridge** | kPlugの体位選択にある挿入体位を、本体のH画面の体位一覧にも反映 | [v0.2.0.1 日本語README同梱・KPlugFixes配置版](release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.1_KPlugFixes_Install.zip) ／ [日本語README](docs/PoseBridge/README_ja.md) |
-| **GaugeSwapFix** | H中に相手を入れ替えた際の顔・ゲージ表示の巻き戻りを抑制 | [v0.2.0・KPlugFixes配置版](release/windows/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0_KPlugFixes_Install.zip) ／ [日本語README](docs/GaugeSwapFix/README_ja.md) |
-| **NullGuardsFix** | kPlugの特定のNullReference例外を、kPlug.dllを直接変更せず保護 | [v0.2.0・KPlugFixes配置版](release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0_KPlugFixes_Install.zip) ／ [日本語README](docs/NullGuardsFix/README_ja.md) |
-| **PistonWaitFix** | 特定の挿入モーション切替後に操作できなくなる状態への対策 | [v1.0.0・KPlugFixes配置版](release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0_KPlugFixes_Install.zip) ／ [日本語README](docs/PistonTransitionFix/README_ja.md) |
-| **PistonAutoResume** | アニメーション切替後、条件が整ったら元のゲームのGo経路でピストン動作を再開 | [v0.2.0・KPlugFixes配置版](release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0_KPlugFixes_Install.zip) ／ [日本語README](docs/PistonTransitionFix/README_ja.md) |
-### Hリスト取得の最適化（1種類・別カテゴリ）
+| **CrossFaderCompatFix** | アニメーション切替競合とHポイント移動後の旧ExtraIK残留を抑制 | [v1.2.0 ZIP](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0_KPlugFixes_Install.zip) ／ [説明](docs/CrossFaderCompatFix/README_ja.md) |
+| **PoseBridge** | kPlug Pose Selectorの挿入体位を本体H画面の一覧にも表示 | [v0.2.0.1 ZIP](release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.1_KPlugFixes_Install.zip) ／ [説明](docs/PoseBridge/README_ja.md) |
+| **GaugeSwapFix** | Mainの女の子を入れ替えた後のFace/Gauge表示を維持 | [v0.2.0 ZIP](release/windows/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0_KPlugFixes_Install.zip) ／ [説明](docs/GaugeSwapFix/README_ja.md) |
+| **NullGuardsFix** | 特定のnull参照・破棄済みオブジェクト例外を軽減 | [v0.2.0 ZIP](release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0_KPlugFixes_Install.zip) ／ [説明](docs/NullGuardsFix/README_ja.md) |
+| **PistonWaitFix** | 挿入モーション切替後の待機状態による操作不能を防止 | [v1.0.0 ZIP](release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0_KPlugFixes_Install.zip) ／ [説明](docs/PistonTransitionFix/README_ja.md) |
+| **PistonAutoResume** | 切替後に元のGo処理でピストン動作を自動再開 | [v0.2.0 ZIP](release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0_KPlugFixes_Install.zip) ／ [説明](docs/PistonTransitionFix/README_ja.md) |
 
-**kPlugの不具合修正ではなく、Koikatu本体の`AssetBundleCheck.GetAllAssetName()`を対象とする独立した最適化**です。原ソースにkPlugの名前空間・APIへの直接参照はありません。**実機成功確認はkPlug 3.6.0＋Sideloaderを含む環境**で行っており、kPlugなしの構成での動作は未検証です。
+**PistonAutoResumeにはPistonWaitFix v1.0.0が必要です。**
 
-| プラグイン | 何を改善する？ | 現行版・入手先 |
+### Koikatu本体側の独立パッチ（2種類）
+
+| プラグイン | 主な機能 | 現行版・ダウンロード |
 | --- | --- | --- |
-| **SideloaderHListNameCache** | H体位一覧の特定6アセットについて、名前一覧の反復取得をキャッシュ（kPlug本体の修正ではない） | [v0.1.0・KPlugFixes配置版](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_KPlugFixes_Install.zip) ／ [日本語README](docs/HListNameCache/README_ja.md) |
+| **SideloaderHListNameCache** | H体位リストのアセット名一覧の反復取得をキャッシュ | [v0.1.0 ZIP](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_KPlugFixes_Install.zip) ／ [説明](docs/HListNameCache/README_ja.md) |
+| **HPointBenchRouteFix** | 椅子・ソファ挿入から「ベンチフェラ」へ切り替わらない問題を補正 | [v1.0.0 ZIP](release/windows/HPointBenchRouteFix/HPointBenchRouteFix_v1.0.0_Install.zip) ／ [説明](docs/HPointBenchRouteFix/README_ja.md) |
 
-旧凍結保全パッケージ（ソース・専用スクリプトを収録）：[Sideloader HListNameCache v0.1.0](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Stable_Frozen.zip)。現行のゲームルート展開用ZIPとは別の形式です。
+これら2種類はkPlugのAPIへの直接依存を持ちません。ただし、**kPlugを使用しない環境での実機動作は未確認**です。
 
-**配置と依存関係は別です。** 現在公開している導入ZIPは管理上`BepInEx/plugins/KPlugFixes/`へ配置しますが、kPlugを必須とする意味ではありません。既に正常動作している同一DLLは、分類のためだけに移動する必要はありません。`BepInEx/plugins/`直下へ移す独立配置ZIPは準備されていますが、展開・起動が未検証のため、現行の公開配布ZIPには切り替えていません。
+## インストール
 
-### Koikatu本体側のHPoint切替補正（1種類・独立）
+1. **Koikatuを終了**し、既存の同名DLLがあればバックアップします。
+2. 必要なプラグインの**導入ZIPをゲーム本体フォルダーへ展開**します。
+3. `BepInEx/plugins/`以下で同名DLLや旧試験版の重複ロードがないことを確認します。
+4. ゲーム起動後、`BepInEx/LogOutput.log`などのログでロードを確認します。個別の確認方法は各説明書を参照してください。
 
-kPlug特有の不具合ではなく、Koikatu本体の`HSceneProc.ChangeCategory()`によるモーション維持判定を限定的に補正します。kPlug・CrossFaderは**コード上の必須依存ではありません**。ただし、kPlugなしの構成での実機動作は未確認です。
-
-| プラグイン | 何を改善する？ | 現行版・入手先 |
-| --- | --- | --- |
-| **HPointBenchRouteFix** | 椅子・ソファの挿入モーションから「ベンチフェラ」を選択しても、以前の挿入モーションが残る問題を補正 | [v1.0.0 ゲームルート導入ZIP](release/windows/HPointBenchRouteFix/HPointBenchRouteFix_v1.0.0_Install.zip) ／ [日本語README](docs/HPointBenchRouteFix/README_ja.md) |
-
-**配置先：** `BepInEx/plugins/HPointBenchRouteFix.dll`（下記7種類の`KPlugFixes/`共通配置とは異なります）。初回実機確認は良好ですが、再起動後・kPlugなしでの動作は未記録です。
-
-**現行推奨ZIPについて：** kPlug関連6種類とHリスト最適化1種類の計7種類はすべて、ゲーム本体へ展開すると `BepInEx/plugins/KPlugFixes/` に各DLLが配置される形式です。各ZIPは日本語／英語READMEとSHA一覧を同梱しています。旧DLL単体ZIPやHListNameCache凍結保全ZIPは履歴として残し、成功済みDLL本体を変更していません。**新規に作成した再梱包ZIPは、実機での展開・起動を別途確認していません。**
-
-**注意：** これらを全部入れる必要はありません。適用したい症状に対応するDLLだけを選んでください。各ZIPの導入手順・検証状況を確認してください。
-
-## KPlugFixes配置版ZIPのインストール方法
-
-現在の7種類の推奨ZIPは、各DLLを次の共通フォルダへ配置します。**必要なプラグインだけを選んでください。** 下図は配置先をまとめて示したもので、全7種類の同時導入を求めるものではありません。
-
-```text
-Koikatu（ゲーム本体フォルダ）
-└─ BepInEx
-   └─ plugins
-      └─ KPlugFixes
-         ├─ KPlugCrossFaderCompatFix.dll
-         ├─ KPlugPoseBridge.dll
-         ├─ KPlugGaugeSwapFix.dll
-         ├─ KPlugNullGuardsFix.dll
-         ├─ KPlugPistonWaitFix.dll
-         ├─ KPlugPistonAutoResume.dll
-         └─ SideloaderHListNameCache.dll
-```
-
-※ SideloaderHListNameCacheのこの配置は、kPlugへの直接依存を表すものではありません。
-
-1. **Koikatuを完全に終了**してください。
-2. 既に使用中のDLLがあればバックアップしてください。`BepInEx/plugins/`直下や他のサブフォルダに同名DLLがある場合、先に配置を確認してください。
-3. 上表から必要なZIPを保存し、**ZIPの中にある `BepInEx` フォルダごと、ゲーム本体フォルダへ展開**してください。
-4. 旧配置先の同名DLLを放置しないでください。**同じプラグインを2か所に置くと、重複ロードや競合の原因となります。** 不明なファイルは削除せずバックアップ・確認してください。
-5. ゲームを再起動して `BepInEx/LogOutput.log` を確認してください。各プラグインの`Loading`が**1回だけ**記録されていれば、起動時ロードの確認になります。
-
-既に旧配置で使用している方は、新版ZIPを重ねて入れるだけでは重複する可能性があります。旧DLLの所在を確認し、安全に移行してください。**今回のフォルダ整理は、DLLの中身や動作の変更ではありません。**
-
-## HPointBenchRouteFix（独立版）の導入
-
-HPointBenchRouteFixは、上記7種類の`KPlugFixes/`配置版とは別です。ゲームを終了し、同名DLLの重複配置がないことを確認してから[専用ZIP](release/windows/HPointBenchRouteFix/HPointBenchRouteFix_v1.0.0_Install.zip)をゲームルートへ展開します。
+配布ZIPの配置先は次のとおりです。
 
 ```text
 Koikatu/
 └─ BepInEx/
    └─ plugins/
+      ├─ KPlugFixes/
+      │  ├─ KPlugCrossFaderCompatFix.dll
+      │  ├─ KPlugPoseBridge.dll
+      │  ├─ KPlugGaugeSwapFix.dll
+      │  ├─ KPlugNullGuardsFix.dll
+      │  ├─ KPlugPistonWaitFix.dll
+      │  ├─ KPlugPistonAutoResume.dll
+      │  └─ SideloaderHListNameCache.dll
       └─ HPointBenchRouteFix.dll
 ```
 
-起動後は`BepInEx/HPointBenchRouteFix.log`の`READY`を確認してください。詳しい互換性・解除方法・未検証事項は[専用README](docs/HPointBenchRouteFix/README_ja.md)を参照してください。
+**すべてを導入する必要はありません。** それぞれのZIPには該当プラグインのDLLが入っています。終了後の解除は対象DLLだけを外し、以前の版があればバックアップから復元してください。
 
-## 確認済みの範囲・残っている問題
+## 環境と既知の制限
 
-- **HPointBenchRouteFix v1.0.0：** 初回実機では「問題なさそう」と報告。公開DLLはその独立版RC1と同一です。再起動後、最終ログ照合、kPlugなしの動作は未記録です。
-- **CrossFaderCompatFix v1.2.0：** 統合ExtraIK抑制を実機ログで確認済み。診断ログON/OFFと、移行後の起動・初期化も確認しています。姿勢崩れの改善を確認しましたが、**絶頂後の移動に続くEnter時の一瞬の位置ズレ**と、**低頻度のEnter無反応**は未解決です。
-- **PoseBridge v0.2.0.1：** 移行後に起動・パッチ有効化を確認済み。体位一覧の同期は一部カテゴリで確認していますが、すべての体位の網羅的な動作確認はしていません。
-- **SideloaderHListNameCache v0.1.0：** 凍結版に収録したDLL本体は実機成功確認済みです。旧凍結版の専用Windowsインストールスクリプト、および今回の新しいゲームルート展開用ZIPは**それぞれ実機導入未検証**です。kPlugなしでの動作も未検証です。
+主な検証環境：Koikatu 5.1、kPlug 3.6.0、BepInEx 5.4.23.5、Unity 5.6.2f1、Windows 11。プラグインによって追加条件があります。
 
-### CrossFaderの診断ログ
+- **CrossFaderCompatFix：** CrossFader 0.11向け。絶頂後の移動に続くEnter時の一瞬の位置ズレ、低頻度のEnter無反応は未解決です。
+- **PoseBridge：** 挿入体位（mode 2）だけが対象で、全体位の網羅的確認は未実施です。
+- **HListNameCache：** 特定6アセットが対象です。kPlugなしの動作は未検証です。
+- **HPointBenchRouteFix：** 特定のベンチフェラ切替だけが対象です。再起動後の動作・最終ログ・kPlugなしの動作は未確認です。
+- 一部の再梱包ZIPは、同一DLLの実機検証とは別に**ZIP展開手順自体の実機検証が未完了**です。詳細は個別READMEで確認してください。
 
-通常は記録をOFFにします。詳細調査が必要なときだけ、`BepInEx/config/tetsupom.kplug.crossfader.compatfix.cfg` の設定を切り替えます。
+## ソース・詳細情報
 
-```ini
-[Logging]
-EnableDiagnosticLogs = true
-```
+[公開ソース](src/) ／ [ビルドスクリプト](scripts/) ／ [機能別ドキュメント](docs/) ／ [配布ZIP一覧](release/windows/) ／ [SHA-256一覧](SHA256SUMS.txt)
 
-ゲームを再起動すると、CrossFaderとExtraIKの詳細が`BepInEx/KPlugCrossFaderCompatFix.log`に出力されます。確認後は`false`へ戻してください。
-
-## 元へ戻すには
-
-Koikatuを終了し、今回導入した同名DLLを外してください。導入前に使っていた版がある場合は**保全したバックアップから復元**します。他のプラグインやゲーム本体のファイルは削除しないでください。
-
-## ソース・詳細・更新履歴
-
-- [HPointBenchRouteFix 日本語README](docs/HPointBenchRouteFix/README_ja.md)／[完全ソース](src/HPointBenchRouteFix/v1.0.0/HPointBenchRouteFix_v1.0.0.cs)／[リリースノート](docs/HPointBenchRouteFix/RELEASE_NOTES_v1.0.0.md)
-- [CrossFader 詳細（日本語）](docs/CrossFaderCompatFix/README_ja.md)／[ソース](src/CrossFaderCompatFix/v1.2.0/KPlugCrossFaderCompatFix_v1.2.0.cs)／[リリースノート](docs/CrossFaderCompatFix/RELEASE_NOTES_v1.2.0.md)
-- [PoseBridge 詳細（日本語）](docs/PoseBridge/README_ja.md)／[ソース](src/PoseBridge/KPlugPoseBridge_v0.2.0.1.cs)／[リリースノート](docs/PoseBridge/RELEASE_NOTES_v0.2.0.1.md)
-- [GaugeSwapFix 日本語README](docs/GaugeSwapFix/README_ja.md)／[ソース](src/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0.cs)
-- [NullGuardsFix 日本語README](docs/NullGuardsFix/README_ja.md)／[ソース](src/NullGuardsFix/KPlugNullGuardsFix_v0.2.0.cs)
-- [Piston系 日本語README](docs/PistonTransitionFix/README_ja.md)／[WaitFixソース](src/PistonTransitionFix/WaitFix/KPlugPistonWaitFix_v1.0.0.cs)／[AutoResumeソース](src/PistonTransitionFix/AutoResume/KPlugPistonAutoResume_v0.2.0.cs)
-- [HListNameCache（Hリスト最適化）日本語README](docs/HListNameCache/README_ja.md)／[旧凍結保全パッケージ（ソース同梱）](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Stable_Frozen.zip)
-- [SHA-256一覧](SHA256SUMS.txt)：配布物の同一性確認に使用します
-- [英語の技術説明](README_en.md)
-
-過去のZIPは再現・比較のため残しています。**新規導入時は上表のリンクを優先**し、旧配置版を重複して入れないでください。
+旧版のZIPやソースは比較・復元用として保管しています。**新しく導入する場合は上表の現行版リンクを使用してください。**

@@ -1,29 +1,22 @@
-# HPointBenchRouteFix v1.0.0 — public repository release
+# HPointBenchRouteFix v1.0.0 — Release notes
 
-**Date:** 2026-11-07  
-**Runtime:** 1.0.0  
-**Artifact:** [`HPointBenchRouteFix_v1.0.0_Install.zip`](../../release/windows/HPointBenchRouteFix/HPointBenchRouteFix_v1.0.0_Install.zip)
-
-## Issue and root cause
-
-Moving from a chair/sofa insertion animation to the explicitly chosen Bench Fellatio H-point may leave the insertion animation unchanged. A read-only diagnostic run showed that `HSceneProc.ChangeCategory()` returned via its `ROUTE_KEEP` branch when both sets were `[2,12]`, with no `ChangeAnimator()` invocation. This is a vanilla-game code path, but reproduction on a completely unmodded installation was **not** separately confirmed.
+**Released:** 2026-11-07  
+[Installer ZIP](../../release/windows/HPointBenchRouteFix/HPointBenchRouteFix_v1.0.0_Install.zip) | [Japanese guide](README_ja.md) | [English guide](README_en.md)
 
 ## Fix
 
-A limited Harmony IL branch adjustment redirects the matching insertion-to-Bench Fellatio case to the stock animation-reselection path. Other H-point routes, IK, Reset, and CrossFader behaviors are not intentionally changed. The published Independent RC1 runtime removes the unnecessary kPlug/CrossFader activation dependencies; BepInEx and Harmony remain required.
+Selecting Bench Fellatio after chair/sofa insertion can leave the insertion animation active. In the tested environment, `HSceneProc.ChangeCategory()` took its `ROUTE_KEEP` branch for equal category sets `[2,12]` instead of executing the normal animation switch. The patch redirects only the matching case to the game's stock reselection route.
+
+The implementation does not intentionally alter other H-point transitions, IK, Reset, or CrossFader behavior. BepInEx and Harmony are required; kPlug and CrossFader are not direct runtime dependencies.
 
 ## Verification and limitations
 
-- Earlier v0.1.0 trial: four guarded activations in the user-provided run; user reported no apparent issue.
-- Independent RC1 v1.0.0: installed and initially tested in the user's game; user reported no apparent issue.
-- Public installer DLL is **byte-identical** to the initially tested Independent RC1 DLL. README and MANIFEST were revised for publication without recompiling it.
-- **Not yet recorded:** second-launch behavior, final runtime log review, kPlug-free configuration, exhaustive H-point regressions.
-- Separate H-point posture/IK and Enter input issues remain out of scope.
+The targeted branch was exercised four times in the trial run, and the final v1.0.0 DLL was installed for an initial in-game check without reported issues. Operation without kPlug, a second launch, final runtime-log review, and exhaustive H-point regression tests remain unverified. Reproduction on a completely unmodded game was not separately established.
+
+Other H-point posture and Enter input problems are outside this fix's scope.
 
 ## Artifacts
 
-- [Japanese guide](README_ja.md) / [English guide](README_en.md)
-- [Install ZIP](../../release/windows/HPointBenchRouteFix/HPointBenchRouteFix_v1.0.0_Install.zip)
 - [Complete C# source](../../src/HPointBenchRouteFix/v1.0.0/HPointBenchRouteFix_v1.0.0.cs)
 - [Build PowerShell](../../scripts/HPointBenchRouteFix/v1.0.0/Build-HPointBenchRouteFix.ps1) / [Build BAT](../../scripts/HPointBenchRouteFix/v1.0.0/01_BuildRelease.bat)
 

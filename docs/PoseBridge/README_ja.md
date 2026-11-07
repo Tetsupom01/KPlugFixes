@@ -1,68 +1,30 @@
-# PoseBridge｜日本語ガイド
+# PoseBridge v0.2.0.1｜日本語ガイド
 
-## 現行版：v0.2.0.1
+kPlugのPose Selectorで選べる**挿入体位（mode 2）**を、Koikatu本体H画面の体位一覧にも反映するBepInExプラグインです。kPlugの既存の体位解決処理を利用し、解決できない体位がある場合は元の一覧を維持します。
 
-kPlugのPose Selectorで選べる挿入体位（mode 2）を、Koikatu本体H画面の体位一覧にも反映するプラグインです。既存のkPlug内部処理を利用し、取得・変換に失敗するときは元の一覧を保持します。
+[導入ZIP](../../release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.1_KPlugFixes_Install.zip) ／ [完全C#ソース](../../src/PoseBridge/KPlugPoseBridge_v0.2.0.1.cs) ／ [リリースノート](RELEASE_NOTES_v0.2.0.1.md)
 
-- **推奨導入ZIP（日本語README付き）：** [v0.2.0.1／KPlugFixesフォルダ配置](../../release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.1_KPlugFixes_Install.zip)
-- [C#ソース](../../src/PoseBridge/KPlugPoseBridge_v0.2.0.1.cs)
-- [リリースノート](RELEASE_NOTES_v0.2.0.1.md)
-- **配置先：** `BepInEx/plugins/KPlugFixes/KPlugPoseBridge.dll`
-- **DLL SHA-256：** `F1A35FF5A1849001D2705DD3F4C368FCB9A309170B51F244AEB1FD99583C9142`
-- **新ZIP SHA-256：** `76a985805c3817b2caf4f69e787fdcc93125780619a66ce69f3d2ef2d7039ba4`
+## インストール・解除
 
-**インストール：** ゲーム終了→同名DLLをバックアップ→ZIPをゲーム本体フォルダへ展開。旧配置先`BepInEx/plugins/`直下などの同名DLLを残さないよう確認してください。
+1. Koikatuを終了し、既存の`KPlugPoseBridge.dll`があればバックアップします。
+2. 導入ZIPをゲーム本体フォルダーへ展開します。配置先は`BepInEx/plugins/KPlugFixes/KPlugPoseBridge.dll`です。
+3. `BepInEx/plugins/`直下などにある同名DLLを残して二重ロードしないよう確認します。
+4. 起動ログでプラグインのロードとパッチ初期化を確認し、H体位一覧を確認します。
 
-**確認済み：** 実機でv0.2.0.1のロードとHarmony有効化を確認し、2026-11-03の`KPlugFixes`フォルダ移行後も1回ロードされて正常に初期化されました。挿入体位一覧の同期は一部カテゴリで検証しましたが、すべての体位を網羅したわけではありません。
+解除はゲームを終了してこのDLLを外し、以前の版があればバックアップから復元します。
 
-旧`KPlugPoseBridge_v0.2.0.1_Install.zip`は`plugins`直下に配置される歴史的パッケージです。新規導入では上記の新ZIPを推奨します。
+## 動作と対応範囲
 
----
+- `ToolAnimSelector.GetAvailablePiston()`と`ParserAnim.GetHAnim()`を使って体位一覧を同期します。
+- 初期化より前に呼び出された場合は同期を延期し、必要な体位を解決できない場合も元の一覧を保持します。
+- **挿入体位（mode 2）のみ**が対象です。service、3P、lesbianは対象外です。
+- Koikatu 5.1、kPlug 3.6.0、BepInEx 5.4.23.5を基準に検証しています。
 
-## 過去の成功版：v0.2.0.0
+## 実機検証・既知の制限
 
-## 目的
+v0.2.0.1は実機でロードと初期化を確認しました。床・壁・机の一覧同期および選択した体位への遷移は検証していますが、**全体位の網羅的な動作確認は未実施**です。
 
-kPlug 3.6.0 の Pose Selector で利用可能な挿入体位を、Koikatu 本体側の H UI でも同じ集合として利用できるようにする。
+DLL SHA-256：`F1A35FF5A1849001D2705DD3F4C368FCB9A309170B51F244AEB1FD99583C9142`  
+導入ZIP SHA-256：`76A985805C3817B2CAF4F69E787FDCC93125780619A66CE69F3D2EF2D7039BA4`
 
-## 実装
-
-kPlug 自身の既存経路を利用する。
-
-`ToolAnimSelector.GetAvailablePiston()`
-→ canonical pose name
-→ `ParserAnim.GetHAnim(canonical)`
-→ `HSceneProc.AnimationListInfo`
-
-初期同期は `ExtraAnimManager.Start` の Postfix、Hポイント/カテゴリ変更後の再同期は `HSceneProc.CreateListAnimationFileName(bool,int)` の Postfix で行う。
-
-全canonical体位を解決できた場合だけ `lstUseAnimInfo[2]` を置き換える。1件でも解決できない場合は `SYNC_ABORT` として既存リストを変更しない。
-
-## 実機確認
-
-2026-10-08 の実機ログで以下を確認した。
-
-- 床 `currentCats=[0]`: 64 → 77、requested=77 / finalCount=77 / canonicalUnique=77
-- 壁 `currentCats=[8]`: 7 → 12、requested=12 / finalCount=12 / canonicalUnique=12
-- 机 `currentCats=[7]`: 11 → 20、requested=20 / finalCount=20 / canonicalUnique=20
-- `SYNC_ABORT` / Sync failed / Sync invocation failed は確認されていない
-- ユーザーが選択した範囲の体位遷移は正常
-- 全体位の総当たり確認は未実施。通常プレイ継続で副作用を監視する
-
-## 判定
-
-v0.2.0.0 を成功版として保存する。
-
-## 対象範囲
-
-- mode 2（挿入）のみ
-- service / 3P / lesbian は本版の対象外
-- 他の成功済み kPlug 修正 DLL には変更を加えない
-
-## 成果物
-
-`release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.0.zip`
-
-ZIP SHA-256:
-
-`df98829f15469b20868a4fe69f20f8c6a58f041dbf54e3c315b96f928f235a5c`
+[旧v0.2.0.0配布ZIP](../../release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.0.zip)は比較・復元用です。新規導入には上記のv0.2.0.1を使用してください。

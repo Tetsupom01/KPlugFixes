@@ -1,38 +1,22 @@
 # kPlug Piston Transition Fix
 
-[日本語版README](README_ja.md) | English
+[日本語ガイド](README_ja.md) | English
 
-BepInEx plugins for Koikatu + kPlug 3.6.0 that fix insertion-animation switching issues and optionally resume piston motion automatically after using Numpad 7 / Backspace.
+Two BepInEx/Harmony plugins for Koikatu + kPlug 3.6.0, addressing separate problems when switching insertion/piston animations using Numpad 7 or Backspace.
 
-This project contains two separate plugins with different roles:
+| Plugin | Purpose | Installer ZIP |
+| --- | --- | --- |
+| **KPlugPistonWaitFix v1.0.0** | Avoids an indefinite wait that can leave later H animation navigation unresponsive | [Download](../../release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0_KPlugFixes_Install.zip) |
+| **KPlugPistonAutoResume v0.2.0** | Resumes piston motion through the game's normal Go action after an animation change | [Download](../../release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0_KPlugFixes_Install.zip) |
 
-- **KPlugPistonWaitFix v1.0.0**  
-  Fixes an issue where animation navigation can stop responding after changing an insertion-state animation with Numpad 7 / Backspace.
-- **KPlugPistonAutoResume v0.2.0**  
-  Automatically resumes piston motion through the game's normal Go route after switching insertion/piston animations while motion is active.
+**AutoResume requires WaitFix v1.0.0; it does not replace WaitFix.**
 
-## Target environment
+## Install / uninstall
 
-Validated with:
-
-- Koikatu 5.1
-- kPlug 3.6.0
-- BepInEx 5.4.23.5
-- Unity 5.6.2f1
-- CLR 2.0.50727.1433
-
-Validated `kPlug.dll` SHA-256:
-
-`880b34324bf1563a1e09a02a6c0960918270fae7463132d47e5fc813bcf4607f`
-
-## Installation — current KPlugFixes layout
-
-Download the current game-root installation ZIPs from this repository:
-
-- [KPlugPistonWaitFix v1.0.0 KPlugFixes installer](../../release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0_KPlugFixes_Install.zip)
-- [KPlugPistonAutoResume v0.2.0 KPlugFixes installer](../../release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0_KPlugFixes_Install.zip)
-
-Each current ZIP contains the unchanged original DLL, Japanese and English READMEs and a SHA256 manifest. Exit Koikatu, back up any existing version, and extract the `BepInEx` folder into your Koikatu game root. The resulting layout (only install the plugins you need) is:
+1. Close Koikatu and back up any existing copies of either DLL.
+2. Extract the ZIPs for the plugins you need into the Koikatu game root. Both install to `BepInEx/plugins/KPlugFixes/`.
+3. Remove or disable duplicate copies under other `BepInEx/plugins/` directories; confirm loading in `BepInEx/LogOutput.log`.
+4. To uninstall, exit the game, remove only the installed DLLs and restore any backed-up version if needed.
 
 ```text
 Koikatu/
@@ -43,107 +27,42 @@ Koikatu/
          └─ KPlugPistonAutoResume.dll
 ```
 
-AutoResume requires WaitFix v1.0.0 and does not replace it. Check other plugin folders for duplicate copies, then confirm loading in BepInEx/LogOutput.log. To uninstall, exit the game, remove only the DLLs installed by these ZIPs, and restore previous versions from your backups if needed.
+## AutoResume settings
 
-The former single-DLL ZIPs are preserved for historical use: [WaitFix](../../release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0.zip), [AutoResume](../../release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0.zip). The new game-root ZIP layout has not been separately tested on Windows; the DLL payloads are byte-identical to the previous packages.
-
-## Auto Resume configuration
-
-After the first launch, the following config file is created:
-
-```text
-BepInEx/config/local.kplug.pistonautoresume.cfg
-```
-
-Main settings:
+On first run the plugin creates `BepInEx/config/local.kplug.pistonautoresume.cfg`:
 
 ```ini
 [Piston Auto Resume]
-
 Enabled = true
 ResumeDelaySeconds = 0.8
 ```
 
-`ResumeDelaySeconds` controls how long Auto Resume waits after the real Animator state reaches `InsertIdle` / `A_InsertIdle` before triggering the normal Go action.
+The delay can be set from `0.0` (fastest) to `3.0` seconds; default is `0.8`. Setting `Enabled = false` disables automatic resume. The plugin waits for the real Animator state `InsertIdle` or `A_InsertIdle` and cancels a pending resume when another H command takes precedence.
 
-- `0.0` = fastest
-- `0.8` = default
-- up to `3.0` seconds
-- set `Enabled = false` to disable Auto Resume
+To clear settings on uninstall, remove only `BepInEx/config/local.kplug.pistonautoresume.cfg` after closing the game.
 
-If another H-scene command or animation change occurs while Auto Resume is waiting, the scheduled resume is cancelled instead of overwriting that action.
+## Compatibility / technical details
 
-## Startup check
+Validated environment: Koikatu 5.1, kPlug 3.6.0, BepInEx 5.4.23.5, Unity 5.6.2f1, CLR 2.0.50727.1433. Compatibility with other versions is not guaranteed.
 
-When both plugins load successfully, the BepInEx log should contain:
+WaitFix changes only the `WaitUntil` predicate in `AI_Main.IE_AskPistonChange` and preserves the stock movement pause. AutoResume uses the game's existing Go processing path. Neither directly modifies game or kPlug binaries.
+
+Successful startup log lines:
 
 ```text
 [PistonWaitFix] v1.0.0 active.
 [PistonAutoResume] v0.2.0 active.
 ```
 
-## Uninstallation
+The current installer ZIPs contain the original DLLs, but their extraction workflow has not been separately runtime-tested.
 
-Exit Koikatu and remove only the DLL(s) installed with the current packages:
+## Source and scripts
 
-```text
-BepInEx/plugins/KPlugFixes/KPlugPistonWaitFix.dll
-BepInEx/plugins/KPlugFixes/KPlugPistonAutoResume.dll
-```
+- [WaitFix C# source](../../src/PistonTransitionFix/WaitFix/KPlugPistonWaitFix_v1.0.0.cs)
+- [AutoResume C# source](../../src/PistonTransitionFix/AutoResume/KPlugPistonAutoResume_v0.2.0.cs)
+- [WaitFix build BAT](../../scripts/PistonTransitionFix/Build-KPlugPistonWaitFix_v1.0.0.bat)
+- [AutoResume build BAT](../../scripts/PistonTransitionFix/Build-KPlugPistonAutoResume_v0.2.0.bat)
+- [Japanese WaitFix details](KPlugPistonWaitFix_v1.0.0_README_ja.txt) / [Japanese AutoResume details](KPlugPistonAutoResume_v0.2.0_README_ja.txt)
+- [Published checksums](../../SHA256SUMS.txt)
 
-The older `BepInEx/plugins/KPlugPistonTransitionFix/` location belongs to historical manual installation. Check it for duplicate DLLs when migrating; do not delete unrelated files.
-
-To remove the Auto Resume configuration as well:
-
-```text
-BepInEx/config/local.kplug.pistonautoresume.cfg
-```
-
-## Repository structure
-
-```text
-src/
-├─ WaitFix/
-│  └─ KPlugPistonWaitFix_v1.0.0.cs
-└─ AutoResume/
-   └─ KPlugPistonAutoResume_v0.2.0.cs
-
-scripts/
-├─ build_KPlugPistonWaitFix_v1.0.0.ps1
-├─ build_KPlugPistonAutoResume_v0.2.0.ps1
-└─ Make-Release.ps1
-
-docs/
-├─ KPlugPistonWaitFix_v1.0.0_README_ja.txt
-├─ KPlugPistonAutoResume_v0.2.0_README_ja.txt
-└─ README_配布用.txt
-```
-
-Japanese documentation is available in the `docs/` folder.
-
-## Building from source
-
-The included PowerShell build scripts use the following game path by default:
-
-```text
-F:\illusion\Koikatu
-```
-
-If your installation is elsewhere, edit `$GameRoot` in the script.
-
-## Creating a release ZIP
-
-If you already have tested DLLs installed in your game folder:
-
-```powershell
-cd scripts
-.\Make-Release.ps1
-```
-
-The generated ZIP is placed in the repository's `release` folder.
-
-## Technical notes
-
-Wait Fix patches only the `WaitUntil` predicate used by `AI_Main.IE_AskPistonChange`. It does not directly modify `Assembly-CSharp.dll` or `kPlug.dll`.
-
-Auto Resume waits until the actual female Animator reaches `InsertIdle` / `A_InsertIdle`, then uses the game's normal Go path. It also cancels the pending resume when the context changes, so user input is not overwritten.
+Build scripts may use a test installation path; check and configure the game root before running them.

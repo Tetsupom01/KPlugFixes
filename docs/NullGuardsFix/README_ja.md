@@ -1,135 +1,38 @@
-# KPlugNullGuardsFix v0.2.0
+# KPlugNullGuardsFix v0.2.0｜日本語ガイド
 
-Status: 正式版・実機確認済み。  
-v0.1.0のNullGuards本体と、standalone版KPlugAtHomeDestroyGuard v0.1.1の処理を統合したv0.2.0を、最終実機テスト通過後の現行Stableとする。
+kPlug 3.6.0のH処理、音声、MyRoom終了時などに発生する特定のnull参照・Destroy済みオブジェクト由来の例外を軽減するBepInEx/Harmonyプラグインです。`kPlug.dll`本体は変更しません。
 
-## 推奨導入ZIP（KPlugFixes配置版）
+[導入ZIP](../../release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0_KPlugFixes_Install.zip) ／ [完全C#ソース](../../src/NullGuardsFix/KPlugNullGuardsFix_v0.2.0.cs) ／ [SHA一覧](../../SHA256SUMS.txt)
 
-- **[NullGuardsFix v0.2.0 推奨導入ZIP](../../release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0_KPlugFixes_Install.zip)**：ゲーム本体フォルダへそのまま展開し、`BepInEx/plugins/KPlugFixes/`にDLLを配置。日本語／英語README、SHA一覧を同梱。
-- [旧DLL単体ZIP（履歴用）](../../release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0.zip)：従来の配布形式。自動配置されません。
-- [C#ソース](../../src/NullGuardsFix/KPlugNullGuardsFix_v0.2.0.cs) ／ [SHA-256一覧](../../SHA256SUMS.txt)
+## インストール・解除
 
-**DLLは旧ZIPとバイト単位で同一です。** Runtimeバージョンと動作処理は変更していません。ゲーム終了→既存の同名DLLをバックアップ→ZIPをゲームルートへ展開→他の`plugins`サブフォルダに同名DLLが残らないことを確認→BepInExロードログを確認、の順に実施してください。解除時はゲームを終了し、今回導入したDLLだけを外して、必要なら旧版をバックアップから復元します。**新しい導入ZIPの実機配置・起動テストは未実施**です。
+1. Koikatuを終了し、既存の`KPlugNullGuardsFix.dll`をバックアップします。
+2. 旧`KPlugAtHomeDestroyGuard.dll`が有効なら退避します。v0.2.0に同じ対象の保護処理を統合しているため、同時に有効化しないでください。
+3. 導入ZIPをゲーム本体フォルダーへ展開します。配置先は`BepInEx/plugins/KPlugFixes/KPlugNullGuardsFix.dll`です。
+4. 他のフォルダーにある同名DLLを残さず、起動ログでロードを確認します。
 
-旧`KPlugAtHomeDestroyGuard.dll`と同時に有効化すると対象処理が重複し得るため、導入前に既存状態を確認してください。
+解除するときはゲームを終了し、このDLLを外します。以前の版があればバックアップから復元してください。kPlug本体やほかのプラグインは削除しないでください。
 
-## 目的
+## 対象処理
 
-kPlug 3.6.0で確認されているnull / destroyed object由来の限定的な例外を、kPlug.dll本体を直接改変せずBepInEx / Harmonyで防御する。
+- H処理のnull guard：9メソッド
+- `KokanBehavior`：2メソッド
+- `MenuCorner`：1メソッド
+- `AtHomeCtrl.OnDestroy()`：1メソッド（Destroy済み／nullの`girlRoots`だけを除外）
+- Voice coroutine：1メソッドのTranspiler
 
-v0.2.0では、成功済みv0.1.0のNullGuardsに、旧 `KPlugAtHomeDestroyGuard v0.1.1` の処理を統合する。
+`AtHomeCtrl.OnDestroy()`の元処理は通常どおり実行します。ガードに該当しない正常な処理を置き換えるものではありません。
 
-## v0.1.0から継続する処理
+## 動作確認・制限
 
-- H処理系 Prefix guard: 9メソッド
-- KokanBehavior Prefix guard: 2メソッド
-- MenuCorner Prefix guard: 1メソッド
-- Voice coroutine Transpiler: 1メソッド
+Koikatu＋kPlug 3.6.0環境で、プラグイン起動、MyRoom入退室、ゲーム通常終了を確認しています。確認した実行では`AtHomeCtrl.OnDestroy`のNullReferenceExceptionおよびプラグイン内部のパッチ適用エラーは記録されませんでした。null要素を実際に取り除く場面の網羅的な再現は行っていません。
 
-v0.1.0実機確認済みDLL SHA-256:
-
-`e1e585f3961126adda211d140535ab7590ed2d47c6f0ce97bbd2f146565a1c1e`
-
-## v0.2.0追加: AtHome OnDestroy guard
-
-対象:
-
-`kPlug.CmpBase.AtHomeCtrl.OnDestroy()`
-
-### 元の症状
-
-ゲーム終了等の破棄処理時、`girlRoots` 内にUnity上ですでにDestroy済みのGameObjectが残っていると、
-元の `OnDestroy()` がその要素に対して `GetComponentInChildren<ChaControl>()` を呼び、NullReferenceExceptionになる場合があった。
-
-### 対応
-
-Harmony Prefixで `AtHomeCtrl.OnDestroy()` の直前に `girlRoots` を確認する。
-
-以下だけをリストから除去する。
-
-- CLR上のnull要素
-- UnityEngine.ObjectとしてDestroy済みのGameObject
-
-その後、元の `AtHomeCtrl.OnDestroy()` は通常どおり最後まで実行する。
-
-カメラ復帰、ChaControl処理、Destroy処理など元のOnDestroyロジックは置き換えない。
-
-### standalone版で確認済み
-
-旧 `KPlugAtHomeDestroyGuard v0.1.1` は、
+起動ログの例：
 
 ```text
-[AtHomeDestroyGuard] v0.1.1 active.
-Destroyed girlRoots are removed before AtHomeCtrl.OnDestroy.
-```
-
-としてロードされ、そのテストログでは従来の `AtHomeCtrl.OnDestroy` NREは再発しなかった。
-
-## v0.2.0構成
-
-- Prefix guards: 13
-- Voice Transpiler: 1
-
-期待起動ログ:
-
-```text
-[NullGuardsFix] Voice guard injected at AudioSource.clip -> AudioClip.length path.
 [NullGuardsFix] v0.2.0 active. 13 Prefix guards + Voice Transpiler. AtHome destroy guard included.
 ```
 
-破棄対象が実際に見つかった場合:
+現行のゲームルート導入ZIPは成功済みDLLを再梱包したもので、ZIP展開操作の実機テストは未実施です。
 
-```text
-[NullGuardsFix] AtHome OnDestroy: removed N null/destroyed girlRoots entries.
-```
-
-## ビルド・導入
-
-`scripts/NullGuardsFix/Build-KPlugNullGuardsFix_v0.2.0.bat`
-
-を実行する。
-
-処理:
-
-1. TEMPへコンパイル
-2. コンパイル成功後のみゲーム側を変更
-3. 旧 `KPlugNullGuardsFix.dll` と standalone `KPlugAtHomeDestroyGuard.dll` を `.integrated_off` へ退避
-4. `BepInEx/plugins/KPlugFixes/KPlugNullGuardsFix.dll` に統合版を配置
-5. 配置失敗時は旧DLLをロールバック
-
-旧DLLは削除しない。
-
-## 最終実機確認
-
-最終確認では以下を実施した。
-
-1. Koikatu起動
-2. v0.2.0起動ログ確認
-3. MyRoomへ入退室
-4. 通常終了
-5. ログ確認
-
-結果:
-
-- `[NullGuardsFix] v0.2.0 active. 13 Prefix guards + Voice Transpiler. AtHome destroy guard included.` を確認
-- MyRoom入退室正常
-- ゲーム通常終了
-- `kPlug.CmpBase.AtHomeCtrl.OnDestroy` のNullReferenceExceptionなし
-- `NullGuardsFix patch failed` なし
-- `InvalidProgramException` なし
-- AccessViolation / Fatal / Crash なし
-
-なお、今回の正常終了ログでは `AtHome OnDestroy: removed N ...` は出ていない。
-これは今回の終了時には除去対象となるnull / Destroy済み `girlRoots` が存在しなかったことを意味する。
-
-## 正式判定
-
-**KPlugNullGuardsFix v0.2.0 を正式成功版・現行Stableとして固定する。**
-
-v0.1.0は履歴・ロールバック用として保持する。
-
-v0.1.0既知SHA-256:
-
-`e1e585f3961126adda211d140535ab7590ed2d47c6f0ce97bbd2f146565a1c1e`
-
-v0.2.0は実機成功確認済みだが、成功実機DLLのSHA-256は確認ログに記録されていないため、値を推定・再生成して記載しない。
+[旧DLL単体配布ZIP](../../release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0.zip)は手動配置用です。
