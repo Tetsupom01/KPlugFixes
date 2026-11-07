@@ -82,9 +82,9 @@ Runtime verification on 2026-10-08 confirmed successful synchronization for floo
 
 **SideloaderHListNameCache v0.1.0 — H-list optimization, not a kPlug fix (tested DLL; frozen baseline).**
 
-This independent BepInEx/Harmony plugin caches asset-name arrays for six exact `abdata/h/list/` bundles via `AssetBundleCheck.GetAllAssetName()`. It does **not** patch `kPlug.dll`. The existing test environment included kPlug 3.6.0 and Sideloader; **operation without kPlug has not been verified**. Two runtime sessions confirmed 852 and 480 cache hits **per bundle**, respectively. The second test confirmed normal H controls, pose-list selection and H-point movement. This plugin does not address the separate intermittent HPointMove pose-collapse issue.
+This independent BepInEx/Harmony plugin caches asset-name arrays for six exact `abdata/h/list/` bundles via `AssetBundleCheck.GetAllAssetName()`. It does **not** patch `kPlug.dll`, and its original C# source has no direct kPlug API or namespace references. The runtime-tested environment included kPlug 3.6.0 and Sideloader; **operation without kPlug has not been verified**. Two runtime sessions confirmed 852 and 480 cache hits **per bundle**, respectively. The second test confirmed normal H controls, pose-list selection and H-point movement. This plugin does not address the separate intermittent HPointMove pose-collapse issue.
 
-- [Current KPlugFixes-layout installer](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_KPlugFixes_Install.zip) — extract into the Koikatu game root; the DLL goes to `BepInEx/plugins/KPlugFixes/SideloaderHListNameCache.dll`.
+- [Current published KPlugFixes-layout installer](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_KPlugFixes_Install.zip) — extract into the Koikatu game root; the DLL goes to `BepInEx/plugins/KPlugFixes/SideloaderHListNameCache.dll`. This directory is a packaging convention, **not a kPlug dependency**. An independently placed installer targeting `BepInEx/plugins/` has been prepared but is **not published as the current release** because that packaging has not been runtime-tested. There is no need to relocate an existing, working, byte-identical DLL solely for classification.
 - [Historical frozen archive (DLL, source, install/removal scripts, records)](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Stable_Frozen.zip) — retained byte-for-byte unchanged; not a game-root overlay ZIP.
 - [Technical README in Japanese](docs/HListNameCache/README_ja.md).
 
@@ -146,7 +146,7 @@ Koikatu/
          └─ SideloaderHListNameCache.dll
 ```
 
-Close the game, locate and back up any previous copy of the same DLL, extract the current ZIP to the game root, and ensure there is no duplicate DLL elsewhere under `BepInEx/plugins/`. Check `BepInEx/LogOutput.log` after restarting. All packages contain unchanged binaries from their respective tested releases; the **packaging layout is not a new runtime validation**. HListNameCache is an H-list optimization (not a kPlug.dll patch), and has only been tested in the original environment with kPlug 3.6.0 present.
+Close the game, locate and back up any previous copy of the same DLL, extract the current ZIP to the game root, and ensure there is no duplicate DLL elsewhere under `BepInEx/plugins/`. Check `BepInEx/LogOutput.log` after restarting. All packages contain unchanged binaries from their respective tested releases; the **packaging layout is not a new runtime validation**. HListNameCache is an independent H-list optimization with no direct kPlug API dependency (not a kPlug.dll patch). Its present `KPlugFixes/` layout is only a distribution choice; it has been runtime-tested with kPlug 3.6.0 present, and a kPlug-free setup is not yet verified.
 
 ## Standalone HPointBenchRouteFix installation
 

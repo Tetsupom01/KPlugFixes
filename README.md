@@ -18,13 +18,15 @@
 | **PistonAutoResume** | アニメーション切替後、条件が整ったら元のゲームのGo経路でピストン動作を再開 | [v0.2.0・KPlugFixes配置版](release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0_KPlugFixes_Install.zip) ／ [日本語README](docs/PistonTransitionFix/README_ja.md) |
 ### Hリスト取得の最適化（1種類・別カテゴリ）
 
-kPlugの不具合修正ではなく、Koikatuの`AssetBundleCheck.GetAllAssetName()`の対象を限定した最適化です。**kPlug 3.6.0が入った環境で実機検証済み**ですが、kPlugなしの環境での動作は未検証です。
+**kPlugの不具合修正ではなく、Koikatu本体の`AssetBundleCheck.GetAllAssetName()`を対象とする独立した最適化**です。原ソースにkPlugの名前空間・APIへの直接参照はありません。**実機成功確認はkPlug 3.6.0＋Sideloaderを含む環境**で行っており、kPlugなしの構成での動作は未検証です。
 
 | プラグイン | 何を改善する？ | 現行版・入手先 |
 | --- | --- | --- |
 | **SideloaderHListNameCache** | H体位一覧の特定6アセットについて、名前一覧の反復取得をキャッシュ（kPlug本体の修正ではない） | [v0.1.0・KPlugFixes配置版](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_KPlugFixes_Install.zip) ／ [日本語README](docs/HListNameCache/README_ja.md) |
 
 旧凍結保全パッケージ（ソース・専用スクリプトを収録）：[Sideloader HListNameCache v0.1.0](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Stable_Frozen.zip)。現行のゲームルート展開用ZIPとは別の形式です。
+
+**配置と依存関係は別です。** 現在公開している導入ZIPは管理上`BepInEx/plugins/KPlugFixes/`へ配置しますが、kPlugを必須とする意味ではありません。既に正常動作している同一DLLは、分類のためだけに移動する必要はありません。`BepInEx/plugins/`直下へ移す独立配置ZIPは準備されていますが、展開・起動が未検証のため、現行の公開配布ZIPには切り替えていません。
 
 ### Koikatu本体側のHPoint切替補正（1種類・独立）
 
@@ -57,6 +59,8 @@ Koikatu（ゲーム本体フォルダ）
          ├─ KPlugPistonAutoResume.dll
          └─ SideloaderHListNameCache.dll
 ```
+
+※ SideloaderHListNameCacheのこの配置は、kPlugへの直接依存を表すものではありません。
 
 1. **Koikatuを完全に終了**してください。
 2. 既に使用中のDLLがあればバックアップしてください。`BepInEx/plugins/`直下や他のサブフォルダに同名DLLがある場合、先に配置を確認してください。
