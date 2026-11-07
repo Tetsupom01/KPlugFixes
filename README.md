@@ -2,7 +2,7 @@
 
 [English README](README_en.md)
 
-**Koikatu＋kPlug 3.6.0環境で検証した、kPlug関連の不具合修正6種類と、独立したHリスト最適化1種類**を公開しています。必要なものだけ選べるよう、機能ごとにDLLを分けています。HListNameCacheはkPlug.dll本体を修正するパッチではありません。ゲーム本体、kPlug本体、CrossFader本体を配布・改造するものではありません。
+**Koikatu＋kPlug 3.6.0環境で検証した、kPlug関連の不具合修正6種類、独立したHリスト最適化1種類、およびKoikatu本体側のHPoint切替補正1種類**を公開しています。必要なものだけ選べるよう、機能ごとにDLLを分けています。HListNameCacheはkPlug.dll本体を修正するパッチではありません。ゲーム本体、kPlug本体、CrossFader本体を配布・改造するものではありません。
 
 ## まずどれを入れる？
 
@@ -26,7 +26,17 @@ kPlugの不具合修正ではなく、Koikatuの`AssetBundleCheck.GetAllAssetNam
 
 旧凍結保全パッケージ（ソース・専用スクリプトを収録）：[Sideloader HListNameCache v0.1.0](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Stable_Frozen.zip)。現行のゲームルート展開用ZIPとは別の形式です。
 
-**現行推奨ZIPについて：** 上記7種類はすべて、ゲーム本体へ展開すると `BepInEx/plugins/KPlugFixes/` に各DLLが配置される形式です。各ZIPは日本語／英語READMEとSHA一覧を同梱しています。旧DLL単体ZIPやHListNameCache凍結保全ZIPは履歴として残し、成功済みDLL本体を変更していません。**新規に作成した再梱包ZIPは、実機での展開・起動を別途確認していません。**
+### Koikatu本体側のHPoint切替補正（1種類・独立）
+
+kPlug特有の不具合ではなく、Koikatu本体の`HSceneProc.ChangeCategory()`によるモーション維持判定を限定的に補正します。kPlug・CrossFaderは**コード上の必須依存ではありません**。ただし、kPlugなしの構成での実機動作は未確認です。
+
+| プラグイン | 何を改善する？ | 現行版・入手先 |
+| --- | --- | --- |
+| **HPointBenchRouteFix** | 椅子・ソファの挿入モーションから「ベンチフェラ」を選択しても、以前の挿入モーションが残る問題を補正 | [v1.0.0 ゲームルート導入ZIP](release/windows/HPointBenchRouteFix/HPointBenchRouteFix_v1.0.0_Install.zip) ／ [日本語README](docs/HPointBenchRouteFix/README_ja.md) |
+
+**配置先：** `BepInEx/plugins/HPointBenchRouteFix.dll`（下記7種類の`KPlugFixes/`共通配置とは異なります）。初回実機確認は良好ですが、再起動後・kPlugなしでの動作は未記録です。
+
+**現行推奨ZIPについて：** kPlug関連6種類とHリスト最適化1種類の計7種類はすべて、ゲーム本体へ展開すると `BepInEx/plugins/KPlugFixes/` に各DLLが配置される形式です。各ZIPは日本語／英語READMEとSHA一覧を同梱しています。旧DLL単体ZIPやHListNameCache凍結保全ZIPは履歴として残し、成功済みDLL本体を変更していません。**新規に作成した再梱包ZIPは、実機での展開・起動を別途確認していません。**
 
 **注意：** これらを全部入れる必要はありません。適用したい症状に対応するDLLだけを選んでください。各ZIPの導入手順・検証状況を確認してください。
 
@@ -56,8 +66,22 @@ Koikatu（ゲーム本体フォルダ）
 
 既に旧配置で使用している方は、新版ZIPを重ねて入れるだけでは重複する可能性があります。旧DLLの所在を確認し、安全に移行してください。**今回のフォルダ整理は、DLLの中身や動作の変更ではありません。**
 
+## HPointBenchRouteFix（独立版）の導入
+
+HPointBenchRouteFixは、上記7種類の`KPlugFixes/`配置版とは別です。ゲームを終了し、同名DLLの重複配置がないことを確認してから[専用ZIP](release/windows/HPointBenchRouteFix/HPointBenchRouteFix_v1.0.0_Install.zip)をゲームルートへ展開します。
+
+```text
+Koikatu/
+└─ BepInEx/
+   └─ plugins/
+      └─ HPointBenchRouteFix.dll
+```
+
+起動後は`BepInEx/HPointBenchRouteFix.log`の`READY`を確認してください。詳しい互換性・解除方法・未検証事項は[専用README](docs/HPointBenchRouteFix/README_ja.md)を参照してください。
+
 ## 確認済みの範囲・残っている問題
 
+- **HPointBenchRouteFix v1.0.0：** 初回実機では「問題なさそう」と報告。公開DLLはその独立版RC1と同一です。再起動後、最終ログ照合、kPlugなしの動作は未記録です。
 - **CrossFaderCompatFix v1.2.0：** 統合ExtraIK抑制を実機ログで確認済み。診断ログON/OFFと、移行後の起動・初期化も確認しています。姿勢崩れの改善を確認しましたが、**絶頂後の移動に続くEnter時の一瞬の位置ズレ**と、**低頻度のEnter無反応**は未解決です。
 - **PoseBridge v0.2.0.1：** 移行後に起動・パッチ有効化を確認済み。体位一覧の同期は一部カテゴリで確認していますが、すべての体位の網羅的な動作確認はしていません。
 - **SideloaderHListNameCache v0.1.0：** 凍結版に収録したDLL本体は実機成功確認済みです。旧凍結版の専用Windowsインストールスクリプト、および今回の新しいゲームルート展開用ZIPは**それぞれ実機導入未検証**です。kPlugなしでの動作も未検証です。
@@ -79,6 +103,7 @@ Koikatuを終了し、今回導入した同名DLLを外してください。導�
 
 ## ソース・詳細・更新履歴
 
+- [HPointBenchRouteFix 日本語README](docs/HPointBenchRouteFix/README_ja.md)／[完全ソース](src/HPointBenchRouteFix/v1.0.0/HPointBenchRouteFix_v1.0.0.cs)／[リリースノート](docs/HPointBenchRouteFix/RELEASE_NOTES_v1.0.0.md)
 - [CrossFader 詳細（日本語）](docs/CrossFaderCompatFix/README_ja.md)／[ソース](src/CrossFaderCompatFix/v1.2.0/KPlugCrossFaderCompatFix_v1.2.0.cs)／[リリースノート](docs/CrossFaderCompatFix/RELEASE_NOTES_v1.2.0.md)
 - [PoseBridge 詳細（日本語）](docs/PoseBridge/README_ja.md)／[ソース](src/PoseBridge/KPlugPoseBridge_v0.2.0.1.cs)／[リリースノート](docs/PoseBridge/RELEASE_NOTES_v0.2.0.1.md)
 - [GaugeSwapFix 日本語README](docs/GaugeSwapFix/README_ja.md)／[ソース](src/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0.cs)

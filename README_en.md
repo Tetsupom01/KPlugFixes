@@ -4,7 +4,7 @@
 
 # KPlugFixes
 
-Six independent BepInEx / Harmony **kPlug-related fixes** and one separately classified **H-list asset-name caching optimization**, validated within a **Koikatu + kPlug 3.6.0** environment. HListNameCache does not patch kPlug itself; operation without kPlug is untested.
+Six independent BepInEx / Harmony **kPlug-related fixes**, one separately classified **H-list asset-name caching optimization**, and one **standalone vanilla Koikatu H-point route correction**, validated within a **Koikatu + kPlug 3.6.0** environment. HListNameCache does not patch kPlug itself; operation without kPlug is untested.
 
 This repository groups stable fixes by issue while keeping each runtime plugin as a separate DLL.  
 Each fix can therefore be built, tested, enabled, updated, or rolled back independently.
@@ -105,6 +105,16 @@ Fixes the kPlug insertion-animation transition path where Numpad 7 / Backspace c
 Optionally resumes piston motion through the normal game Go path after a piston/insertion animation change.  
 It waits for the real Animator state and cancels the pending resume when the H context changes.
 
+### HPointBenchRouteFix (vanilla H-point selection fix; independent)
+
+**HPointBenchRouteFix v1.0.0** fixes a case where selecting *Bench Fellatio* from an insertion pose keeps the previous animation. Diagnostic logs traced this to a same-category `HSceneProc.ChangeCategory()` preserve-motion branch. The fix reuses the stock animation-selection path. **kPlug and CrossFader are not code-level dependencies.** Operation without kPlug has not been runtime-tested.
+
+- [v1.0.0 installer ZIP](release/windows/HPointBenchRouteFix/HPointBenchRouteFix_v1.0.0_Install.zip)
+- [Japanese guide](docs/HPointBenchRouteFix/README_ja.md) / [English guide](docs/HPointBenchRouteFix/README_en.md)
+- [Complete C# source](src/HPointBenchRouteFix/v1.0.0/HPointBenchRouteFix_v1.0.0.cs) / [Release notes](docs/HPointBenchRouteFix/RELEASE_NOTES_v1.0.0.md)
+
+The user installed the Independent RC1 binary and initially reported no apparent issue. The public DLL is byte-identical. A second launch, final runtime log inspection, and kPlug-free testing remain undocumented.
+
 ## Repository structure
 
 ```text
@@ -138,12 +148,17 @@ Koikatu/
 
 Close the game, locate and back up any previous copy of the same DLL, extract the current ZIP to the game root, and ensure there is no duplicate DLL elsewhere under `BepInEx/plugins/`. Check `BepInEx/LogOutput.log` after restarting. All packages contain unchanged binaries from their respective tested releases; the **packaging layout is not a new runtime validation**. HListNameCache is an H-list optimization (not a kPlug.dll patch), and has only been tested in the original environment with kPlug 3.6.0 present.
 
+## Standalone HPointBenchRouteFix installation
+
+Unlike the seven `KPlugFixes/` packages above, this patch is installed to `BepInEx/plugins/HPointBenchRouteFix.dll`. Extract its [ZIP](release/windows/HPointBenchRouteFix/HPointBenchRouteFix_v1.0.0_Install.zip) at the game root after closing Koikatu. Avoid duplicate copies under any plugin directory, including `KPlugFixes/`. At startup inspect `BepInEx/HPointBenchRouteFix.log` for `READY`.
+
 ## Prebuilt Windows binaries
 
 Each plugin has its own self-contained ZIP in `release/windows/<FixName>/`. The following checksums identify the published packages. The four newly repackaged legacy fixes contain byte-identical DLL payloads; their installer layout has not been separately tested in-game. Historical DLL-only ZIPs remain available at their original paths.
 
 | Package | DLL SHA-256 | ZIP SHA-256 | Verification |
 | --- | --- | --- | --- |
+| [HPointBenchRouteFix v1.0.0](release/windows/HPointBenchRouteFix/HPointBenchRouteFix_v1.0.0_Install.zip) | `170757da0a4880cf2f8cf23c7e206c70bc6f9487f0051aab470353d57a3408bd` | `db4ef44288838d754edc64278240b4a1e03883b2d41b4adeff849ced7a79204f` | User-reported initial game run OK; final DLL unchanged; second-launch/log/kPlug-free tests pending |
 | [CrossFaderCompatFix v1.2.0](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0_KPlugFixes_Install.zip) | `2392ccafe5663efc4fd80f8f72e9741796de1ddd85d92f9a0e2c0f6c3e45acfc` | `f769ee644700fc52c8d59a14f5f80bd9103df2be9543947b6201506ddde499d1` | Pre-label-cleanup candidate tested OFF/ON; final DLL startup/patch activation verified after migration; full H-point regression retest incomplete; Enter issues remain |
 | [CrossFaderCompatFix v1.1.0](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.1.0_Install.zip) | `1f6f359255d3501545f1b97e25dc059436fa24c3eeb704ec9db93e80256b4154` | `d826bfc59e8994fefbb862f135ad77fab8354c0e6d003f9e79d230bd02e581a1` | Label-cleaned DLL: startup/patch/MoveBoundary READY verified; separate H-point move retest pending |
 | [CrossFaderCompatFix v1.0.0 (historical)](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.0.0.zip) | `1bd4cbcd316b4ec4132f453c732ddcbc95d12911349099b3fe786dbed9036cc7` | `50ce10e547e64f7fa564b8263d2271418e9853fb3b74b38cd1e8add8abd9a0ec` | Prior runtime-tested baseline |
