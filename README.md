@@ -1,8 +1,8 @@
-# KPlugFixes｜Koikatu用BepInExプラグイン
+# KPlugFixes｜コイカツ（Koikatu）用BepInEx不具合修正パッチ
 
 [English README](README_en.md)
 
-KoikatuのHシーンなどで確認した不具合の修正と、一部処理の最適化を配布しています。必要な機能だけ選んで導入できます。**ゲーム本体、kPlug、CrossFader、Sideloaderなど第三者のDLLは配布していません。**
+コイカツ（Koikatu）＋kPlug 3.6.0向けの**不具合修正・安定化用BepInExパッチ集**です。Hシーンの操作不能やアニメーション切替の不具合、音声再生・MyRoom終了時の例外に対処し、クラッシュにつながり得るエラーのリスク低減とH体位リストの重複処理削減を図ります。必要なプラグインだけ選んで導入できます。**ゲーム本体、kPlug、CrossFader、Sideloaderなど第三者のDLLは配布していません。**
 
 ## プラグイン一覧
 

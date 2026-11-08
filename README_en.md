@@ -1,8 +1,8 @@
-# KPlugFixes — BepInEx plugins for Koikatu
+# KPlugFixes — Koikatu (Koikatsu) BepInEx bug fixes
 
 [日本語README](README.md)
 
-This repository provides individual fixes for Koikatu H-scene issues and a targeted H-list optimization. Install **only the plugins you need**. No third-party game, kPlug, CrossFader, Sideloader, or BepInEx DLLs are redistributed.
+This repository provides **Koikatu (Koikatsu) / kPlug 3.6.0 bug fixes and BepInEx stability patches**. The plugins address unresponsive H-scene controls, animation-transition issues, and selected exceptions during voice playback and MyRoom shutdown to reduce crash risks; a separate plugin optimizes repeated H-list asset-name lookups. Install **only the plugins you need**. No third-party game, kPlug, CrossFader, Sideloader, or BepInEx DLLs are redistributed.
 
 ## Available plugins
 
