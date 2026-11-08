@@ -4,6 +4,12 @@ KoikatuのH体位リストで、アセット名一覧の重複取得を減らす
 
 [導入ZIP](../../release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Standalone_Install.zip) ／ [SHA-256一覧](../../SHA256SUMS.txt)
 
+## 最適化する処理と効果
+
+| 重複していた処理 | 対処内容 | 改善効果 |
+| --- | --- | --- |
+| H体位一覧の処理で、同じアセット名一覧を繰り返し取得する | 対象6アセットの該当する`AssetBundleCheck.GetAllAssetName()`呼び出し結果をキャッシュし、配列を複製して返す | 重複したアセット名取得処理を削減し、一覧処理の無駄を減らす |
+
 ## 機能
 
 対象は`abdata/h/list/`配下の6つのBundle（`hs2suite.unity3d`、`mmbath.unity3d`、`mmhouse01.unity3d`、`poolmap.unity3d`、`purpleroom.unity3d`、`sakuraroom.unity3d`）です。

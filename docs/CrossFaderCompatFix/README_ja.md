@@ -1,8 +1,15 @@
 # CrossFaderCompatFix v1.2.0｜日本語ガイド
 
-Koikatu＋kPlug 3.6.0＋CrossFader 0.11向けのBepInEx/Harmony互換パッチです。H中のアニメーション切替要求が重なる場面で、安全な切替状態まで待機します。また、Hポイント移動後に旧ExtraIKが残って姿勢が崩れる問題を限定的に抑制します。
+Koikatu＋kPlug 3.6.0＋CrossFader 0.11向けのBepInEx/Harmony互換パッチです。
 
 [導入ZIP](../../release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0_KPlugFixes_Install.zip) ／ [C#ソース](../../src/CrossFaderCompatFix/v1.2.0/KPlugCrossFaderCompatFix_v1.2.0.cs) ／ [リリースノート](RELEASE_NOTES_v1.2.0.md)
+
+## 修正する不具合と効果
+
+| 発生していた不具合 | 対処内容 | 改善効果 |
+| --- | --- | --- |
+| H中に複数のアニメーション切替要求が重なり、切替処理が競合する | 切替要求を調整し、安全な切替状態まで待機する | アニメーション切替時の競合や状態の不整合を抑制 |
+| Hポイント移動後に移動前のExtraIKが残り、女性の姿勢が崩れる | 移動境界を検出し、対象状態で古いExtraIKの適用を限定的に抑制する | 移動後の姿勢崩れを軽減 |
 
 ## インストール・解除
 

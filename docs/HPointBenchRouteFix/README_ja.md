@@ -2,9 +2,15 @@
 
 [English](README_en.md) ／ [導入ZIP](../../release/windows/HPointBenchRouteFix/HPointBenchRouteFix_v1.0.0_Install.zip) ／ [完全C#ソース](../../src/HPointBenchRouteFix/v1.0.0/HPointBenchRouteFix_v1.0.0.cs) ／ [リリースノート](RELEASE_NOTES_v1.0.0.md)
 
-## 修正内容
+## 修正する不具合と効果
 
-椅子・ソファで挿入モーション中に「ベンチフェラ」を選んでも、直前の挿入モーションが残る問題を補正します。`HSceneProc.ChangeCategory()`でカテゴリ集合`[2,12]`が一致する場合のモーション維持判定を限定的に調整し、ゲーム本来のモーション再選択処理を利用します。ほかのAnimator・IK・Reset処理は変更しません。
+| 発生していた不具合 | 対処内容 | 改善効果 |
+| --- | --- | --- |
+| 椅子・ソファで挿入モーション中に「ベンチフェラ」を選んでも、直前の挿入モーションが残る | カテゴリ集合が一致する場合のモーション維持判定を限定的に調整し、本来のモーション再選択処理を利用する | 「ベンチフェラ」のモーションへ正しく切り替わる |
+
+## 修正の仕組み
+
+`HSceneProc.ChangeCategory()`でカテゴリ集合`[2,12]`が一致する場合のモーション維持判定を限定的に調整し、ゲーム本来のモーション再選択処理を利用します。ほかのAnimator・IK・Reset処理は変更しません。
 
 **BepInEx・Harmonyが必要です。** kPlug・CrossFaderは起動時の必須依存ではありません。ただし、kPlugなしでの動作は実機未確認です。
 

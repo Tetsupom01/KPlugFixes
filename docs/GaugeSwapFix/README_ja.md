@@ -1,8 +1,14 @@
 # KPlugGaugeSwapFix v0.2.0｜日本語ガイド
 
-kPlug 3.6.0のHシーンで、女の子をMainへ入れ替えた後にHカテゴリやアニメーションを変更すると、**Face/Gauge表示が入れ替え前へ戻る**問題を補正します。実際の相手を変更するパッチではありません。
+kPlug 3.6.0のHシーンで、女の子をMainへ入れ替えた際のFace/Gauge表示を補正するプラグインです。実際の相手を変更するパッチではありません。
 
 [導入ZIP](../../release/windows/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0_KPlugFixes_Install.zip) ／ [C#ソース](../../src/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0.cs) ／ [SHA-256一覧](../../SHA256SUMS.txt)
+
+## 修正する不具合と効果
+
+| 発生していた不具合 | 対処内容 | 改善効果 |
+| --- | --- | --- |
+| 女の子をMainへ入れ替えた後、Hカテゴリやアニメーションを変更するとFace/Gauge表示が入れ替え前へ戻る | 同じMainが続いている場合だけ、変更前のFace/Gauge表示を復元する | 相手を入れ替えた後も正しいFace/Gauge表示を維持できる |
 
 ## インストール・解除
 

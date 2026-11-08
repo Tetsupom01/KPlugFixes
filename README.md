@@ -10,12 +10,12 @@ KoikatuのHシーンなどで確認した不具合の修正と、一部処理の
 
 | プラグイン | 主な機能 | 現行版・ダウンロード |
 | --- | --- | --- |
-| **CrossFaderCompatFix** | アニメーション切替競合とHポイント移動後の旧ExtraIK残留を抑制 | [v1.2.0 ZIP](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0_KPlugFixes_Install.zip) ／ [説明](docs/CrossFaderCompatFix/README_ja.md) |
-| **PoseBridge** | kPlug Pose Selectorの挿入体位を本体H画面の一覧にも表示 | [v0.2.0.1 ZIP](release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.1_KPlugFixes_Install.zip) ／ [説明](docs/PoseBridge/README_ja.md) |
-| **GaugeSwapFix** | Mainの女の子を入れ替えた後のFace/Gauge表示を維持 | [v0.2.0 ZIP](release/windows/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0_KPlugFixes_Install.zip) ／ [説明](docs/GaugeSwapFix/README_ja.md) |
+| **CrossFaderCompatFix** | Hポイント移動後の姿勢崩れやアニメーション切替要求の競合を抑制し、H中のモーション切替を安定させる | [v1.2.0 ZIP](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0_KPlugFixes_Install.zip) ／ [説明](docs/CrossFaderCompatFix/README_ja.md) |
+| **PoseBridge** | kPlugの挿入体位が本体H体位一覧に表示されない問題に対応し、本体画面から選べるようにする | [v0.2.0.1 ZIP](release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.1_KPlugFixes_Install.zip) ／ [説明](docs/PoseBridge/README_ja.md) |
+| **GaugeSwapFix** | 女の子をMainへ入れ替えた後の体位変更でFace/Gauge表示が元に戻る問題を修正し、表示を維持する | [v0.2.0 ZIP](release/windows/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0_KPlugFixes_Install.zip) ／ [説明](docs/GaugeSwapFix/README_ja.md) |
 | **NullGuardsFix** | H処理・音声再生・MyRoom終了時に発生するNullReferenceExceptionなどを防止し、ゲームの異常動作やクラッシュのリスクを低減 | [v0.2.0 ZIP](release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0_KPlugFixes_Install.zip) ／ [説明](docs/NullGuardsFix/README_ja.md) |
-| **PistonWaitFix** | 挿入モーション切替後の待機状態による操作不能を防止 | [v1.0.0 ZIP](release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0_KPlugFixes_Install.zip) ／ [説明](docs/PistonTransitionFix/README_ja.md) |
-| **PistonAutoResume** | 切替後に元のGo処理でピストン動作を自動再開 | [v0.2.0 ZIP](release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0_KPlugFixes_Install.zip) ／ [説明](docs/PistonTransitionFix/README_ja.md) |
+| **PistonWaitFix** | テンキー7・Backspaceで挿入モーションを切り替えた後の操作不能を防止し、次のH操作を受け付けられるようにする | [v1.0.0 ZIP](release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0_KPlugFixes_Install.zip) ／ [説明](docs/PistonTransitionFix/README_ja.md) |
+| **PistonAutoResume** | 挿入モーション切替後に停止したピストン動作を、元のGo処理で自動再開する | [v0.2.0 ZIP](release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0_KPlugFixes_Install.zip) ／ [説明](docs/PistonTransitionFix/README_ja.md) |
 
 **PistonAutoResumeにはPistonWaitFix v1.0.0が必要です。**
 
@@ -23,8 +23,8 @@ KoikatuのHシーンなどで確認した不具合の修正と、一部処理の
 
 | プラグイン | 主な機能 | 現行版・ダウンロード |
 | --- | --- | --- |
-| **SideloaderHListNameCache** | H体位リストのアセット名一覧の反復取得をキャッシュ | [v0.1.0 ZIP](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Standalone_Install.zip) ／ [説明](docs/HListNameCache/README_ja.md) |
-| **HPointBenchRouteFix** | 椅子・ソファ挿入から「ベンチフェラ」へ切り替わらない問題を補正 | [v1.0.0 ZIP](release/windows/HPointBenchRouteFix/HPointBenchRouteFix_v1.0.0_Install.zip) ／ [説明](docs/HPointBenchRouteFix/README_ja.md) |
+| **SideloaderHListNameCache** | H体位リストでのアセット名一覧の繰り返し取得をキャッシュし、対象6アセットの重複処理を削減する | [v0.1.0 ZIP](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Standalone_Install.zip) ／ [説明](docs/HListNameCache/README_ja.md) |
+| **HPointBenchRouteFix** | 椅子・ソファからベンチフェラを選んでも前の挿入モーションが残る問題を修正し、正しいモーションへ切り替える | [v1.0.0 ZIP](release/windows/HPointBenchRouteFix/HPointBenchRouteFix_v1.0.0_Install.zip) ／ [説明](docs/HPointBenchRouteFix/README_ja.md) |
 
 これら2種類はkPlugのAPIへの直接依存を持ちません。ただし、**kPlugを使用しない環境での実機動作は未確認**です。
 

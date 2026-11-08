@@ -1,8 +1,14 @@
 # PoseBridge v0.2.0.1｜日本語ガイド
 
-kPlugのPose Selectorで選べる**挿入体位（mode 2）**を、Koikatu本体H画面の体位一覧にも反映するBepInExプラグインです。kPlugの既存の体位解決処理を利用し、解決できない体位がある場合は元の一覧を維持します。
+kPlugのPose SelectorとKoikatu本体H画面の挿入体位一覧を連携するBepInExプラグインです。
 
 [導入ZIP](../../release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.1_KPlugFixes_Install.zip) ／ [完全C#ソース](../../src/PoseBridge/KPlugPoseBridge_v0.2.0.1.cs) ／ [リリースノート](RELEASE_NOTES_v0.2.0.1.md)
+
+## 修正する不具合と効果
+
+| 発生していた不具合 | 対処内容 | 改善効果 |
+| --- | --- | --- |
+| kPlugのPose Selectorで選べる挿入体位（mode 2）が、Koikatu本体のH体位一覧に反映されない | kPlugの既存の体位解決処理を使って一覧を同期し、解決できない体位は元の一覧を維持する | 対象の挿入体位を本体H画面から選択できるようにする |
 
 ## インストール・解除
 

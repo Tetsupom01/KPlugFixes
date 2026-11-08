@@ -2,9 +2,15 @@
 
 [日本語](README_ja.md) | [Installer ZIP](../../release/windows/HPointBenchRouteFix/HPointBenchRouteFix_v1.0.0_Install.zip) | [Complete source](../../src/HPointBenchRouteFix/v1.0.0/HPointBenchRouteFix_v1.0.0.cs) | [Release notes](RELEASE_NOTES_v1.0.0.md)
 
-## What it fixes
+## Problems addressed and results
 
-When switching from a chair/sofa insertion animation to **Bench Fellatio**, the game may retain the previous insertion animation. This plugin narrowly adjusts the stock `HSceneProc.ChangeCategory()` preserve-animation branch for matching category sets `[2,12]` and uses the game's normal animation-reselection path. It does not replace animator, IK, or Reset processing.
+| Problem | How it works | Result |
+| --- | --- | --- |
+| Selecting **Bench Fellatio** from a chair or sofa insertion animation can leave the previous insertion animation playing | Narrowly adjusts the matching-category preserve-animation branch and uses the game's original animation-reselection path | Correctly transitions to the selected Bench Fellatio animation |
+
+## How it works
+
+This plugin narrowly adjusts the stock `HSceneProc.ChangeCategory()` preserve-animation branch for matching category sets `[2,12]` and uses the game's normal animation-reselection path. It does not replace animator, IK, or Reset processing.
 
 **Requires BepInEx and Harmony.** kPlug and CrossFader are not startup dependencies; runtime behavior without kPlug has not been verified.
 

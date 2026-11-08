@@ -10,12 +10,12 @@ This repository provides individual fixes for Koikatu H-scene issues and a targe
 
 | Plugin | Purpose | Current download |
 | --- | --- | --- |
-| **CrossFaderCompatFix** | Prevents conflicting animation requests and suppresses stale ExtraIK after H-point moves | [v1.2.0 ZIP](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0_KPlugFixes_Install.zip) / [Details](docs/CrossFaderCompatFix/README_ja.md) |
-| **PoseBridge** | Makes kPlug insertion poses available in the standard H-scene pose list | [v0.2.0.1 ZIP](release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.1_KPlugFixes_Install.zip) / [Details](docs/PoseBridge/README_ja.md) |
-| **GaugeSwapFix** | Retains Face/Gauge display for a swapped Main partner | [v0.2.0 ZIP](release/windows/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0_KPlugFixes_Install.zip) / [Details](docs/GaugeSwapFix/README_ja.md) |
+| **CrossFaderCompatFix** | Reduces pose displacement after H-point moves and conflicting animation requests, stabilizing H-scene transitions | [v1.2.0 ZIP](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0_KPlugFixes_Install.zip) / [Details](docs/CrossFaderCompatFix/README_ja.md) |
+| **PoseBridge** | Makes kPlug insertion poses missing from the standard H-scene pose list selectable there | [v0.2.0.1 ZIP](release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.1_KPlugFixes_Install.zip) / [Details](docs/PoseBridge/README_ja.md) |
+| **GaugeSwapFix** | Prevents Face/Gauge displays from reverting after changing an H animation with a swapped Main partner | [v0.2.0 ZIP](release/windows/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0_KPlugFixes_Install.zip) / [Details](docs/GaugeSwapFix/README_ja.md) |
 | **NullGuardsFix** | Prevents selected NullReferenceExceptions during H-scene processing, voice playback and MyRoom shutdown, reducing the risk of game instability and crashes | [v0.2.0 ZIP](release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0_KPlugFixes_Install.zip) / [Details](docs/NullGuardsFix/README_ja.md) |
-| **PistonWaitFix** | Avoids an indefinite wait after insertion-animation navigation | [v1.0.0 ZIP](release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0_KPlugFixes_Install.zip) / [Details](docs/PistonTransitionFix/README.md) |
-| **PistonAutoResume** | Resumes piston motion using the game's standard Go action | [v0.2.0 ZIP](release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0_KPlugFixes_Install.zip) / [Details](docs/PistonTransitionFix/README.md) |
+| **PistonWaitFix** | Prevents H controls becoming unresponsive after switching insertion animations with Numpad 7 or Backspace | [v1.0.0 ZIP](release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0_KPlugFixes_Install.zip) / [Details](docs/PistonTransitionFix/README.md) |
+| **PistonAutoResume** | Automatically restarts piston movement through the normal Go action after insertion-animation changes | [v0.2.0 ZIP](release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0_KPlugFixes_Install.zip) / [Details](docs/PistonTransitionFix/README.md) |
 
 **PistonAutoResume requires PistonWaitFix v1.0.0.**
 
@@ -23,8 +23,8 @@ This repository provides individual fixes for Koikatu H-scene issues and a targe
 
 | Plugin | Purpose | Current download |
 | --- | --- | --- |
-| **SideloaderHListNameCache** | Caches repeated H-list asset-name lookups for six specific bundles | [v0.1.0 ZIP](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Standalone_Install.zip) / [Details](docs/HListNameCache/README_ja.md) |
-| **HPointBenchRouteFix** | Fixes a stuck insertion animation when selecting Bench Fellatio | [v1.0.0 ZIP](release/windows/HPointBenchRouteFix/HPointBenchRouteFix_v1.0.0_Install.zip) / [English details](docs/HPointBenchRouteFix/README_en.md) |
+| **SideloaderHListNameCache** | Caches repeated H-list asset-name lookups, reducing duplicate processing for six selected bundles | [v0.1.0 ZIP](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Standalone_Install.zip) / [Details](docs/HListNameCache/README_ja.md) |
+| **HPointBenchRouteFix** | Fixes the old insertion animation remaining when selecting Bench Fellatio from a chair or sofa | [v1.0.0 ZIP](release/windows/HPointBenchRouteFix/HPointBenchRouteFix_v1.0.0_Install.zip) / [English details](docs/HPointBenchRouteFix/README_en.md) |
 
 These two plugins do not call kPlug APIs directly. Runtime operation without kPlug **has not been verified**.
 
@@ -48,7 +48,7 @@ Koikatu/
       │  ├─ KPlugNullGuardsFix.dll
       │  ├─ KPlugPistonWaitFix.dll
       │  ├─ KPlugPistonAutoResume.dll
-      └─ HPointBenchRouteFix.dll
+      ├─ HPointBenchRouteFix.dll
       └─ SideloaderHListNameCache.dll
 ```
 

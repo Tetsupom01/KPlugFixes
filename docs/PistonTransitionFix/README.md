@@ -11,6 +11,13 @@ Two BepInEx/Harmony plugins for Koikatu + kPlug 3.6.0, addressing separate probl
 
 **AutoResume requires WaitFix v1.0.0; it does not replace WaitFix.**
 
+## Problems addressed and results
+
+| Plugin | Problem or inconvenience | How it works | Result |
+| --- | --- | --- | --- |
+| **PistonWaitFix** | Switching insertion animations using Numpad 7 or Backspace may leave subsequent H controls unresponsive | Corrects only the wait predicate in the original `IE_AskPistonChange` flow | Avoids the stuck wait and restores normal H navigation |
+| **PistonAutoResume** | Piston motion remains stopped after an insertion-animation change and needs to be restarted | Waits until `InsertIdle` or `A_InsertIdle`, then uses the game's original Go action | Automatically resumes piston motion; cancels the pending resume if another H command takes priority |
+
 ## Install / uninstall
 
 1. Close Koikatu and back up any existing copies of either DLL.
