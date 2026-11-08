@@ -23,7 +23,7 @@ KoikatuのHシーンなどで確認した不具合の修正と、一部処理の
 
 | プラグイン | 主な機能 | 現行版・ダウンロード |
 | --- | --- | --- |
-| **SideloaderHListNameCache** | H体位リストのアセット名一覧の反復取得をキャッシュ | [v0.1.0 ZIP](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_KPlugFixes_Install.zip) ／ [説明](docs/HListNameCache/README_ja.md) |
+| **SideloaderHListNameCache** | H体位リストのアセット名一覧の反復取得をキャッシュ | [v0.1.0 ZIP](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Standalone_Install.zip) ／ [説明](docs/HListNameCache/README_ja.md) |
 | **HPointBenchRouteFix** | 椅子・ソファ挿入から「ベンチフェラ」へ切り替わらない問題を補正 | [v1.0.0 ZIP](release/windows/HPointBenchRouteFix/HPointBenchRouteFix_v1.0.0_Install.zip) ／ [説明](docs/HPointBenchRouteFix/README_ja.md) |
 
 これら2種類はkPlugのAPIへの直接依存を持ちません。ただし、**kPlugを使用しない環境での実機動作は未確認**です。
@@ -48,8 +48,8 @@ Koikatu/
       │  ├─ KPlugNullGuardsFix.dll
       │  ├─ KPlugPistonWaitFix.dll
       │  ├─ KPlugPistonAutoResume.dll
-      │  └─ SideloaderHListNameCache.dll
       └─ HPointBenchRouteFix.dll
+      └─ SideloaderHListNameCache.dll
 ```
 
 **すべてを導入する必要はありません。** それぞれのZIPには該当プラグインのDLLが入っています。終了後の解除は対象DLLだけを外し、以前の版があればバックアップから復元してください。

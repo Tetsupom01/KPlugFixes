@@ -23,7 +23,7 @@ This repository provides individual fixes for Koikatu H-scene issues and a targe
 
 | Plugin | Purpose | Current download |
 | --- | --- | --- |
-| **SideloaderHListNameCache** | Caches repeated H-list asset-name lookups for six specific bundles | [v0.1.0 ZIP](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_KPlugFixes_Install.zip) / [Details](docs/HListNameCache/README_ja.md) |
+| **SideloaderHListNameCache** | Caches repeated H-list asset-name lookups for six specific bundles | [v0.1.0 ZIP](release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Standalone_Install.zip) / [Details](docs/HListNameCache/README_ja.md) |
 | **HPointBenchRouteFix** | Fixes a stuck insertion animation when selecting Bench Fellatio | [v1.0.0 ZIP](release/windows/HPointBenchRouteFix/HPointBenchRouteFix_v1.0.0_Install.zip) / [English details](docs/HPointBenchRouteFix/README_en.md) |
 
 These two plugins do not call kPlug APIs directly. Runtime operation without kPlug **has not been verified**.
@@ -48,8 +48,8 @@ Koikatu/
       │  ├─ KPlugNullGuardsFix.dll
       │  ├─ KPlugPistonWaitFix.dll
       │  ├─ KPlugPistonAutoResume.dll
-      │  └─ SideloaderHListNameCache.dll
       └─ HPointBenchRouteFix.dll
+      └─ SideloaderHListNameCache.dll
 ```
 
 Each ZIP includes only the relevant plugin DLL; not all eight are required. To uninstall, exit the game, remove only the DLL installed for that feature, and restore a previous version from backup if needed.

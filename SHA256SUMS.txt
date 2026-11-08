@@ -34,3 +34,4 @@ ad7eec9aafe1dce177bd5567e41cc9b187d413f3a2fc675f20537f1e9459db00  release/window
 170757da0a4880cf2f8cf23c7e206c70bc6f9487f0051aab470353d57a3408bd  HPointBenchRouteFix_v1.0.0.dll  # installed by the user; initial runtime behavior reported OK
 db4ef44288838d754edc64278240b4a1e03883b2d41b4adeff849ced7a79204f  release/windows/HPointBenchRouteFix/HPointBenchRouteFix_v1.0.0_Install.zip  # public installer, only README/MANIFEST changed from runtime RC1
 1baf13fce2cd85114a8a23187e2b74acb8436ab6603d045c5e08808b193c3f90  src/HPointBenchRouteFix/v1.0.0/HPointBenchRouteFix_v1.0.0.cs  # complete source of the tested runtime
+80a95b2f86ba5bc4b0b2ee5904ef807af2f70df68f310c2516c9aec953839fbf  release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Standalone_Install.zip  # standalone plugins-root installer; same validated DLL; relocation confirmed by user, ZIP extraction untested
