@@ -13,7 +13,7 @@ KoikatuのHシーンなどで確認した不具合の修正と、一部処理の
 | **CrossFaderCompatFix** | アニメーション切替競合とHポイント移動後の旧ExtraIK残留を抑制 | [v1.2.0 ZIP](release/windows/CrossFaderCompatFix/KPlugCrossFaderCompatFix_v1.2.0_KPlugFixes_Install.zip) ／ [説明](docs/CrossFaderCompatFix/README_ja.md) |
 | **PoseBridge** | kPlug Pose Selectorの挿入体位を本体H画面の一覧にも表示 | [v0.2.0.1 ZIP](release/windows/PoseBridge/KPlugPoseBridge_v0.2.0.1_KPlugFixes_Install.zip) ／ [説明](docs/PoseBridge/README_ja.md) |
 | **GaugeSwapFix** | Mainの女の子を入れ替えた後のFace/Gauge表示を維持 | [v0.2.0 ZIP](release/windows/GaugeSwapFix/KPlugGaugeSwapFix_v0.2.0_KPlugFixes_Install.zip) ／ [説明](docs/GaugeSwapFix/README_ja.md) |
-| **NullGuardsFix** | 特定のnull参照・破棄済みオブジェクト例外を軽減 | [v0.2.0 ZIP](release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0_KPlugFixes_Install.zip) ／ [説明](docs/NullGuardsFix/README_ja.md) |
+| **NullGuardsFix** | H処理・音声再生・MyRoom終了時に発生するNullReferenceExceptionなどを防止し、ゲームの異常動作やクラッシュのリスクを低減 | [v0.2.0 ZIP](release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0_KPlugFixes_Install.zip) ／ [説明](docs/NullGuardsFix/README_ja.md) |
 | **PistonWaitFix** | 挿入モーション切替後の待機状態による操作不能を防止 | [v1.0.0 ZIP](release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0_KPlugFixes_Install.zip) ／ [説明](docs/PistonTransitionFix/README_ja.md) |
 | **PistonAutoResume** | 切替後に元のGo処理でピストン動作を自動再開 | [v0.2.0 ZIP](release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0_KPlugFixes_Install.zip) ／ [説明](docs/PistonTransitionFix/README_ja.md) |
 

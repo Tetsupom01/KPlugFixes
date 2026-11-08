@@ -4,6 +4,20 @@ kPlug 3.6.0のH処理、音声、MyRoom終了時などに発生する特定のnu
 
 [導入ZIP](../../release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0_KPlugFixes_Install.zip) ／ [完全C#ソース](../../src/NullGuardsFix/KPlugNullGuardsFix_v0.2.0.cs) ／ [SHA一覧](../../SHA256SUMS.txt)
 
+## 修正する不具合と効果
+
+kPlug 3.6.0で発生していた、ゲームの動作を不安定にする処理エラーを修正します。
+
+| 発生していた不具合 | 対処内容 | 改善効果 |
+|---|---|---|
+| Hシーンの終了・状態切替後に、H関連処理が不適切に実行される | Hシーンの状態を確認し、不要な処理を停止 | H操作に関連する例外を抑制 |
+| 音声再生時、存在しないAudioSourceや音声クリップを参照してエラーが発生する | 音声データの有効性を確認してから参照 | 音声処理のNullReferenceExceptionを防止 |
+| MyRoom終了時、破棄済みのキャラクターオブジェクトを参照してエラーが発生する | 無効なオブジェクトを除外してから終了処理を実行 | MyRoom退出・ゲーム終了時の例外を抑制 |
+
+**これらの修正により、Hシーン・音声再生・MyRoom終了時の動作を安定させ、エラーによるゲームの異常動作やクラッシュのリスクを低減します。**
+
+kPlug.dll本体を変更せず、BepInEx/Harmonyプラグインとして対処します。
+
 ## インストール・解除
 
 1. Koikatuを終了し、既存の`KPlugNullGuardsFix.dll`をバックアップします。
