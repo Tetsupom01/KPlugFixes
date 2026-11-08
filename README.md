@@ -48,7 +48,7 @@ Koikatu/
       │  ├─ KPlugNullGuardsFix.dll
       │  ├─ KPlugPistonWaitFix.dll
       │  ├─ KPlugPistonAutoResume.dll
-      └─ HPointBenchRouteFix.dll
+      ├─ HPointBenchRouteFix.dll
       └─ SideloaderHListNameCache.dll
 ```
 
