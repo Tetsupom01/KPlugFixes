@@ -16,7 +16,6 @@ This repository provides **Koikatu (Koikatsu) / kPlug 3.6.0 bug fixes and BepInE
 | **NullGuardsFix** | Prevents selected NullReferenceExceptions during H-scene processing, voice playback and MyRoom shutdown, reducing the risk of game instability and crashes | [v0.2.0 ZIP](release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0_KPlugFixes_Install.zip) / [Details](docs/NullGuardsFix/README_ja.md) |
 | **PistonWaitFix** | Prevents H controls becoming unresponsive after switching insertion animations with Numpad 7 or Backspace | [v1.0.0 ZIP](release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0_KPlugFixes_Install.zip) / [Details](docs/PistonTransitionFix/README.md) |
 | **PistonAutoResume** | Automatically restarts piston movement through the normal Go action after insertion-animation changes | [v0.2.0 ZIP](release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0_KPlugFixes_Install.zip) / [Details](docs/PistonTransitionFix/README.md) |
-
 | **KPlugBenchEnterFix** | Corrects Numpad Enter handling when starting bench oral service, at qualifying gauge, and after climax while preserving native transitions | [v1.0.0 ZIP](release/windows/KPlugBenchEnterFix/KPlugBenchEnterFix_v1.0.0_Install.zip) / [English details](docs/KPlugBenchEnterFix/README_en.md) |
 
 **PistonAutoResume requires PistonWaitFix v1.0.0.**
