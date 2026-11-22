@@ -16,7 +16,6 @@
 | **NullGuardsFix** | H処理・音声再生・MyRoom終了時に発生するNullReferenceExceptionなどを防止し、ゲームの異常動作やクラッシュのリスクを低減 | [v0.2.0 ZIP](release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0_KPlugFixes_Install.zip) ／ [説明](docs/NullGuardsFix/README_ja.md) |
 | **PistonWaitFix** | テンキー7・Backspaceで挿入モーションを切り替えた後の操作不能を防止し、次のH操作を受け付けられるようにする | [v1.0.0 ZIP](release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0_KPlugFixes_Install.zip) ／ [説明](docs/PistonTransitionFix/README_ja.md) |
 | **PistonAutoResume** | 挿入モーション切替後に停止したピストン動作を、元のGo処理で自動再開する | [v0.2.0 ZIP](release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0_KPlugFixes_Install.zip) ／ [説明](docs/PistonTransitionFix/README_ja.md) |
-
 | **KPlugBenchEnterFix** | ベンチフェラ待機中・射精前後のテンキーEnter受付と連打音を制御し、元の状態遷移を保護する | [v1.0.0 ZIP](release/windows/KPlugBenchEnterFix/KPlugBenchEnterFix_v1.0.0_Install.zip) ／ [説明](docs/KPlugBenchEnterFix/README_ja.md) |
 
 **PistonAutoResumeにはPistonWaitFix v1.0.0が必要です。**
