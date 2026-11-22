@@ -35,3 +35,7 @@ ad7eec9aafe1dce177bd5567e41cc9b187d413f3a2fc675f20537f1e9459db00  release/window
 db4ef44288838d754edc64278240b4a1e03883b2d41b4adeff849ced7a79204f  release/windows/HPointBenchRouteFix/HPointBenchRouteFix_v1.0.0_Install.zip  # public installer, only README/MANIFEST changed from runtime RC1
 1baf13fce2cd85114a8a23187e2b74acb8436ab6603d045c5e08808b193c3f90  src/HPointBenchRouteFix/v1.0.0/HPointBenchRouteFix_v1.0.0.cs  # complete source of the tested runtime
 80a95b2f86ba5bc4b0b2ee5904ef807af2f70df68f310c2516c9aec953839fbf  release/windows/HListNameCache/Sideloader_HListNameCache_v0.1.0_Standalone_Install.zip  # standalone plugins-root installer; same validated DLL; relocation confirmed by user, ZIP extraction untested
+df1e541ca58b07d2ccce1a87925bcab4651e1c2c7df24a45db2cfbf29ce0c4cc  KPlugBenchEnterFix_v1.0.0.dll  # exact runtime-tested DLL inside current install ZIP
+8509d14394f3f1a9c138880176f64847fbc9aad7b9ce3d2e4debd39ce422a412  release/windows/KPlugBenchEnterFix/KPlugBenchEnterFix_v1.0.0_Install.zip  # game-root install, exact tested DLL
+7d43b746a5eae4433141420fc751a4a4c3bdec8fbe5ec36c4945003f16b0e8b6  release/source/KPlugBenchEnterFix/KPlugBenchEnterFix_v1.0.0-source.zip  # public source + historic build scripts
+3c95474583c45febd672985ec620d5e5e4cfd41d26a5dbb1e740dcac952a4db8  src/KPlugBenchEnterFix/v1.0.0/KPlugBenchEnterFix_v1.0.0.cs  # exact runtime-tested source

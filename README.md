@@ -6,7 +6,7 @@
 
 ## プラグイン一覧
 
-### kPlug関連の修正（6種類）
+### kPlug関連の修正（7種類）
 
 | プラグイン | 主な機能 | 現行版・ダウンロード |
 | --- | --- | --- |
@@ -16,6 +16,8 @@
 | **NullGuardsFix** | H処理・音声再生・MyRoom終了時に発生するNullReferenceExceptionなどを防止し、ゲームの異常動作やクラッシュのリスクを低減 | [v0.2.0 ZIP](release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0_KPlugFixes_Install.zip) ／ [説明](docs/NullGuardsFix/README_ja.md) |
 | **PistonWaitFix** | テンキー7・Backspaceで挿入モーションを切り替えた後の操作不能を防止し、次のH操作を受け付けられるようにする | [v1.0.0 ZIP](release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0_KPlugFixes_Install.zip) ／ [説明](docs/PistonTransitionFix/README_ja.md) |
 | **PistonAutoResume** | 挿入モーション切替後に停止したピストン動作を、元のGo処理で自動再開する | [v0.2.0 ZIP](release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0_KPlugFixes_Install.zip) ／ [説明](docs/PistonTransitionFix/README_ja.md) |
+
+| **KPlugBenchEnterFix** | ベンチフェラ待機中・射精前後のテンキーEnter受付と連打音を制御し、元の状態遷移を保護する | [v1.0.0 ZIP](release/windows/KPlugBenchEnterFix/KPlugBenchEnterFix_v1.0.0_Install.zip) ／ [説明](docs/KPlugBenchEnterFix/README_ja.md) |
 
 **PistonAutoResumeにはPistonWaitFix v1.0.0が必要です。**
 
@@ -47,7 +49,8 @@ Koikatu/
       │  ├─ KPlugGaugeSwapFix.dll
       │  ├─ KPlugNullGuardsFix.dll
       │  ├─ KPlugPistonWaitFix.dll
-      │  └─ KPlugPistonAutoResume.dll
+      │  ├─ KPlugPistonAutoResume.dll
+      │  └─ KPlugBenchEnterFix.dll
       ├─ HPointBenchRouteFix.dll
       └─ SideloaderHListNameCache.dll
 ```
@@ -62,6 +65,7 @@ Koikatu/
 - **PoseBridge：** 挿入体位（mode 2）だけが対象で、全体位の網羅的確認は未実施です。
 - **HListNameCache：** 特定6アセットが対象です。kPlugなしの動作は未検証です。
 - **HPointBenchRouteFix：** 特定のベンチフェラ切替だけが対象です。再起動後の動作・最終ログ・kPlugなしの動作は未確認です。
+- **KPlugBenchEnterFix：** kPlug 3.6.0向け。後段の口モーションからベンチフェラへの再移動不成立は別件として未解決で、原因未確定です。
 - 一部の再梱包ZIPは、同一DLLの実機検証とは別に**ZIP展開手順自体の実機検証が未完了**です。詳細は個別READMEで確認してください。
 
 ## ソース・詳細情報

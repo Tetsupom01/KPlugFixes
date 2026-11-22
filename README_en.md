@@ -6,7 +6,7 @@ This repository provides **Koikatu (Koikatsu) / kPlug 3.6.0 bug fixes and BepInE
 
 ## Available plugins
 
-### kPlug-related fixes (6 plugins)
+### kPlug-related fixes (7 plugins)
 
 | Plugin | Purpose | Current download |
 | --- | --- | --- |
@@ -16,6 +16,8 @@ This repository provides **Koikatu (Koikatsu) / kPlug 3.6.0 bug fixes and BepInE
 | **NullGuardsFix** | Prevents selected NullReferenceExceptions during H-scene processing, voice playback and MyRoom shutdown, reducing the risk of game instability and crashes | [v0.2.0 ZIP](release/windows/NullGuardsFix/KPlugNullGuardsFix_v0.2.0_KPlugFixes_Install.zip) / [Details](docs/NullGuardsFix/README_ja.md) |
 | **PistonWaitFix** | Prevents H controls becoming unresponsive after switching insertion animations with Numpad 7 or Backspace | [v1.0.0 ZIP](release/windows/PistonTransitionFix/KPlugPistonWaitFix_v1.0.0_KPlugFixes_Install.zip) / [Details](docs/PistonTransitionFix/README.md) |
 | **PistonAutoResume** | Automatically restarts piston movement through the normal Go action after insertion-animation changes | [v0.2.0 ZIP](release/windows/PistonTransitionFix/KPlugPistonAutoResume_v0.2.0_KPlugFixes_Install.zip) / [Details](docs/PistonTransitionFix/README.md) |
+
+| **KPlugBenchEnterFix** | Corrects Numpad Enter handling when starting bench oral service, at qualifying gauge, and after climax while preserving native transitions | [v1.0.0 ZIP](release/windows/KPlugBenchEnterFix/KPlugBenchEnterFix_v1.0.0_Install.zip) / [English details](docs/KPlugBenchEnterFix/README_en.md) |
 
 **PistonAutoResume requires PistonWaitFix v1.0.0.**
 
@@ -48,11 +50,12 @@ Koikatu/
       │  ├─ KPlugNullGuardsFix.dll
       │  ├─ KPlugPistonWaitFix.dll
       │  ├─ KPlugPistonAutoResume.dll
+      │  └─ KPlugBenchEnterFix.dll
       ├─ HPointBenchRouteFix.dll
       └─ SideloaderHListNameCache.dll
 ```
 
-Each ZIP includes only the relevant plugin DLL; not all eight are required. To uninstall, exit the game, remove only the DLL installed for that feature, and restore a previous version from backup if needed.
+Each ZIP includes only the relevant plugin DLL; not all nine are required. To uninstall, exit the game, remove only the DLL installed for that feature, and restore a previous version from backup if needed.
 
 ## Compatibility and limitations
 
@@ -62,6 +65,7 @@ Main test environment: Koikatu 5.1, kPlug 3.6.0, BepInEx 5.4.23.5, Unity 5.6.2f1
 - **PoseBridge:** Insertion poses (mode 2) only. Not every pose has been individually exercised.
 - **HListNameCache:** Limited to six specific asset bundles. Operation without kPlug has not been tested.
 - **HPointBenchRouteFix:** Applies only to the targeted Bench Fellatio transition. Second launch, final logs and kPlug-free operation are not verified.
+- **KPlugBenchEnterFix:** Tested on kPlug 3.6.0; later oral-animation to bench H-point movement remains unresolved with root cause undetermined.
 - For some repackaged ZIPs, the **installation process itself has not been separately tested**, even though the enclosed DLLs are unchanged from previously tested builds. See individual guides.
 
 ## Source and technical documentation
